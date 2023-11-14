@@ -3,7 +3,8 @@
 use PHPUnit\Framework\TestCase;
 
 
-require_once 'C:\Apps\xampp\htdocs\LeeTUcode\LeeTUcode\testcases\testClass.php'; // Adjust the path accordingly
+require_once __DIR__ . '\\..\\backendTests\\testClass.php'; // Adjust the path accordingly
+
 
 class FruitTest extends TestCase {
     public function testGetName() {
