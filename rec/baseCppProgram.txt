@@ -1,0 +1,16 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+%%funDeclaration%%;
+
+
+int main()
+{
+	%%funcTests%%
+
+	std::cout << "All tests cleared!" << std::endl;
+	return 0;
+}
+
+%%funcDefinition%%
