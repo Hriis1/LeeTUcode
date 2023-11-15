@@ -1,0 +1,2 @@
+1.In command prompt navigate to the folder of the project
+2.Run: 'vendor\bin\phpunit tests\<name_of_the_test_file>'

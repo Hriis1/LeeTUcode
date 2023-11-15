@@ -19,6 +19,7 @@ class courseTaskTest extends TestCase
         $task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers);
 
         //Tests
+        print_r("\n" . $task->getBaseCppFile());
         $this->assertEquals('int testFunc(std::vector<int> vec, int x)', $task->getFunctionDeclaration());
         $this->assertEquals(["{ 1,3,5 }, 2", "{ 1,1,1 }, 2", "{ 2,2,2 }, 5"], $task->getTestCases());
         $this->assertEquals([15, 9, 21], $task->getTestAnswers());
