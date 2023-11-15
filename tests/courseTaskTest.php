@@ -19,7 +19,10 @@ class courseTaskTest extends TestCase
         $task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers);
 
         //Tests
-        print_r("\n" . $task->getCppFile());
+        $functionSubmitionPath = __DIR__ . "\\..\\rec\\submitionTests\\submitionTest1.txt";
+        $functionSubmition = file_get_contents($functionSubmitionPath);
+        print_r("\n" . $task->addSubmition($functionSubmition));
+        
         $this->assertEquals('int testFunc(std::vector<int> vec, int x)', $task->getFunctionDeclaration());
         $this->assertEquals(["{ 1,3,5 }, 2", "{ 1,1,1 }, 2", "{ 2,2,2 }, 5"], $task->getTestCases());
         $this->assertEquals([15, 9, 21], $task->getTestAnswers());
