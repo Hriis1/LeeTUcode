@@ -58,10 +58,10 @@ class CourseTask
         return $funcTests;
     }
 
-    public function addSubmition($submition)
+    public function addSubmition($functionImplementation)
     {
         $cppFileToCompile = $this->_cppFile;
-        $cppFileToCompile = str_replace("%%funcDefinition%%",$submition,$cppFileToCompile);
+        $cppFileToCompile = str_replace("%%funcDefinition%%",$functionImplementation,$cppFileToCompile);
 
         return $cppFileToCompile;
 
