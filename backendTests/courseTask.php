@@ -58,6 +58,16 @@ class CourseTask
         return $funcTests;
     }
 
+    public function addSubmition($submition)
+    {
+        $cppFileToCompile = $this->_cppFile;
+        $cppFileToCompile = str_replace("%%funcDefinition%%",$submition,$cppFileToCompile);
+
+        return $cppFileToCompile;
+
+        //to do: compile the C++ file and return output to the user
+    }
+
     //Getters
     function getFunnctionName()
     {
