@@ -34,6 +34,27 @@ class CourseTask
 
         //Replace the function declaration
         $this->_cppFile = str_replace("%%funDeclaration%%",$this->_functionDeclaration,$this->_cppFile);
+
+        //Replace the func tests
+        $functests = $this->buildFuncTests();
+        $this->_cppFile = str_replace("%%funcTests%%",$functests,$this->_cppFile);
+    }
+
+    private function buildFuncTests()
+    {
+        $funcTests = "";
+        $idx = 0;
+        foreach ($this->_testCases as $case) {
+            $funcTests = $funcTests . "if(" . $this->_functionName . "(" . $case . ") !=" . $this->_testAnswers[$idx] . ")\n";
+            $funcTests = $funcTests . 'std::cout << "Input: " << "' . $case . '" << std::endl;' . "\n";
+            $funcTests = $funcTests . 'std::cout << "Your answer: " << ' . $this->_functionName . "(" . $case . ") << std::endl;\n"; 
+            $funcTests = $funcTests . 'std::cout << "Expected answer: " << ' . $this->_testAnswers[$idx] . " << std::endl;\n";
+            $funcTests = $funcTests . "return 0;\n";
+            $funcTests = $funcTests . "}\n\n"; 
+            $idx++;
+        }
+
+        return $funcTests;
     }
 
     //Getters
