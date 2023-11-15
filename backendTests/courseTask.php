@@ -27,6 +27,7 @@ class CourseTask
         $this->createCppFile();
     }
 
+    //Creates the cpp file only missing the function implementation
     private function createCppFile()
     {
         //Load the base file
