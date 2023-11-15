@@ -10,6 +10,8 @@ class CourseTask
 
     private $_baseCppFile = "";
 
+    private $_cppFile ="";
+
     function __construct($functionName, $functionDeclaration, $testCases, $testAnswers)
     {
         $this->_functionName = $functionName;
@@ -20,6 +22,18 @@ class CourseTask
         //Load the file
         $baseCppFilePath = __DIR__ . "\\..\\rec\\baseCppProgram.txt";
         $this->_baseCppFile = file_get_contents($baseCppFilePath);
+
+        //Create the cppfile (without the func implementation)
+        $this->createCppFile();
+    }
+
+    private function createCppFile()
+    {
+        //Load the base file
+        $this->_cppFile = $this->_baseCppFile;
+
+        //Replace the function declaration
+        $this->_cppFile = str_replace("%%funDeclaration%%",$this->_functionDeclaration,$this->_cppFile);
     }
 
     //Getters
@@ -44,5 +58,10 @@ class CourseTask
     function getBaseCppFile()
     {
         return $this->_baseCppFile;
+    }
+
+    function getCppFile()
+    {
+        return $this->_cppFile;
     }
 }
