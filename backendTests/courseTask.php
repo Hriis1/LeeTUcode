@@ -35,8 +35,9 @@ class CourseTask
         $cppFileToCompile = str_replace("%%funcDefinition%%", $functionImplementation, $cppFileToCompile);
 
         //to do: compile the C++ file and return output to the user
+        $response = $this->testSubmition($cppFileToCompile);
 
-        return $cppFileToCompile;
+        return $response;
 
 
     }
