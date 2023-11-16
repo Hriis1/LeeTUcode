@@ -33,11 +33,12 @@ class CourseTask
     {
         $cppFileToCompile = $this->_cppFile;
         $cppFileToCompile = str_replace("%%funcDefinition%%", $functionImplementation, $cppFileToCompile);
+        print_r($cppFileToCompile);
 
         //to do: compile the C++ file and return output to the user
-        $response = $this->testSubmition($cppFileToCompile);
+        /* $response = $this->testSubmition($cppFileToCompile);
 
-        return $response;
+        return $response; */
 
 
     }
@@ -95,7 +96,7 @@ class CourseTask
             $output = 'Error: ' . curl_error($ch);
         } else {
             // Process the response (contains compiled code output)
-            $output =  $response;
+            $output = $response;
         }
 
         curl_close($ch);
@@ -132,3 +133,15 @@ class CourseTask
         return $this->_cppFile;
     }
 }
+
+//Construction
+$functionName = "testFunc";
+$functionDeclaration = "int testFunc(std::vector<int> vec, int x)";
+$testCases = ["{ 1,3,5 }, 2", "{ 1,1,1 }, 2", "{ 2,2,2 }, 5"];
+$testAnswers = [15, 9, 21];
+$task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers);
+
+//Tests
+$functionSubmitionPath = __DIR__ . "\\..\\rec\\submitionTests\\submitionTest1.txt";
+$functionSubmition = file_get_contents($functionSubmitionPath);
+$task->addSubmition($functionSubmition);
