@@ -10,7 +10,7 @@ class CourseTask
 
     private $_baseCppFile = "";
 
-    private $_cppFile ="";
+    private $_cppFile = "";
 
     function __construct($functionName, $functionDeclaration, $testCases, $testAnswers)
     {
@@ -27,6 +27,20 @@ class CourseTask
         $this->createCppFile();
     }
 
+
+
+    public function addSubmition($functionImplementation)
+    {
+        $cppFileToCompile = $this->_cppFile;
+        $cppFileToCompile = str_replace("%%funcDefinition%%", $functionImplementation, $cppFileToCompile);
+
+        //to do: compile the C++ file and return output to the user
+
+        return $cppFileToCompile;
+
+
+    }
+
     //Creates the cpp file only missing the function implementation
     private function createCppFile()
     {
@@ -34,11 +48,11 @@ class CourseTask
         $this->_cppFile = $this->_baseCppFile;
 
         //Replace the function declaration
-        $this->_cppFile = str_replace("%%funDeclaration%%",$this->_functionDeclaration,$this->_cppFile);
+        $this->_cppFile = str_replace("%%funDeclaration%%", $this->_functionDeclaration, $this->_cppFile);
 
         //Replace the func tests
         $functests = $this->buildFuncTests();
-        $this->_cppFile = str_replace("%%funcTests%%",$functests,$this->_cppFile);
+        $this->_cppFile = str_replace("%%funcTests%%", $functests, $this->_cppFile);
     }
 
     private function buildFuncTests()
@@ -48,24 +62,44 @@ class CourseTask
         foreach ($this->_testCases as $case) {
             $funcTests = $funcTests . "if(" . $this->_functionName . "(" . $case . ") !=" . $this->_testAnswers[$idx] . "){\n";
             $funcTests = $funcTests . 'std::cout << "Input: " << "' . $case . '" << std::endl;' . "\n";
-            $funcTests = $funcTests . 'std::cout << "Your answer: " << ' . $this->_functionName . "(" . $case . ") << std::endl;\n"; 
+            $funcTests = $funcTests . 'std::cout << "Your answer: " << ' . $this->_functionName . "(" . $case . ") << std::endl;\n";
             $funcTests = $funcTests . 'std::cout << "Expected answer: " << ' . $this->_testAnswers[$idx] . " << std::endl;\n";
             $funcTests = $funcTests . "return 0;\n";
-            $funcTests = $funcTests . "}\n\n"; 
+            $funcTests = $funcTests . "}\n\n";
             $idx++;
         }
 
         return $funcTests;
     }
 
-    public function addSubmition($functionImplementation)
+    private function testSubmition($submition)
     {
-        $cppFileToCompile = $this->_cppFile;
-        $cppFileToCompile = str_replace("%%funcDefinition%%",$functionImplementation,$cppFileToCompile);
+        $output = "";
+        $cppCode = '...'; // Your C++ code here
 
-        return $cppFileToCompile;
+        $apiUrl = 'https://api.onlinecompiler.net/compile';
+        $postData = [
+            'code' => $cppCode,
+            'language' => 'cpp',
+            // Add other parameters as required by the API
+        ];
 
-        //to do: compile the C++ file and return output to the user
+        $ch = curl_init($apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+
+        $response = curl_exec($ch);
+
+        if ($response === false) {
+            $output = 'Error: ' . curl_error($ch);
+        } else {
+            // Process the response (contains compiled code output)
+            $output =  $response;
+        }
+
+        curl_close($ch);
+
+        return $output;
     }
 
     //Getters
