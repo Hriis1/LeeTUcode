@@ -89,11 +89,11 @@ class CourseTask
 
     function getBaseCppFile()
     {
-        return $this->_baseCppFile;
+        return htmlspecialchars($this->_baseCppFile);
     }
 
     function getCppFile()
     {
-        return $this->_cppFile;
+        return htmlspecialchars($this->_cppFile);
     }
 }

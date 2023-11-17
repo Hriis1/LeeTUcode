@@ -17,17 +17,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $serializedTask = $_POST['serializedTask'];
             $task = unserialize(base64_decode($serializedTask));
-            echo $task->addSubmition($file_contents);
-        }
-        else{
+            $builtCppFile = $task->addSubmition($file_contents);
+            $_SESSION['cppFile'] = $builtCppFile;
+
+            header("Location: ../taskSubmition.php");
+            exit();
+
+        } else {
             echo "Only txt files can be submited!";
         }
 
-    }
-    else {
+    } else {
         echo "File error!";
     }
-}
-else {
+} else {
     echo "Invalid way of getting to this page!";
 }

@@ -67,6 +67,8 @@
     </main>
     <?php include "components/footer.php" ?>
     <script>
+        var cppFile = `<?php echo  $_SESSION['cppFile']; ?>`
+        console.log(cppFile);
         var settings = {
             "url": "https://api.codex.jaagrav.in",
             "method": "POST",
