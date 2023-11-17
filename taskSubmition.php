@@ -19,7 +19,7 @@
     </main>
     <?php include "components/footer.php" ?>
     <script>
-        var cppFile = `<?php echo  $_SESSION['cppFile']; ?>`
+        var cppFile = `<?php echo $_SESSION['cppFile']; ?>`
         console.log(cppFile);
         var settings = {
             "url": "https://api.codex.jaagrav.in",
@@ -37,13 +37,20 @@
         };
 
         $.ajax(settings).done(function (response) {
-            // Replace newline characters with <br> tags
-            var formattedOutput = response["output"].replace(/\n/g, '<br>');
+            if (response["output"] != "") {
+                // Replace newline characters with <br> tags
+                var formattedOutput = response["output"].replace(/\n/g, '<br>');
 
-            console.log(formattedOutput);
+                console.log(formattedOutput);
 
-            // Set the formatted output in <p> tag
-            $("#codeoutput").html(formattedOutput);
+                // Set the formatted output in <p> tag
+                $("#codeoutput").html(formattedOutput);
+            }
+            else
+            {
+                console.log(response);
+                $("#codeoutput").html("Program did not compile correctly! <br>" + response["error"]);
+            }
         });
     </script>
 </body>
