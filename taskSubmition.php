@@ -88,7 +88,7 @@
 
             console.log(formattedOutput);
 
-            // Set the formatted output in your <p> tag
+            // Set the formatted output in <p> tag
             $("#codeoutput").html(formattedOutput);
         });
     </script>

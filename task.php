@@ -1,5 +1,14 @@
-<?php include "components/head.php" ?>
-
+<?php include "include/courseTask.php"; ?>
+<?php 
+    include "components/head.php";
+    //Construction
+    $functionName = "testFunc";
+    $functionDeclaration = "int testFunc(std::vector<int> vec, int x)";
+    $testCases = ["{ 1,3,5 }, 2", "{ 1,1,1 }, 2", "{ 2,2,2 }, 5"];
+    $testAnswers = [15, 9, 21];
+    $task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers);
+    $_SESSION["current_task"] = $task;
+?>
 <body>
     <?php include "components/header.php" ?>
     <main>
@@ -52,7 +61,7 @@
                     if (isset($_SESSION["user_id"])) {
                         echo '<form class="form-upload mx-auto" action="include/uploadPicture.php" method="post" enctype="multipart/form-data">
                                         <h2 class="form-upload-heading">Upload solution</h2>
-                                        <input type="file" class="form-control" name="file">
+                                        <input type="file" class="form-control" name="submition_file" accept=".txt">
                                         <div class="centered mt-3">
                                             <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Upload</button>
                                         </div>
