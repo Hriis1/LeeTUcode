@@ -1,5 +1,5 @@
 <header>
-    <div class="logo"><a href=""><img src="rec/img/logo-Placeholder.jpg" alt=""></a></div>
+    <div class="logo"><a href="index.php"><img src="rec/img/logo-Placeholder.jpg" alt=""></a></div>
     <div class="heading">
         <?php
         $_SESSION["user_id"] = 1;
@@ -7,7 +7,7 @@
         if (isset($_SESSION["user_id"])) {
             echo '<ul>
 			<li class="user-info">' . $_SESSION["user_username"] . '</li>
-            <li><a href="" class="under">Courses</a></li>
+            <li><a href="courses.php" class="under">Courses</a></li>
             <li><a href="task.php?id=1" class="under">TaskTest</a></li>
             <li>
                 <div class="dropdown">
