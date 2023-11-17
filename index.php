@@ -5,4 +5,5 @@
     <main>
         <p>indexaaaaaaaa</p>
     </main>
+    <?php include "components/footer.php" ?>
 </body>
