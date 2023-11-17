@@ -15,7 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Read the contents of the file
             $file_contents = file_get_contents($file_tmp);
 
-            $task = $_SESSION["current_task"];
+            $serializedTask = $_POST['serializedTask'];
+            $task = unserialize(base64_decode($serializedTask));
             echo $task->addSubmition($file_contents);
         }
         else{
