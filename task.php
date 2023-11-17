@@ -44,6 +44,26 @@
 
             </div>
 
+
+            <div class="row">
+                <div class="col-4 upload-submition-container bg-light border border-secondary rounded ps-3 pt-2 mt-5
+                    upload-form-container d-flex text-center mx-auto">
+                    <?php
+                    if (isset($_SESSION["user_id"])) {
+                        echo '<form class="form-upload mx-auto" action="include/uploadPicture.php" method="post" enctype="multipart/form-data">
+                                        <h2 class="form-upload-heading">Upload solution</h2>
+                                        <input type="file" class="form-control" name="file">
+                                        <div class="centered mt-3">
+                                            <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Upload</button>
+                                        </div>
+                                    </form>';
+                    } else {
+                        echo '<h2>Log in to upload a solution!</h2>';
+                    }
+                    ?>
+                </div>
+            </div>
+
         </div>
     </main>
     <?php include "components/footer.php" ?>
