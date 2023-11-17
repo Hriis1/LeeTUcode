@@ -8,6 +8,7 @@
             echo '<ul>
 			<li class="user-info">' . $_SESSION["user_username"] . '</li>
             <li><a href="" class="under">Courses</a></li>
+            <li><a href="task.php?id=1" class="under">TaskTest</a></li>
             <li>
                 <div class="dropdown">
                     <span>Dropdown</span>
