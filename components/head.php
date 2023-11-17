@@ -1,3 +1,4 @@
+<?php include "include/sessionConfig.php"; ?>
 <html lang="en">
 
 <head>

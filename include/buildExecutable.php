@@ -1,5 +1,7 @@
 <?php
+include "sessionConfig.php";
 include "courseTask.php";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_contents = "";
