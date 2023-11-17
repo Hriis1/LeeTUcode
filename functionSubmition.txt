@@ -1,0 +1,10 @@
+int testFunc(std::vector<int> vec, int x)
+{
+	int ans = 0;
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		ans += vec[i] + x;
+	}
+
+	return ans;
+}
