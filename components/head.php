@@ -1,4 +1,5 @@
 <?php include "include/sessionConfig.php"; ?>
+<?php include "include/dbHandler.php"; ?>
 <html lang="en">
 
 <head>
