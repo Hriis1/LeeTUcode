@@ -61,7 +61,7 @@
                     if (isset($_SESSION["user_id"])) {
                         echo '<form class="form-upload mx-auto" action="include/uploadPicture.php" method="post" enctype="multipart/form-data">
                                         <h2 class="form-upload-heading">Upload solution</h2>
-                                        <input type="file" class="form-control" name="submition_file" accept=".txt">
+                                        <input type="file" class="form-control" name="submition_file" accept=".txt" required>
                                         <div class="centered mt-3">
                                             <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Upload</button>
                                         </div>
