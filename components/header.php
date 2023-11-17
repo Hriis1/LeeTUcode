@@ -7,20 +7,21 @@
         if (isset($_SESSION["user_id"])) {
             echo '<ul>
 			<li class="user-info">' . $_SESSION["user_username"] . '</li>
+            <li><a href="" class="under">Courses</a></li>
             <li>
                 <div class="dropdown">
-                    <span>Модули</span>
+                    <span>Dropdown</span>
                     <div class="dropdown-content">
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="tableClients.php" class="under">Клиенти</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="tableMachines.php" class="under">Мащини</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="createOrder.php" class="under">Поръчки</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="tableSoftActualization.php" class="under">Софтуерни актуализации</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="tableMaintenance.php" class="under">Сервизиране</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="tableWarranty.php" class="under">Гаранционни поддръжки</a></div>
+                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item1</a></div>
+                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item2</a></div>
+                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item3</a></div>
+                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item4</a></div>
+                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item5</a></div>
+                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item6</a></div>
                     </div>
                 </div>
              </li>
-            <li><a href="include/logout.php" class="under">Отписване</a></li>
+            <li><a href="" class="under">Log out</a></li>
 		    </ul>';
         } else {
             echo '<ul>
