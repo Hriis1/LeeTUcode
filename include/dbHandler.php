@@ -24,6 +24,29 @@ class dbHandler
         }
 
     }
+
+    public function createUser(string $username, string $pass, string $email)
+    {
+        $hashedPassword = hashPassword($pass); //hash the password
+    
+        $myQuery = $this->mysqli->prepare("INSERT INTO users (username, pass, email) VALUES (?,?,?);"); //Prepare the sql query
+        $myQuery->bind_param("sss", $username, $hashedPassword, $email); //bind the params in place of the '?'
+        $myQuery->execute(); //Execute the statement
+        $myQuery->close(); //Free/close the statement
+    }
+
+    public function createTask()
+    {
+
+    }
+
+    public function getUser()
+    {
+        
+    }
+
+
+
 }
 
 // Report all mysqli errors as exceptions
