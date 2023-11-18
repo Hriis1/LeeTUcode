@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2023 at 05:01 PM
+-- Generation Time: Nov 18, 2023 at 06:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -67,7 +67,8 @@ CREATE TABLE `course_tasks` (
   `test_answers` text NOT NULL,
   `course_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `difficulty` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -101,6 +102,13 @@ CREATE TABLE `users` (
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `pass`, `account_type`, `created_on`, `updated_on`) VALUES
+(1, 'teacher1', 'teacher1@example.com', '$2y$12$iVjSlhKbjntwqoFbFTcRvOg6z0dPZ7K4gTcemTT1Kuu/Fjl81bEza', 'teacher', '2023-11-18 19:07:41', '2023-11-18 19:07:41');
 
 --
 -- Indexes for dumped tables
@@ -174,7 +182,7 @@ ALTER TABLE `task_submitions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
