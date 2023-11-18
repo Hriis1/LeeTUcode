@@ -1,6 +1,6 @@
-<?php include "include/courseTask.php"; ?>
+<?php include_once "include/courseTask.php"; ?>
 <?php 
-    include "components/head.php";
+    include_once "components/head.php";
     //Construction
     $functionName = "testFunc";
     $functionDeclaration = "int testFunc(std::vector<int> vec, int x)";
@@ -9,7 +9,7 @@
     $task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers);
 ?>
 <body>
-    <?php include "components/header.php" ?>
+    <?php include_once "components/header.php" ?>
     <main>
 
         <div class="container mt-5">
@@ -76,5 +76,5 @@
 
         </div>
     </main>
-    <?php include "components/footer.php" ?>
+    <?php include_once "components/footer.php" ?>
 </body>

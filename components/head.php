@@ -1,5 +1,5 @@
-<?php include "include/sessionConfig.php"; ?>
-<?php include "include/dbHandler.php"; ?>
+<?php include_once "include/sessionConfig.php"; ?>
+<?php include_once "include/dbHandler.php"; ?>
 <html lang="en">
 
 <head>

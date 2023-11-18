@@ -1,6 +1,6 @@
 <?php
-include "sessionConfig.php";
-include "courseTask.php";
+include_once "sessionConfig.php";
+include_once "courseTask.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

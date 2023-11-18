@@ -1,7 +1,7 @@
-<?php include "components/head.php" ?>
+<?php include_once "components/head.php" ?>
 
 <body>
-    <?php include "components/header.php" ?>
+    <?php include_once "components/header.php" ?>
     <main>
         <div class="container mt-5">
             <div class="row">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </main>
-    <?php include "components/footer.php" ?>
+    <?php include_once "components/footer.php" ?>
     <script>
         var cppFile = `<?php echo $_SESSION['cppFile']; ?>`
         console.log(cppFile);

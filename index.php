@@ -1,8 +1,8 @@
-<?php include "components/head.php" ?>
+<?php include_once "components/head.php" ?>
 <body>
-    <?php include "components/header.php" ?>
+    <?php include_once "components/header.php" ?>
     <main>
         <p>indexaaaaaaaa</p>
     </main>
-    <?php include "components/footer.php" ?>
+    <?php include_once "components/footer.php" ?>
 </body>
