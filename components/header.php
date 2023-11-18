@@ -2,8 +2,6 @@
     <div class="logo"><a href="index.php"><img src="rec/img/logo-Placeholder.jpg" alt=""></a></div>
     <div class="heading">
         <?php
-        $_SESSION["user_id"] = 1;
-        $_SESSION["user_username"] = "zzz";
         if (isset($_SESSION["user_id"])) {
             echo '<ul>
 			<li class="user-info">' . $_SESSION["user_username"] . '</li>
