@@ -8,7 +8,7 @@ class dbHandler
     {
         try {
             $host = "localhost";
-            $dbname = "leeTUcode";
+            $dbname = "leetucode";
             $dbusername = "root";
             $dbpassword = "";
 
