@@ -6,6 +6,7 @@
             echo '<ul>
 			<li class="user-info">' . $_SESSION["user_username"] . '</li>
             <li><a href="courses.php" class="under">Courses</a></li>
+            <li><a href="course.php?id=1" class="under">CourseTest</a></li>
             <li><a href="task.php?id=1" class="under">TaskTest</a></li>
             <li>
                 <div class="dropdown">
