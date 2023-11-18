@@ -30,6 +30,12 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
+                        <h4>Difficulty:</h4>
+                        <p>Easy</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-12">
                         <h4>Function name:</h4>
                         <p>funcName</p>
                     </div>
