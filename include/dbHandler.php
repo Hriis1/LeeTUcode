@@ -343,6 +343,8 @@ $dbHandler = new dbHandler();
 //=============================================CourseMember=============================================
 //$dbHandler->createCourseMember(1,3);
 //$dbHandler->getMembersOfCourse(1);
+//$dbHandler->getCoursesJoinedByUser(1);
+
 
 
 
