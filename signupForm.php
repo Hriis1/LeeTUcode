@@ -14,8 +14,8 @@
       background-color: blue;
       margin-left: 10px;
     }
-    #capthaError
-    {
+
+    #capthaError {
       margin-top: 5px;
     }
   </style>
@@ -33,6 +33,13 @@
       </div>
       <div class="input-box">
         <input type="password" name="pass" placeholder="Password" required>
+      </div>
+      <div class="">
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" name="accountType" required>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
       </div>
       <div id="submitBox" class="input-box button">
         <input type="Submit" name="submit" value="Register Now">
