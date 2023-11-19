@@ -36,7 +36,7 @@ class dbHandler
         $myQuery->execute(); //Execute the statement
         $myQuery->close(); //Free/close the statement
     }
-    
+
     public function getUserByCredentials($user_password, $user_name, $email)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM users WHERE (username = ? OR email = ?)");
@@ -54,8 +54,7 @@ class dbHandler
 
         if (password_verify($user_password, $hashedPassword)) {
             return $userArray;
-        }
-        else {
+        } else {
             return "Incorrect password";
         }
 
@@ -119,7 +118,7 @@ class dbHandler
 
         return $taskSubArray;
     }
-     //==============================================CourseTask==============================================
+    //==============================================CourseTask==============================================
     public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id)
     {
         $myQuery = $this->mysqli->prepare("INSERT INTO course_tasks (name, description, function_name, function_declaration, test_cases, test_answers, course_id) VALUES (?,?,?,?,?,?,?);"); //Prepare the sql query
@@ -129,13 +128,13 @@ class dbHandler
     }
 
     public function getCourseTasksByCourseId($id)
-    {//Returns all tasks from course
+    { //Returns all tasks from course
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_tasks 
                 WHERE course_id = ?");
         $myQuery->bind_param("i", $id);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseTasksArray = $result->fetch_assoc();
 
         print_r($courseTasksArray); // Fetch the first row as an associative array 
@@ -143,21 +142,21 @@ class dbHandler
 
         return $courseTasksArray;
     }
-    
+
     public function getCourseTask($name, $id)
-    {//Get task from course with specific name
+    { //Get task from course with specific name
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_tasks 
                 WHERE course_id = ? AND name = ?");
         $myQuery->bind_param("is", $id, $name);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseTasksArray = $result->fetch_assoc();
 
         print_r($courseTasksArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
-        return $courseTasksArray;        
+        return $courseTasksArray;
     }
 
     public function getCourseTaskById($id)
@@ -167,32 +166,32 @@ class dbHandler
         $myQuery->bind_param("i", $id);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseTasksArray = $result->fetch_assoc();
 
         print_r($courseTasksArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
-        return $courseTasksArray; 
+        return $courseTasksArray;
     }
-     //=============================================CourseMember=============================================
+    //=============================================CourseMember=============================================
     public function createCourseMember($course_id, $user_id)
     {
-        $myQuery = $this->mysqli->prepare("INSERT INTO course_members (course_id, user_id) VALUES (?,?);"); 
-         //Prepare the sql query
+        $myQuery = $this->mysqli->prepare("INSERT INTO course_members (course_id, user_id) VALUES (?,?);");
+        //Prepare the sql query
         $myQuery->bind_param("ii", $course_id, $user_id); //bind the params in place of the '?'
         $myQuery->execute(); //Execute the statement
         $myQuery->close(); //Free/close the statement 
     }
 
     public function getCourseMembersByCourse($course_id)
-    {//Gets user_id
+    { //Gets user_id
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE course_id = ?");
         $myQuery->bind_param("i", $course_id);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseMembersArray = $result->fetch_assoc();
 
         print_r($courseMembersArray); // Fetch the first row as an associative array 
@@ -208,9 +207,9 @@ class dbHandler
         $myQuery->bind_param("i", $user_id);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseMembersArray = $result->fetch_assoc();
-         
+
         print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
@@ -224,57 +223,62 @@ class dbHandler
         $myQuery->bind_param("i", $id);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseMembersArray = $result->fetch_assoc();
 
         print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
-        return $courseMembersArray;        
+        return $courseMembersArray;
     }
-     //==============================================Course==================================================
+    //==============================================Course==================================================
     public function createCourse($name, $requirements, $description, $creator_id)
     {
-        $myQuery = $this->mysqli->prepare("INSERT INTO courses (name, requirements, description, creator_id) VALUES (?,?,?,?);"); 
+        $myQuery = $this->mysqli->prepare("INSERT INTO courses (name, requirements, description, creator_id) VALUES (?,?,?,?);");
         //Prepare the sql query
-        $myQuery->bind_param("sssi", $name, $requirements, $description, $creator_id); 
+        $myQuery->bind_param("sssi", $name, $requirements, $description, $creator_id);
         //bind the params in place of the '?'
         $myQuery->execute(); //Execute the statement
         $myQuery->close(); //Free/close the statement 
     }
 
-    public function getCourseByCreatorId($id)
+    public function getCoursesByCreatorId($id)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
                 WHERE creator_id = ?");
         $myQuery->bind_param("i", $id);
-        $myQuery->execute(); 
+        $myQuery->execute();
         $result = $myQuery->get_result();
-         
-        $courseArray = $result->fetch_assoc();
-         
-        print_r($courseArray); // Fetch the first row as an associative array 
-         
+
+        $courseArray = [];
+
+        while ($row = $result->fetch_assoc()) {
+            // Fetch result as an associative array and append to $courseArray
+            $courseArray[] = $row;
+        }
+
+        print_r($courseArray);
+
         $myQuery->close();
 
         return $courseArray;
     }
 
     public function getCourse($id, $name)
-    {//Get course from specific creator with specific name 
+    { //Get course from specific creator with specific name 
         $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
                 WHERE creator_id = ? AND name = ?");
         $myQuery->bind_param("is", $id, $name);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseArray = $result->fetch_assoc();
-         
+
         print_r($courseArray); // Fetch the first row as an associative array 
-         
+
         $myQuery->close();
 
-        return $courseArray;    
+        return $courseArray;
     }
 
     public function getCourseById($id)
@@ -284,21 +288,22 @@ class dbHandler
         $myQuery->bind_param("i", $id);
         $myQuery->execute();
         $result = $myQuery->get_result();
-         
+
         $courseArray = $result->fetch_assoc();
-         
+
         print_r($courseArray);  // Fetch the first row as an associative array 
-         
+
         $myQuery->close();
 
-        return $courseArray;        
+        return $courseArray;
     }
-    
+
 }
 
 // Report all mysqli errors as exceptions
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $dbHandler = new dbHandler();
-//$dbHandler->createTaskSubmition("void zdr() {std::cout<<zdr}", "fail", );
+//$dbHandler->createCourse("Busted course 2","ludak2 :)", "za ludaci2", 1); //Test course creation
+$dbHandler->getCoursesByCreatorId(1);
 
