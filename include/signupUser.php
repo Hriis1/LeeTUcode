@@ -5,13 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
     $username = $_POST["username"];
     $pass = $_POST["pass"];
     $email = $_POST["email"];
+    $accountType = $_POST["accountType"];
 
     try {
         require_once "sessionConfig.php";
-        require_once "hashPassword.php";
-        require_once "dbconfig.php";
+        require_once "dbHandler.php";
         require_once "utils.php";
-        require_once "dbUtils.php";
         
 
         //ERROR HANDLERS
@@ -23,16 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
         if (isEmailInvalid($email)) {
             $errors["invalid_email"] = "Email is invalid!";
         }
-        if (isUsernameTaken($mysqli, $username)) {
+        if ($dbHandler->isUsernameTaken($username)) {
             $errors["taken_username"] = "Username already taken!";
         }
-        if (isEmailRegistered($mysqli, $email)) {
+        if ($dbHandler->isEmailRegistered($email)) {
             $errors["registered_email"] = "Email is already registered!";
         }
 
         if (!$errors) //if there were no errors
         {
-            createUser($mysqli, $username, $pass, $email);
+            $dbHandler->createUser($username, $pass, $email, $accountType);
 
             $mysqli->close(); //free/close the sql connection
             header('Location: ../index.php?signup=success'); //Redirect the user to the home page
@@ -48,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
             ];
             $_SESSION["data_signup"] = $signupData;
 
-            header('Location: ../index.php'); //Redirect the user to the home page
+            header('Location: ../index.php?signup=fail'); //Redirect the user to the home page
             die();
            
         }
