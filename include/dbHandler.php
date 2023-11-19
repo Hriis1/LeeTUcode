@@ -235,7 +235,7 @@ class dbHandler
      //==============================================Course==================================================
     public function createCourse($name, $requirements, $description, $creator_id)
     {
-        $myQuery = $this->mysqli->prepare("INSERT INTO courses (course_id, user_id) VALUES (?,?,?,?);"); 
+        $myQuery = $this->mysqli->prepare("INSERT INTO courses (name, requirements, description, creator_id) VALUES (?,?,?,?);"); 
         //Prepare the sql query
         $myQuery->bind_param("sssi", $name, $requirements, $description, $creator_id); 
         //bind the params in place of the '?'
