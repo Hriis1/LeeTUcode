@@ -104,7 +104,7 @@ class dbHandler
         return $taskSubArray;
     }
 
-    public function getTaskById($id)
+    public function getTaskSubmitionById($id)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM task_submitions 
                 WHERE id = ?");
@@ -114,7 +114,7 @@ class dbHandler
 
         $taskSubArray = $result->fetch_assoc();
 
-        //print_r $taskSubArray; // Fetch the first row as an associative array 
+        print_r($taskSubArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $taskSubArray;
@@ -185,9 +185,9 @@ class dbHandler
         $myQuery->close(); //Free/close the statement 
     }
 
-    public function getCourseMemberByCourse($course_id)
+    public function getCourseMembersByCourse($course_id)
     {//Gets user_id
-        $myQuery = $this->mysqli->prepare("SELECT user_id FROM course_members 
+        $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE course_id = ?");
         $myQuery->bind_param("i", $course_id);
         $myQuery->execute();
@@ -201,9 +201,9 @@ class dbHandler
         return $courseMembersArray;
     }
 
-    public function getCourseMemberByUser($user_id)
+    public function getCourseMembersByUser($user_id)
     {
-        $myQuery = $this->mysqli->prepare("SELECT course_id FROM course_members 
+        $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE user_id = ?");
         $myQuery->bind_param("i", $user_id);
         $myQuery->execute();
@@ -300,5 +300,5 @@ class dbHandler
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $dbHandler = new dbHandler();
-print_r($dbHandler->getUserByCredentials("1234", "teacher1", "teacher1@example.com"));
+//$dbHandler->createTaskSubmition("void zdr() {std::cout<<zdr}", "fail", );
 
