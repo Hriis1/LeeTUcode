@@ -39,13 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
         {
             $_SESSION["errors_signup"] = $errors;
 
-            $signupData = [
-                "username" => $username,
-                "email" => $email
-            ];
-            $_SESSION["data_signup"] = $signupData;
-
-            header('Location: ../index.php?signup=fail'); //Redirect the user to the home page
+            header('Location: ../signupForm.php?signup=fail'); //Redirect the user to the home page
             die();
            
         }

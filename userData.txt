@@ -1,5 +1,6 @@
 1.teachers
 username: teacher1 pass: 1234
+username: teacher2 pass: 1234
 
 
 2.students
