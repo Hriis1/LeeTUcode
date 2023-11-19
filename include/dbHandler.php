@@ -135,9 +135,14 @@ class dbHandler
         $myQuery->execute();
         $result = $myQuery->get_result();
 
-        $courseTasksArray = $result->fetch_assoc();
+        $courseTasksArray = [];
 
-        print_r($courseTasksArray); // Fetch the first row as an associative array 
+        while($row = $result->fetch_assoc()) // Fetch the result as an associative array 
+        {
+            $courseTasksArray[] = $row; 
+        }
+
+        print_r($courseTasksArray); 
         $myQuery->close();
 
         return $courseTasksArray;
@@ -304,8 +309,18 @@ class dbHandler
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $dbHandler = new dbHandler();
+//$dbHandler->createUser("student2", "student2@example.com", "1234", "student");
+
+//==============================================Course==================================================
 //$dbHandler->createCourse("Busted course 2","ludak2 :)", "za ludaci2", 1); //Test course creation
 //$dbHandler->getCoursesByCreatorId(1); //Test getCoursesByCreatorId
 //$dbHandler->getCourseFromCreator(1, "Busted course 2"); //Test getCourseFromCreator
+//$dbHandler->getCourseById(1); Test get course by id
+
+//==============================================CourseTask==================================================
+//Test createCourseTask
+//$dbHandler->createCourseTask("busted task1", "napishi busted funkciq", "bustedFunc", "int bustedFunc(int a, int b)","1,2@@@2,5@@@5,5", "3@@@7@@@10", 1);
+
+
 
 
