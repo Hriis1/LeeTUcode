@@ -76,11 +76,14 @@ class dbHandler
                  WHERE user_id = ? AND task_id = ?");
          $myQuery->bind_param("ii", $user_id, $task_id);
          $myQuery->execute();
-         $taskSub = $myQuery->get_result();
-         echo $taskSub; //these need to be tested because I'm not sure what the result returns actually 
+         $result = $myQuery->get_result();
+
+         $taskSubArray = $result->fetch_assoc();
+
+         print_r $taskSubArray; //these need to be tested because I'm not sure what the result returns actually 
          $myQuery->close();
 
-         return $taskSub;
+         return $taskSubArray;
      }
      //==============================================CourseTask==============================================
      public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id)
@@ -97,24 +100,30 @@ class dbHandler
                  WHERE course_id = ?");
          $myQuery->bind_param("i", $id);
          $myQuery->execute();
-         $courseTasks = $myQuery->get_result();
-         echo $courseTasks; //these need to be tested because I'm not sure what the result returns actually 
+         $result = $myQuery->get_result();
+         
+         $courseTasksArray = $result->fetch_assoc();
+
+         print_r $courseTasksArray; //these need to be tested because I'm not sure what the result returns actually 
          $myQuery->close();
 
-         return $courseTasks;
+         return $courseTasksArray;
      }
 
      public function getCourseTask($name, $id)
      {//Get task from course with specific name
-         $myQuery = $this->mysqli->prepare("SELECT * FROM task_submitions 
+         $myQuery = $this->mysqli->prepare("SELECT * FROM course_tasks 
                  WHERE course_id = ? AND name = ?");
          $myQuery->bind_param("is", $id, $name);
          $myQuery->execute();
-         $courseTask = $myQuery->get_result();
-         echo $courseTask; //these need to be tested because I'm not sure what the result returns actually 
+         $result = $myQuery->get_result();
+         
+         $courseTasksArray = $result->fetch_assoc();
+
+         print_r $courseTasksArray; //these need to be tested because I'm not sure what the result returns actually 
          $myQuery->close();
 
-         return $courseTasks;        
+         return $courseTasksArray;        
      }
      //=============================================CourseMember=============================================
      public function createCourseMember($course_id, $user_id)
@@ -132,11 +141,14 @@ class dbHandler
                  WHERE course_id = ?");
          $myQuery->bind_param("i", $course_id);
          $myQuery->execute();
-         $courseMembers = $myQuery->get_result();
-         echo $courseMember; //these need to be tested because I'm not sure what the result returns actually 
+         $result = $myQuery->get_result();
+         
+         $courseMembersArray = $result->fetch_assoc();
+
+         print_r $courseMembersArray; //these need to be tested because I'm not sure what the result returns actually 
          $myQuery->close();
 
-         return $courseMember;
+         return $courseMembersArray;
      }
 
      public function getCourseMemberByUser($user_id)
@@ -145,11 +157,14 @@ class dbHandler
                  WHERE user_id = ?");
          $myQuery->bind_param("i", $user_id);
          $myQuery->execute();
-         $courseMembers = $myQuery->get_result();
-         echo $courseMember; //these need to be tested because I'm not sure what the result returns actually 
+         $result = $myQuery->get_result();
+         
+         $courseMembersArray = $result->fetch_assoc();
+         
+         print_r $courseMembersArray; //these need to be tested because I'm not sure what the result returns actually 
          $myQuery->close();
 
-         return $courseMember;
+         return $courseMembersArray;
      }
      //==============================================Course==================================================
      public function createCourse($name, $requirements, $description, $creator_id)
@@ -167,12 +182,16 @@ class dbHandler
          $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
                  WHERE creator_id = ?");
          $myQuery->bind_param("i", $id);
-         $myQuery->execute();
-         $course = $myQuery->get_result();
-         echo $course; //these need to be tested because I'm not sure what the result returns actually 
+         $myQuery->execute(); 
+         $result = $myQuery->get_result();
+         
+         $courseArray = $result->fetch_assoc();
+         
+         print_r $courseArray; //these need to be tested because I'm not sure what the result returns actually 
+         
          $myQuery->close();
 
-         return $course;
+         return $courseArray;
      }
 
      public function getCourse($id, $name)
@@ -181,11 +200,15 @@ class dbHandler
                  WHERE creator_id = ? AND name = ?");
          $myQuery->bind_param("is", $id, $name);
          $myQuery->execute();
-         $course = $myQuery->get_result();
-         echo $course; //these need to be tested because I'm not sure what the result returns actually 
+         $result = $myQuery->get_result();
+         
+         $courseArray = $result->fetch_assoc();
+         
+         print_r $courseArray; //these need to be tested because I'm not sure what the result returns actually 
+         
          $myQuery->close();
 
-         return $course;    
+         return $courseArray;    
      }
 
 }
