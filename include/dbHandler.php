@@ -213,7 +213,7 @@ class dbHandler
         return $courseMembersArray;
     }
 
-    public function getCourseMembersByUser($user_id)
+    public function getCoursesJoinedByUser($user_id)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE user_id = ?");
@@ -221,12 +221,16 @@ class dbHandler
         $myQuery->execute();
         $result = $myQuery->get_result();
 
-        $courseMembersArray = $result->fetch_assoc();
+        $joindCoursesArray = [];
+        while($row = $result->fetch_assoc())
+        {
+            $joindCoursesArray[] = $this->getCourseById($row["course_id"]);
+        }
 
-        print_r($courseMembersArray); // Fetch the first row as an associative array 
+        print_r($joindCoursesArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
-        return $courseMembersArray;
+        return $joindCoursesArray;
     }
 
     public function getCourseMemberById($id)
@@ -338,7 +342,7 @@ $dbHandler = new dbHandler();
 
 //=============================================CourseMember=============================================
 //$dbHandler->createCourseMember(1,3);
-$dbHandler->getMembersOfCourse(2);
+//$dbHandler->getMembersOfCourse(1);
 
 
 
