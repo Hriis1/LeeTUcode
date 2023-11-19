@@ -7,3 +7,4 @@ username: teacher2 pass: 1234
 username: student1 pass: 1234
 username: student2 pass: 1234
 username: student3 pass: 1234
+username: luvcho pass: 1234
