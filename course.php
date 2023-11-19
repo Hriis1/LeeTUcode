@@ -91,7 +91,7 @@ include_once "components/head.php";
                     <div class="col-12">
                         <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
                     </div>
-                </div>`; ?>'; 
+                </div>'; 
                 ?>
 
             </div>
