@@ -193,7 +193,7 @@ class dbHandler
         $myQuery->close(); //Free/close the statement 
     }
 
-    public function getMembersOfCourse($course_id)
+    public function getIDsOfMembersOfCourse($course_id)
     { 
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE course_id = ?");
@@ -204,7 +204,7 @@ class dbHandler
         $courseMembersArray = [];
         while($row = $result->fetch_assoc())
         {
-            $courseMembersArray[] = $row;
+            $courseMembersArray[] = $row["user_id"];
         }
 
         print_r($courseMembersArray); // Fetch the first row as an associative array 
@@ -338,6 +338,7 @@ $dbHandler = new dbHandler();
 
 //=============================================CourseMember=============================================
 //$dbHandler->createCourseMember(1,3);
+$dbHandler->getMembersOfCourse(2);
 
 
 
