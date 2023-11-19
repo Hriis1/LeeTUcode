@@ -87,7 +87,7 @@ class dbHandler
         $myQuery->close(); //Free/close the statement   
     }
 
-    public function getTaskSubmition($user_id, $task_id)
+    public function getTaskSubmitionsOfUserForTask($user_id, $task_id)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM task_submitions 
                 WHERE user_id = ? AND task_id = ?");
@@ -95,7 +95,11 @@ class dbHandler
         $myQuery->execute();
         $result = $myQuery->get_result();
 
-        $taskSubArray = $result->fetch_assoc();
+        $taskSubArray =[];
+        while($row = $result->fetch_assoc())
+        {
+            $taskSubArray[] = $row;
+        } 
 
         print_r($taskSubArray); // Fetch the first row as an associative array 
         $myQuery->close();
@@ -321,6 +325,10 @@ $dbHandler = new dbHandler();
 //$dbHandler->createCourseTask("busted task3", "napishi busted funkciq", "bustedFunc", "int bustedFunc(int a, int b)","1,2@@@2,5@@@5,5", "3@@@7@@@10", 1, "easy");
 //$dbHandler->getCourseTasksByCourseId(1);
 //$dbHandler->getCourseTaskFromCourseWithId("mega task", 2);
+//$dbHandler->getCourseTaskById(3);
+
+//===============================================TaskSubmition==========================================
+//$dbHandler->createTaskSubmition("int bustedFunc(int a, int b) {return a+b;}", "fail", 1, 1);
 
 
 
