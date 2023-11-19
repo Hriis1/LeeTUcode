@@ -264,7 +264,7 @@ class dbHandler
         return $courseArray;
     }
 
-    public function getCourse($id, $name)
+    public function getCourseFromCreator($id, $name)
     { //Get course from specific creator with specific name 
         $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
                 WHERE creator_id = ? AND name = ?");
@@ -305,5 +305,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $dbHandler = new dbHandler();
 //$dbHandler->createCourse("Busted course 2","ludak2 :)", "za ludaci2", 1); //Test course creation
-$dbHandler->getCoursesByCreatorId(1);
+//$dbHandler->getCoursesByCreatorId(1); //Test getCoursesByCreatorId
+//$dbHandler->getCourseFromCreator(1, "Busted course 2"); //Test getCourseFromCreator
+
 
