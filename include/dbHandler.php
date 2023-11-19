@@ -148,7 +148,7 @@ class dbHandler
         return $courseTasksArray;
     }
 
-    public function getCourseTask($name, $id)
+    public function getCourseTaskFromCourseWithId($name, $id)
     { //Get task from course with specific name
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_tasks 
                 WHERE course_id = ? AND name = ?");
@@ -319,7 +319,7 @@ $dbHandler = new dbHandler();
 
 //==============================================CourseTask==================================================
 //Test createCourseTask
-//$dbHandler->createCourseTask("busted task1", "napishi busted funkciq", "bustedFunc", "int bustedFunc(int a, int b)","1,2@@@2,5@@@5,5", "3@@@7@@@10", 1);
+//$dbHandler->createCourseTask("busted task2", "napishi busted funkciq", "bustedFunc", "int bustedFunc(int a, int b)","1,2@@@2,5@@@5,5", "3@@@7@@@10", 1);
 
 
 
