@@ -193,15 +193,19 @@ class dbHandler
         $myQuery->close(); //Free/close the statement 
     }
 
-    public function getCourseMembersByCourse($course_id)
-    { //Gets user_id
+    public function getMembersOfCourse($course_id)
+    { 
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE course_id = ?");
         $myQuery->bind_param("i", $course_id);
         $myQuery->execute();
         $result = $myQuery->get_result();
 
-        $courseMembersArray = $result->fetch_assoc();
+        $courseMembersArray = [];
+        while($row = $result->fetch_assoc())
+        {
+            $courseMembersArray[] = $row;
+        }
 
         print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
@@ -329,6 +333,11 @@ $dbHandler = new dbHandler();
 
 //===============================================TaskSubmition==========================================
 //$dbHandler->createTaskSubmition("int bustedFunc(int a, int b) {return a+b;}", "fail", 1, 1);
+//$dbHandler->getTaskSubmitionsOfUserForTask(2,1);
+//$dbHandler->getTaskSubmitionById(1);
+
+//=============================================CourseMember=============================================
+//$dbHandler->createCourseMember(1,3);
 
 
 
