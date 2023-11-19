@@ -70,7 +70,7 @@ class dbHandler
         $myQuery->close(); //Free/close the statement   
     }
 
-    /*  public function getTaskSubmition($user_id, $task_id)
+     public function getTaskSubmition($user_id, $task_id)
      {
          $myQuery = $this->mysqli->prepare("SELECT * FROM task_submitions 
                  WHERE user_id = ? AND task_id = ?");
@@ -186,7 +186,7 @@ class dbHandler
          $myQuery->close();
 
          return $course;    
-     } */
+     }
 
 }
 
