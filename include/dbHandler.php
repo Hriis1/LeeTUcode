@@ -122,7 +122,7 @@ class dbHandler
     public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id, $difficulty)
     {
         $myQuery = $this->mysqli->prepare("INSERT INTO course_tasks (name, description, function_name, function_declaration, test_cases, test_answers, course_id, difficulty) VALUES (?,?,?,?,?,?,?,?);"); //Prepare the sql query
-        $myQuery->bind_param("ssssssis", $name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id,$difficulty); //bind the params in place of the '?'
+        $myQuery->bind_param("ssssssis", $name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id, $difficulty); //bind the params in place of the '?'
         $myQuery->execute(); //Execute the statement
         $myQuery->close(); //Free/close the statement         
     }
@@ -148,7 +148,7 @@ class dbHandler
         return $courseTasksArray;
     }
 
-    public function getCourseTaskFromCourseWithId($name, $id)
+    public function getCourseTaskByCourseId($name, $id)
     { //Get task from course with specific name
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_tasks 
                 WHERE course_id = ? AND name = ?");
@@ -318,9 +318,9 @@ $dbHandler = new dbHandler();
 //$dbHandler->getCourseById(1); Test get course by id
 
 //==============================================CourseTask==================================================
-//Test createCourseTask
-//$dbHandler->createCourseTask("busted task2", "napishi busted funkciq", "bustedFunc", "int bustedFunc(int a, int b)","1,2@@@2,5@@@5,5", "3@@@7@@@10", 1);
-$dbHandler->getCourseTaskFromCourseWithId("mega task", 2);
+//$dbHandler->createCourseTask("busted task3", "napishi busted funkciq", "bustedFunc", "int bustedFunc(int a, int b)","1,2@@@2,5@@@5,5", "3@@@7@@@10", 1, "easy");
+//$dbHandler->getCourseTasksByCourseId(1);
+//$dbHandler->getCourseTaskFromCourseWithId("mega task", 2);
 
 
 
