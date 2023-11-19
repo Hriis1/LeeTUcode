@@ -25,8 +25,8 @@
 		    </ul>';
         } else {
             echo '<ul>
-			<li><a href="signupForm.php" class="under">Създаване на акаунт</a></li>
-			<li><a href="loginForm.php" class="under">Вписване</a></li>
+			<li><a href="signupForm.php" class="under">Sign up</a></li>
+			<li><a href="loginForm.php" class="under">Sign in</a></li>
 		    </ul>';
         }
         ?>
