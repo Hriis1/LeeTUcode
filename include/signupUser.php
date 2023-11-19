@@ -31,9 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
         if (!$errors) //if there were no errors
         {
-            $dbHandler->createUser($username, $pass, $email, $accountType);
-
-            $mysqli->close(); //free/close the sql connection
+            $dbHandler->createUser($username, $email, $pass, $accountType);
             header('Location: ../index.php?signup=success'); //Redirect the user to the home page
             die(); //Kill the script
 

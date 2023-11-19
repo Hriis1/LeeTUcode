@@ -3,3 +3,6 @@ username: teacher1 pass: 1234
 
 
 2.students
+username: student1 pass: 1234
+username: student2 pass: 1234
+username: student3 pass: 1234
