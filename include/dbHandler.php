@@ -8,7 +8,7 @@ class dbHandler
     {
         try {
             $host = "localhost";
-            $dbname = "leeTUcode";
+            $dbname = "leetucode";
             $dbusername = "root";
             $dbpassword = "";
 
@@ -36,7 +36,7 @@ class dbHandler
         $myQuery->execute(); //Execute the statement
         $myQuery->close(); //Free/close the statement
     }
-
+    
     public function getUserByCredentials($user_password, $user_name, $email)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM users WHERE (username = ? OR email = ?)");
@@ -73,7 +73,8 @@ class dbHandler
         // Fetch the first row as an associative array
         $userArray = $result->fetch_assoc();
 
-        print_r $userArray;
+        echo $userArray["id"];
+        print_r($userArray);
         $myQuery->close();
 
         return $userArray;
@@ -97,7 +98,7 @@ class dbHandler
 
         $taskSubArray = $result->fetch_assoc();
 
-        print_r $taskSubArray; // Fetch the first row as an associative array 
+        print_r($taskSubArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $taskSubArray;
@@ -113,7 +114,7 @@ class dbHandler
 
         $taskSubArray = $result->fetch_assoc();
 
-        print_r $taskSubArray; // Fetch the first row as an associative array 
+        //print_r $taskSubArray; // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $taskSubArray;
@@ -137,12 +138,12 @@ class dbHandler
          
         $courseTasksArray = $result->fetch_assoc();
 
-        print_r $courseTasksArray; // Fetch the first row as an associative array 
+        print_r($courseTasksArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseTasksArray;
     }
-
+    
     public function getCourseTask($name, $id)
     {//Get task from course with specific name
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_tasks 
@@ -153,7 +154,7 @@ class dbHandler
          
         $courseTasksArray = $result->fetch_assoc();
 
-        print_r $courseTasksArray; // Fetch the first row as an associative array 
+        print_r($courseTasksArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseTasksArray;        
@@ -169,7 +170,7 @@ class dbHandler
          
         $courseTasksArray = $result->fetch_assoc();
 
-        print_r $courseTasksArray; // Fetch the first row as an associative array 
+        print_r($courseTasksArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseTasksArray; 
@@ -194,7 +195,7 @@ class dbHandler
          
         $courseMembersArray = $result->fetch_assoc();
 
-        print_r $courseMembersArray; // Fetch the first row as an associative array 
+        print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseMembersArray;
@@ -210,7 +211,7 @@ class dbHandler
          
         $courseMembersArray = $result->fetch_assoc();
          
-        print_r $courseMembersArray; // Fetch the first row as an associative array 
+        print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseMembersArray;
@@ -226,7 +227,7 @@ class dbHandler
          
         $courseMembersArray = $result->fetch_assoc();
 
-        print_r $courseMembersArray; // Fetch the first row as an associative array 
+        print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseMembersArray;        
@@ -252,7 +253,7 @@ class dbHandler
          
         $courseArray = $result->fetch_assoc();
          
-        print_r $courseArray; // Fetch the first row as an associative array 
+        print_r($courseArray); // Fetch the first row as an associative array 
          
         $myQuery->close();
 
@@ -269,7 +270,7 @@ class dbHandler
          
         $courseArray = $result->fetch_assoc();
          
-        print_r $courseArray; // Fetch the first row as an associative array 
+        print_r($courseArray); // Fetch the first row as an associative array 
          
         $myQuery->close();
 
@@ -286,13 +287,13 @@ class dbHandler
          
         $courseArray = $result->fetch_assoc();
          
-        print_r $courseArray; // Fetch the first row as an associative array 
+        print_r($courseArray);  // Fetch the first row as an associative array 
          
         $myQuery->close();
 
         return $courseArray;        
     }
-
+    
 }
 
 // Report all mysqli errors as exceptions
