@@ -1,5 +1,5 @@
 <?php
-include "dbHandler.php";
+include_once "dbHandler.php";
 class Course
 {
 	private $_id;
