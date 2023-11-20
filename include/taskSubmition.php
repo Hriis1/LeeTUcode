@@ -1,5 +1,5 @@
 <?php
-class TaskSubmtion
+class TaskSubmition
 {
 
     private $_submitedFunction = "";

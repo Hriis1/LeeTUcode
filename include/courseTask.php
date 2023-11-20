@@ -1,4 +1,6 @@
 <?php
+include_once "taskSubmition.php";
+
 class CourseTask
 {
 
@@ -33,6 +35,8 @@ class CourseTask
     {
         $cppFileToCompile = $this->_cppFile;
         $cppFileToCompile = str_replace("%%funcDefinition%%", $functionImplementation, $cppFileToCompile);
+
+        submition = new TaskSubmition($cppFileToCompile, False);//This class should be called here (probably)?
 
         return $cppFileToCompile;
     }
