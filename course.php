@@ -26,7 +26,7 @@ include_once "components/head.php";
     <?php include_once "components/header.php" ?>
     <main>
 
-        <div class="container mt-5">
+        <div class="container my-5">
             <div class="task-info bg-light border border-secondary rounded ps-3 pt-2 pe-3">
                 <div class="row">
                     <div class="col-lg-12">
@@ -87,7 +87,7 @@ include_once "components/head.php";
                 </div>
                 <?php
                 echo 
-                '<div class="row mt-3">
+                '<div class="row my-3">
                     <div class="col-12">
                         <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
                     </div>

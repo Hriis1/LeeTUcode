@@ -3,7 +3,6 @@
 <body>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
         }
 
@@ -38,16 +37,16 @@
     </style>
     <?php include_once "components/header.php" ?>
     <main>
-        <div class="container mt-5">
+        <div class="container my-5">
             <div class="row">
-                <div class="col-11 mx-auto">
+                <div class="col-lg-12 mx-auto">
                     <div class="search-container">
                         <input type="text" class="search-input" id="searchInput" placeholder="Search by course name">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-11 bg-light border border-secondary rounded ps-5 pt-5 pb-5 mx-auto">
+                <div class="col-lg-12 bg-light border border-secondary rounded ps-5 pt-5 pb-5 mx-auto">
                     <div class="courses-container" id="coursesContainer">
                         <!-- Placeholder data, replace with your actual courses -->
                         <div class="course-card">
