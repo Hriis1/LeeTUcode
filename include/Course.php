@@ -21,6 +21,10 @@ class Course
 	}
 
 	//Getters
+	function getID()
+    {
+        return $this->_id;
+    }
 	function getName()
 	{
 		return $this->_name;
