@@ -5,13 +5,15 @@ class Course
 	private $_name = "";
 	private $_requirements = "";
 	private $_description = "";
+	private $_creatorID;
 	private $_creatorName = "";//Would be cool to also show the creators name, we can get it from the foreign key
 
-	function __construct($name, $requirements, $description, $creatorName)
+	function __construct($name, $requirements, $description, $creatorID, $creatorName)
 	{
 		$this->_name = $name;
 		$this->_requirements = $requirements;
 		$this->_description = $description;
+		$this->_creatorID = $creatorID;
 		$this->_creatorName = $creatorName;
 	}
 
