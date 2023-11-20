@@ -2,25 +2,24 @@
 class TaskSubmition
 {
 
+    private $_id;
     private $_submitedFunction = "";
-    private $_submitionStatus = False;
+    private $_submitionStatus = "";
+    private $_taskID;
+    private $_userID;
 
-    function __construct($function, $status)
+    function __construct($id, $function, $status, $taskID, $userID)
     {
+        $this->_id = $id;
         $this->_submitedFunction = $function;
         $this->_submitionStatus = $status;
+        $this->_taskID = $taskID;
+        $this->_userID = $userID;
     }
  
     public function setStatus($status)
     {
-        if(is_bool($status)){
-            $this->_submitionStatus = $status;
-        }
-        else
-        {   
-            echo "Status input not boolean!";
-            return -1;
-        }
+        $this->_submitionStatus = $status;
     }
 
     //Getters

@@ -163,6 +163,14 @@ class dbHandler
 
         return $taskSubArray;
     }
+
+    public function updateTaskSubmitionStatus($submition_status, $id)
+{
+    $myQuery = $this->mysqli->prepare("UPDATE task_submitions SET submition_status = ? WHERE id = ?"); // Prepare the SQL query
+    $myQuery->bind_param("si", $submition_status, $id); // Bind the parameters in place of the '?'
+    $myQuery->execute(); // Execute the statement
+    $myQuery->close(); // Free/close the statement
+}
     //==============================================CourseTask==============================================
     public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id, $difficulty)
     {
@@ -378,6 +386,7 @@ $dbHandler = new dbHandler();
 //$dbHandler->createTaskSubmition("int bustedFunc(int a, int b) {return a+b;}", "fail", 1, 1);
 //$dbHandler->getTaskSubmitionsOfUserForTask(2,1);
 //$dbHandler->getTaskSubmitionById(1);
+//$dbHandler->updateTaskSubmitionStatus("success", 1);
 
 //=============================================CourseMember=============================================
 //$dbHandler->createCourseMember(1,3);
