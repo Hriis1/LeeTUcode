@@ -14,11 +14,11 @@ class TaskSubmition
     public function setStatus($status)
     {
         if(is_bool($status)){
-            $this->_submitionStatus = $status
+            $this->_submitionStatus = $status;
         }
         else
         {   
-            echo "Status input not boolean!"
+            echo "Status input not boolean!";
             return -1;
         }
     }

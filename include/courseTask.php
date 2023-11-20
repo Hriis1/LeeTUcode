@@ -39,7 +39,7 @@ class CourseTask
         $cppFileToCompile = $this->_cppFile;
         $cppFileToCompile = str_replace("%%funcDefinition%%", $functionImplementation, $cppFileToCompile);
 
-        submition = new TaskSubmition($cppFileToCompile, False);//This class should be called here (probably)?
+        $submition = new TaskSubmition($functionImplementation, false);//This class should be called here (probably)?
 
         return $cppFileToCompile;
     }
