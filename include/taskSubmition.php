@@ -27,6 +27,10 @@ class TaskSubmition
     }
 
     //Getters
+    function getID()
+    {
+        return $this->_id;
+    }
     function getSubmitedFunction()
     {
         return $this->_submitedFunction;
@@ -37,8 +41,14 @@ class TaskSubmition
         return $this->_submitionStatus;
     }
 
-}
+    function getTaskID()
+    {
+        return $this->_taskID;
+    }
 
-$taskSubmitionData = $dbHandler->getTaskSubmitionById(2);
-$taskSubmition = new TaskSubmition($taskSubmitionData["id"], $taskSubmitionData["submited_function"],
- $taskSubmitionData["submition_status"], $taskSubmitionData["task_id"], $taskSubmitionData["user_id"]);
+    function getUserID()
+    {
+        return $this->_userID;
+    }
+
+}
