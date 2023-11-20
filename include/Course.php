@@ -40,10 +40,8 @@ class Course
 	{
 		return $this->_creatorID;
 	}
-	function getCreatorName($_dbHandler)
+	function getCreatorName(dbHandler $_dbHandler)
 	{
-		return $_dbHandler->getUserById($this->_creatorID);
+		return $_dbHandler->getUserById($this->_creatorID)["username"];
 	}
 }
-
-$courseData = $dbHandler->getCourseById(1);
