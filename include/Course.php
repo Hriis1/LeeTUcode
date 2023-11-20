@@ -15,9 +15,6 @@ class Course
 		$this->_creatorName = $creatorName;
 	}
 
-
-	
-
 	//Getters
 	function getName()
 	{

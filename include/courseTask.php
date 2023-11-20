@@ -14,12 +14,15 @@ class CourseTask
 
     private $_cppFile = "";
 
-    function __construct($functionName, $functionDeclaration, $testCases, $testAnswers)
+    private $_difficulty = "";
+
+    function __construct($functionName, $functionDeclaration, $testCases, $testAnswers, $difficulty)
     {
         $this->_functionName = $functionName;
         $this->_functionDeclaration = $functionDeclaration;
         $this->_testCases = $testCases;
         $this->_testAnswers = $testAnswers;
+        $this->_difficulty = $difficulty;
 
         //Load the file
         $baseCppFilePath = __DIR__ . "\\..\\rec\\baseCppProgram.txt";
@@ -99,5 +102,10 @@ class CourseTask
     function getCppFile()
     {
         return htmlspecialchars($this->_cppFile);
+    }
+
+    function getDifficulty()
+    {
+        return $this->_difficulty;
     }
 }
