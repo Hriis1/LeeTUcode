@@ -1,20 +1,23 @@
 <?php
-
+include "dbHandler.php";
 class Course
 {
+	private $_id;
 	private $_name = "";
 	private $_requirements = "";
 	private $_description = "";
 	private $_creatorID;
-	private $_creatorName = "";//Would be cool to also show the creators name, we can get it from the foreign key
 
-	function __construct($name, $requirements, $description, $creatorID, $creatorName)
+	//Moved this to be just a getter
+	//private $_creatorName = "";//Would be cool to also show the creators name, we can get it from the foreign key
+
+	function __construct($id, $name, $requirements, $description, $creatorID)
 	{
+		$this->_id = $id;
 		$this->_name = $name;
 		$this->_requirements = $requirements;
 		$this->_description = $description;
 		$this->_creatorID = $creatorID;
-		$this->_creatorName = $creatorName;
 	}
 
 	//Getters
@@ -33,8 +36,14 @@ class Course
 		return $this->_description;
 	}
 
-	function getCreatorName()
+	function getCreatorID()
 	{
-		return $this->_creatorName;
+		return $this->_creatorID;
+	}
+	function getCreatorName($_dbHandler)
+	{
+		return $_dbHandler->getUserById($this->_creatorID);
 	}
 }
+
+$courseData = $dbHandler->getCourseById(1);
