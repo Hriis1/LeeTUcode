@@ -18,21 +18,21 @@ class Course
 	//Getters
 	function getName()
 	{
-		return this->_name;
+		return $this->_name;
 	}
 
 	function getRequirements()
 	{
-		return this->_requirements;
+		return $this->_requirements;
 	}
 
 	function getDescription()
 	{
-		return this->_description;
+		return $this->_description;
 	}
 
 	function getCreatorName()
 	{
-		return this->_creatorName;
+		return $this->_creatorName;
 	}
 }
