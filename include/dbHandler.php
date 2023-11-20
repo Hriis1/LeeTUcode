@@ -78,6 +78,48 @@ class dbHandler
 
         return $userArray;
     }
+
+    function getUsername(string $username)
+    {
+        $fetchedUsername = "";
+        $myQuery = $this->mysqli->prepare("SELECT username FROM users WHERE username = ?;"); //Prepare the sql query
+        $myQuery->bind_param("s", $username); //bind the params in place of the '?'
+        $myQuery->execute(); //Execute the statement
+
+        // Bind the result to a variable
+        $myQuery->bind_result($fetchedUsername);
+
+        // Fetch the result
+        $myQuery->fetch();
+        $myQuery->close(); //Free/close the statement
+        return $fetchedUsername;
+    }
+
+    function getEmail(string $email)
+    {
+        $fetchedEmail = "";
+        $myQuery = $this->mysqli->prepare("SELECT email FROM users WHERE email = ?;"); //Prepare the sql query
+        $myQuery->bind_param("s", $email); //bind the params in place of the '?'
+        $myQuery->execute(); //Execute the statement
+
+        // Bind the result to a variable
+        $myQuery->bind_result($fetchedEmail);
+
+        // Fetch the result
+        $myQuery->fetch();
+        $myQuery->close(); //Free/close the statement
+        return $fetchedEmail;
+    }
+
+    function isUsernameTaken(string $username)
+    {
+        return (bool) $this->getUsername($username);
+    }
+
+    function isEmailRegistered(string $email)
+    {
+        return (bool) $this->getEmail($email);
+    }
     //===============================================TaskSubmition==========================================
     public function createTaskSubmition($submited_function, $submition_status, $task_id, $user_id)
     {
@@ -95,11 +137,10 @@ class dbHandler
         $myQuery->execute();
         $result = $myQuery->get_result();
 
-        $taskSubArray =[];
-        while($row = $result->fetch_assoc())
-        {
+        $taskSubArray = [];
+        while ($row = $result->fetch_assoc()) {
             $taskSubArray[] = $row;
-        } 
+        }
 
         print_r($taskSubArray); // Fetch the first row as an associative array 
         $myQuery->close();
@@ -141,12 +182,12 @@ class dbHandler
 
         $courseTasksArray = [];
 
-        while($row = $result->fetch_assoc()) // Fetch the result as an associative array 
+        while ($row = $result->fetch_assoc()) // Fetch the result as an associative array 
         {
-            $courseTasksArray[] = $row; 
+            $courseTasksArray[] = $row;
         }
 
-        print_r($courseTasksArray); 
+        print_r($courseTasksArray);
         $myQuery->close();
 
         return $courseTasksArray;
@@ -194,7 +235,7 @@ class dbHandler
     }
 
     public function getMembersOfCourse($course_id)
-    { 
+    {
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
                 WHERE course_id = ?");
         $myQuery->bind_param("i", $course_id);
@@ -202,8 +243,7 @@ class dbHandler
         $result = $myQuery->get_result();
 
         $courseMembersArray = [];
-        while($row = $result->fetch_assoc())
-        {
+        while ($row = $result->fetch_assoc()) {
             $courseMembersArray[] = $this->getUserById($row["user_id"]);
         }
 
@@ -222,8 +262,7 @@ class dbHandler
         $result = $myQuery->get_result();
 
         $joindCoursesArray = [];
-        while($row = $result->fetch_assoc())
-        {
+        while ($row = $result->fetch_assoc()) {
             $joindCoursesArray[] = $this->getCourseById($row["course_id"]);
         }
 

@@ -1,8 +1,6 @@
 <?php
 include_once "include/sessionConfig.php";
 include_once "include/dbHandler.php";
-$_SESSION["user_id"] = 1;
-$_SESSION["user_username"] = "teacher1";
 ?>
 <html lang="en">
 
