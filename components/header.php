@@ -10,7 +10,7 @@
             <li><a href="task.php?id=1" class="under">TaskTest</a></li>
             <li>
                 <div class="dropdown">
-                    <span>Dropdown</span>
+                    <a class="under" href="">Dropdown</a>
                     <div class="dropdown-content">
                         <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item1</a></div>
                         <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item2</a></div>

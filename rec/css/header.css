@@ -17,13 +17,14 @@ header {
   padding-top: 10px;
   list-style-type: none;
   display: flex;
-
+  flex-wrap:wrap;
 }
 
-.heading ul li a {
+.heading ul li a{
   text-decoration: none;
   font-weight: 500;
   font-size: 18px;
+  white-space: none;
   color: black;
   margin: 2px 30px;
   transition-duration: 1s;
@@ -60,7 +61,10 @@ header {
   font-size: 18px;
   margin: 2px 30px;
 }
-
+/* margin removed so that content aligns with text */
+.dropdown>a{
+  margin: 0!important;
+}
 .dropdown-content {
   display: none;
   position: absolute;

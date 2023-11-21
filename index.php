@@ -7,7 +7,6 @@ include_once "components/head.php" ?>
 <body>
     <?php include_once "components/header.php" ?>
     <main>
-        <p>indexaaaaaaaa</p>
         <div class="container my-5">
             <div class="border border-secondary rounded bg-light pt-2 px-3">
                 <div class="row mt-3 "> 
