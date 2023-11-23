@@ -12,12 +12,12 @@
     <?php include_once "components/header.php" ?>
     <main>
 
-        <div class="container mt-5">
+        <div class="container my-5">
             <div class="task-info bg-light border border-secondary rounded ps-3 pt-2">
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>
-                            <?php echo $_GET["id"]; ?>.Title
+                            <?php echo $_GET["id"];?>.Title
                         </h2>
                     </div>
                 </div>

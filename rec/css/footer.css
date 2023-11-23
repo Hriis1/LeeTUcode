@@ -1,0 +1,27 @@
+footer{
+    width: 100%;
+    height: fit-content;
+
+    background-color: black;
+    font-size: 0.75em;
+    color:white;
+
+    box-sizing: border-box;
+}
+#contacts{
+    width: 100%;
+    padding: 1.5em 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+#contacts a{
+    color: white;
+    text-decoration: none;
+}
+#contacts ul{
+    list-style-type: none;
+    padding: 0;
+}
