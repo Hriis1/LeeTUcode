@@ -1,3 +1,8 @@
+main{
+	margin:0;
+	min-height:70vh;
+}
+
 footer{
     width: 100%;
     height: fit-content;
