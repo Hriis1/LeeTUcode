@@ -21,7 +21,7 @@
                     </div>
                 </div>
              </li>
-            <li><a href="" class="under">Log out</a></li>
+            <li><a href="include/logout.php" class="under">Log out</a></li>
 		    </ul>';
         } else {
             echo '<ul>
