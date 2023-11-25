@@ -1,3 +1,4 @@
+<?php include_once "include/sessionConfig.php"; ?>
 <!DOCTYPE html>
 <!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en" dir="ltr">
@@ -30,6 +31,7 @@
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
   <script>
     $(document).ready(function () {
+      
       <?php
       if (isset($_SESSION["errors_login"])) { ?>
         <?php
