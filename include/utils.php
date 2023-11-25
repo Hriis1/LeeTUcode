@@ -21,6 +21,18 @@ function isInputEmptySignUp(string $username, string $password, string $email)
     }
 }
 
+function isInputEmptyLogIn(string $username, string $password)
+{
+    if(empty($username) || empty($password))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 function isEmailInvalid(string $email)
 {
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)) //checks if email is valid
