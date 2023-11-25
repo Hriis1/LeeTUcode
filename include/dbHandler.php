@@ -136,6 +136,21 @@ class dbHandler
     {
         return (bool) $this->getEmail($email);
     }
+
+    function isPasswordCorrect(string $username, string $pass)
+{
+    $user = $this->getUserByUsernaame($username);
+
+    if ($user) //the user exists
+    {
+        $hashedPassword = $user["pass"]; //get the hashed password from the database
+
+        return password_verify($pass, $hashedPassword);
+    } else //the user does not exist
+    {
+        return false;
+    }
+}
     //===============================================TaskSubmition==========================================
     public function createTaskSubmition($submited_function, $submition_status, $task_id, $user_id)
     {
