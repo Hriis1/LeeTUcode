@@ -60,6 +60,22 @@ class dbHandler
 
 
     }
+    
+    public function getUserByUsernaame($username)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM users WHERE username = ?");
+        $myQuery->bind_param("s", $username);
+        $myQuery->execute();
+
+        $result = $myQuery->get_result();
+
+        // Fetch the first row as an associative array
+        $userArray = $result->fetch_assoc();
+
+        $myQuery->close();
+
+        return $userArray;
+    }
 
     public function getUserById($id)
     {
