@@ -1,6 +1,4 @@
-<?php 
-include_once "components/head.php" 
-?>
+<?php include_once "components/head.php" ?>
 
 <body>
     <?php include_once "components/header.php" ?>
@@ -39,21 +37,36 @@ include_once "components/head.php"
         };
 
         $.ajax(settings).done(function (response) {
-            var formattedOutput ="";
+            var submitionStatus = "fail";
+            var formattedOutput = "";
             if (response["output"] != "") {
                 // Replace newline characters with <br> tags
                 formattedOutput = response["output"].replace(/\n/g, '<br>');
 
-                console.log(formattedOutput);
+                //Set the submition status
+                if (formattedOutput == "All tests cleared!") {
+                    submitionStatus = "success";
+                }
             }
-            else
-            {
+            else {
                 formattedOutput = "Program did not compile correctly! <br>" + response["error"];
-                console.log(response);
+
+                //Set the submition status
+                submitionStatus = "error";
             }
 
             // Set the formatted output in <p> tag
             $("#codeoutput").html(formattedOutput);
+
+            // Update the submission status in the database using AJAX
+            $.ajax({
+                type: "POST",
+                url: "include/updateSubmissionStatus.php",
+                data: { submitionStatus: submitionStatus, taskId: <?php echo $_GET["id"]; ?> },
+                success: function (result) {
+                   console.log("update status success!");
+                }
+            });
         });
     </script>
 </body>
