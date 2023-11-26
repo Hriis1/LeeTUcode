@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['cppFile'] = $builtCppFile;
 
             //Upload the task submition to db
-            $dbHandler->createTaskSubmition($file_contents, "fail", $task["id"], $_SESSION["user_id"]);
+            $dbHandler->createTaskSubmition($file_contents, "fail", $task->getId(), $_SESSION["user_id"]);
             $insertedTask = $dbHandler->getLastInsertedTaskSubmition();
 
             header('Location: ../taskSubmitionPage.php?id=' . $insertedTask['id']);
