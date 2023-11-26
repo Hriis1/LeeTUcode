@@ -61,7 +61,7 @@
 
 
             <div class="row">
-                <div class="col-4 upload-submition-container bg-light border border-secondary rounded ps-3 pt-2 mt-5
+                <div class="col-4 upload-submition-container bg-light border border-secondary rounded ps-3 pt-2 mt-5 mb-5
                     upload-form-container d-flex text-center mx-auto">
                     <?php
                     if (isset($_SESSION["user_id"])) {
