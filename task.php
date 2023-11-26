@@ -4,7 +4,7 @@ include_once "include/courseTask.php";
 ?>
 <?php 
     include_once "components/head.php";
-    
+
     //Construction
     $taskArray = $dbHandler->getCourseTaskById($_GET["id"]);
     $testCases = explode("@@@", $taskArray["test_cases"]);
@@ -35,28 +35,25 @@ include_once "include/courseTask.php";
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Difficulty:</h4>
-                        <p>Easy</p>
+                        <p><?php echo $task->getDifficulty()?></p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Function name:</h4>
-                        <p>funcName</p>
+                        <p><?php echo $task->getFunnctionName()?></p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Function declaration:</h4>
-                        <p>funcName(int param1, float param2)</p>
+                        <p><?php echo $task->getFunctionDeclaration()?></p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Task description:</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad eveniet repellat consequatur
-                            natus
-                            eius, eum quaerat ut commodi ea consequuntur soluta vel dolor veniam consectetur eaque vero
-                            voluptates reiciendis libero.</p>
+                        <p><?php echo $task->getDescription()?></p>
                     </div>
                 </div>
 
