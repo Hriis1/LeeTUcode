@@ -17,6 +17,7 @@ include_once "include/courseTask.php";
     $testAnswers = explode("@@@", $taskArray["test_answers"]);
     $task = new CourseTask($taskArray["id"], $taskArray["name"], $taskArray["description"], $taskArray["function_name"], 
     $taskArray["function_declaration"], $testCases, $testAnswers, $taskArray["course_id"], $taskArray["difficulty"]);
+    print_r($task->getName());
 ?>
 <body>
     <?php include_once "components/header.php" ?>
