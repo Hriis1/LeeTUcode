@@ -35,8 +35,6 @@ class CourseTask
 
         //Create the cppfile (without the func implementation)
         $this->createCppFile();
-
-        print_r("zzzz");
     }
 
 

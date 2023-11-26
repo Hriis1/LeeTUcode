@@ -9,7 +9,7 @@ int main()
 {
 	%%funcTests%%
 
-	std::cout << "All tests cleared!" << std::endl;
+	std::cout << "All tests cleared!";
 	return 0;
 }
 
