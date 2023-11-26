@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $builtCppFile = $task->addSubmition($file_contents);
             $_SESSION['cppFile'] = $builtCppFile;
 
-            header("Location: ../taskSubmition.php");
+            header("Location: ../taskSubmitionPage.php");
             exit();
 
         } else {
