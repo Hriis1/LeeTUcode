@@ -256,7 +256,6 @@ class dbHandler
 
         $courseTasksArray = $result->fetch_assoc();
 
-        print_r($courseTasksArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseTasksArray;
