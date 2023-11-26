@@ -6,7 +6,8 @@
     $functionDeclaration = "int testFunc(std::vector<int> vec, int x)";
     $testCases = ["{ 1,3,5 }, 2", "{ 1,1,1 }, 2", "{ 2,2,2 }, 5"];
     $testAnswers = [15, 9, 21];
-    $task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers);
+    $difficulty = "easy";
+    $task = new CourseTask($functionName, $functionDeclaration, $testCases, $testAnswers, $difficulty);
 ?>
 <body>
     <?php include_once "components/header.php" ?>
