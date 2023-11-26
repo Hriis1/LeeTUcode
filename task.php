@@ -4,15 +4,19 @@ include_once "include/courseTask.php";
 ?>
 <?php 
     include_once "components/head.php";
-    //Construction
-    $taskArray = $dbHandler->getCourseTaskById(1);
-    $functionName = "testFunc";
+
+    /* $functionName = "testFunc";
     $functionDeclaration = "int testFunc(std::vector<int> vec, int x)";
     $testCases = ["{ 1,3,5 }, 2", "{ 1,1,1 }, 2", "{ 2,2,2 }, 5"];
     $testAnswers = [15, 9, 21];
-    $difficulty = "easy";
+    $difficulty = "easy"; */
+
+    //Construction
+    $taskArray = $dbHandler->getCourseTaskById(1);
+    $testCases = explode("@@@", $taskArray["test_cases"]);
+    $testAnswers = explode("@@@", $taskArray["test_answers"]);
     $task = new CourseTask($taskArray["id"], $taskArray["name"], $taskArray["description"], $taskArray["function_name"], 
-    $taskArray["function_declaration"], $taskArray["test_cases"], $taskArray["test_answers"], $taskArray["course_id"], $taskArray["difficulty"]);
+    $taskArray["function_declaration"], $testCases, $testAnswers, $taskArray["course_id"], $taskArray["difficulty"]);
 ?>
 <body>
     <?php include_once "components/header.php" ?>
