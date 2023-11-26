@@ -225,8 +225,6 @@ class dbHandler
         {
             $courseTasksArray[] = $row;
         }
-
-        print_r($courseTasksArray);
         $myQuery->close();
 
         return $courseTasksArray;
