@@ -1,5 +1,6 @@
 <?php
 include_once "sessionConfig.php";
+include_once "dbHandler.php";
 include_once "courseTask.php";
 
 
@@ -20,7 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $builtCppFile = $task->addSubmition($file_contents);
             $_SESSION['cppFile'] = $builtCppFile;
 
-            header("Location: ../taskSubmitionPage.php");
+            //Upload the task submition to db
+            $dbHandler->createTaskSubmition($file_contents, "fail", $task["id"], $_SESSION["user_id"]);
+            $insertedTask = $dbHandler->getLastInsertedTaskSubmition();
+
+            header('Location: ../taskSubmitionPage.php?id=' . $insertedTask['id']);
             exit();
 
         } else {

@@ -60,7 +60,7 @@ class dbHandler
 
 
     }
-    
+
     public function getUserByUsernaame($username)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM users WHERE username = ?");
@@ -138,19 +138,19 @@ class dbHandler
     }
 
     function isPasswordCorrect(string $username, string $pass)
-{
-    $user = $this->getUserByUsernaame($username);
-
-    if ($user) //the user exists
     {
-        $hashedPassword = $user["pass"]; //get the hashed password from the database
+        $user = $this->getUserByUsernaame($username);
 
-        return password_verify($pass, $hashedPassword);
-    } else //the user does not exist
-    {
-        return false;
+        if ($user) //the user exists
+        {
+            $hashedPassword = $user["pass"]; //get the hashed password from the database
+
+            return password_verify($pass, $hashedPassword);
+        } else //the user does not exist
+        {
+            return false;
+        }
     }
-}
     //===============================================TaskSubmition==========================================
     public function createTaskSubmition($submited_function, $submition_status, $task_id, $user_id)
     {
@@ -195,13 +195,26 @@ class dbHandler
         return $taskSubArray;
     }
 
+    public function getLastInsertedTaskSubmition()
+    {
+        $result = $this->mysqli->query("SELECT * FROM task_submitions ORDER BY id DESC LIMIT 1");
+
+        if ($result && $result->num_rows > 0) {
+            $lastInsertedTask = $result->fetch_assoc();
+            $result->free_result();
+            return $lastInsertedTask;
+        } else {
+            return null; // No records found
+        }
+    }
+
     public function updateTaskSubmitionStatus($submition_status, $id)
-{
-    $myQuery = $this->mysqli->prepare("UPDATE task_submitions SET submition_status = ? WHERE id = ?"); // Prepare the SQL query
-    $myQuery->bind_param("si", $submition_status, $id); // Bind the parameters in place of the '?'
-    $myQuery->execute(); // Execute the statement
-    $myQuery->close(); // Free/close the statement
-}
+    {
+        $myQuery = $this->mysqli->prepare("UPDATE task_submitions SET submition_status = ? WHERE id = ?"); // Prepare the SQL query
+        $myQuery->bind_param("si", $submition_status, $id); // Bind the parameters in place of the '?'
+        $myQuery->execute(); // Execute the statement
+        $myQuery->close(); // Free/close the statement
+    }
     //==============================================CourseTask==============================================
     public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id, $difficulty)
     {
