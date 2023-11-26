@@ -1,4 +1,6 @@
-<?php include_once "components/head.php" ?>
+<?php 
+include_once "components/head.php" 
+?>
 
 <body>
     <?php include_once "components/header.php" ?>
@@ -37,20 +39,21 @@
         };
 
         $.ajax(settings).done(function (response) {
+            var formattedOutput ="";
             if (response["output"] != "") {
                 // Replace newline characters with <br> tags
-                var formattedOutput = response["output"].replace(/\n/g, '<br>');
+                formattedOutput = response["output"].replace(/\n/g, '<br>');
 
                 console.log(formattedOutput);
-
-                // Set the formatted output in <p> tag
-                $("#codeoutput").html(formattedOutput);
             }
             else
             {
+                formattedOutput = "Program did not compile correctly! <br>" + response["error"];
                 console.log(response);
-                $("#codeoutput").html("Program did not compile correctly! <br>" + response["error"]);
             }
+
+            // Set the formatted output in <p> tag
+            $("#codeoutput").html(formattedOutput);
         });
     </script>
 </body>

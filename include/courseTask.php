@@ -4,24 +4,29 @@ include_once "taskSubmition.php";
 class CourseTask
 {
 
+    private $_id = -1;
+    private $_name ="";
+    private $_description ="";
     private $_functionName = "";
     private $_functionDeclaration = "";
-
     private $_testCases = [];
     private $_testAnswers = [];
-
-    private $_baseCppFile = "";
-
-    private $_cppFile = "";
-
+    private $_course_id = -1;
     private $_difficulty = "";
+    private $_baseCppFile = "";
+    private $_cppFile = "";
+    
 
-    function __construct($functionName, $functionDeclaration, $testCases, $testAnswers, $difficulty)
+    function __construct($id, $name, $description, $functionName, $functionDeclaration, $testCases, $testAnswers, $course_id, $difficulty)
     {
+        $this->_id = $id;
+        $this->_name = $name;
+        $this->_description = $description;
         $this->_functionName = $functionName;
         $this->_functionDeclaration = $functionDeclaration;
         $this->_testCases = $testCases;
         $this->_testAnswers = $testAnswers;
+        $this->_course_id = $course_id;
         $this->_difficulty = $difficulty;
 
         //Load the file
@@ -76,6 +81,18 @@ class CourseTask
     }
 
     //Getters
+    function getId()
+    {
+        return $this->_id;
+    }
+    function getName()
+    {
+        return $this->_name;
+    }
+    function getDescription()
+    {
+        return $this->_description;
+    }
     function getFunnctionName()
     {
         return $this->_functionName;
@@ -84,7 +101,6 @@ class CourseTask
     {
         return $this->_functionDeclaration;
     }
-
     function getTestCases()
     {
         return $this->_testCases;
@@ -93,19 +109,22 @@ class CourseTask
     {
         return $this->_testAnswers;
     }
-
+    function getCourseId()
+    {
+        return $this->_course_id;
+    }
+    function getDifficulty()
+    {
+        return $this->_difficulty;
+    }
     function getBaseCppFile()
     {
         return htmlspecialchars($this->_baseCppFile);
     }
-
     function getCppFile()
     {
         return htmlspecialchars($this->_cppFile);
     }
 
-    function getDifficulty()
-    {
-        return $this->_difficulty;
-    }
+    
 }
