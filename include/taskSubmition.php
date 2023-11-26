@@ -2,7 +2,6 @@
 include_once "dbHandler.php";
 class TaskSubmition
 {
-
     private $_id;
     private $_submitedFunction = "";
     private $_submitionStatus = "";
