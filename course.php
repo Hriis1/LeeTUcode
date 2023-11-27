@@ -1,6 +1,12 @@
 <?php
+include_once "include/dbHandler.php";
+include_once "include/Course.php";
 include_once "include/courseTask.php";
 include_once "components/head.php";
+
+$courseArray = $dbHandler->getCourseById($_GET["id"]);
+
+$course = new Course($courseArray["id"], $courseArray["name"], $courseArray["requirements"], $courseArray["description"], $courseArray["creator_id"]);
 ?>
 
 <body>
@@ -31,28 +37,26 @@ include_once "components/head.php";
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>
-                            <?php echo $_GET["id"]; ?>.CourseName
+                            <?php echo $_GET["id"] . '.' . $course->getName(); ?>
                         </h2>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Course owner:</h4>
-                        <p>owner</p>
+                        <p><?php echo $course->getCreatorName($dbHandler); ?></p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Requirements:</h4>
-                        <p>Please, provide file with a function deffinition that completes the given task with name and
-                            parameters as specified below!</p>
+                        <p><?php echo $course->getRequirements(); ?></p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Description:</h4>
-                        <p>Please, provide file with a function deffinition that completes the given task with name and
-                            parameters as specified below!</p>
+                        <p><?php echo $course->getDescription(); ?></p>
                     </div>
                 </div>
                 <div class="row mt-3">

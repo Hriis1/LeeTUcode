@@ -87,9 +87,7 @@ class dbHandler
 
         // Fetch the first row as an associative array
         $userArray = $result->fetch_assoc();
-
-        echo $userArray["id"];
-        print_r($userArray);
+        
         $myQuery->close();
 
         return $userArray;
