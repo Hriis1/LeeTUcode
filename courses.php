@@ -1,7 +1,9 @@
 <?php
-include_once "include/dbHandler.php"; 
+include_once "include/dbHandler.php";
 include_once "include/Course.php";
 include_once "components/head.php";
+
+$coursesArr = $dbHandler->getCourses();
 ?>
 
 <body>
@@ -52,29 +54,16 @@ include_once "components/head.php";
             <div class="row">
                 <div class="col-lg-12 bg-light border border-secondary rounded ps-5 pt-5 pb-5 mx-auto">
                     <div class="courses-container" id="coursesContainer">
-                        <!-- Placeholder data, replace with your actual courses -->
-                        <div class="course-card">
-                            <h3>Algorithm Design</h3>
-                        </div>
-                        <div class="course-card">
-                            <h3>Data Structures</h3>
-                        </div>
-                        <div class="course-card">
-                            <h3>Web Development</h3>
-                        </div>
-                        <div class="course-card">
-                            <h3>Database Management</h3>
-                        </div>
-                        <div class="course-card">
-                            <h3>Artificial Intelligence</h3>
-                        </div>
-                        <div class="course-card">
-                            <h3>Mobile App Development</h3>
-                        </div>
-                        <div class="course-card">
-                            <h3>Network Security</h3>
-                        </div>
-                        <!-- Add more courses as needed -->
+                        <?php foreach ($coursesArr as $course) { ?>
+                            <a href="course.php?id=<?php echo $course["id"]; ?>" style="text-decoration: none; color: inherit;">
+                                <div class="course-card">
+                                    <h3>
+                                        <?php echo $course["name"]; ?>
+                                    </h3>
+                                </div>
+                            </a>
+
+                        <?php } ?>
                     </div>
                 </div>
             </div>

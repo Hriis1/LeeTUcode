@@ -315,7 +315,6 @@ class dbHandler
             $joindCoursesArray[] = $this->getCourseById($row["course_id"]);
         }
 
-        print_r($joindCoursesArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $joindCoursesArray;
@@ -331,7 +330,6 @@ class dbHandler
 
         $courseMembersArray = $result->fetch_assoc();
 
-        print_r($courseMembersArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $courseMembersArray;
@@ -360,8 +358,6 @@ class dbHandler
             $courseArray[] = $row;
         }
 
-        print_r($courseArray);
-
         $myQuery->close();
 
         return $courseArray;
@@ -382,8 +378,6 @@ class dbHandler
             $courseArray[] = $row;
         }
 
-        print_r($courseArray);
-
         $myQuery->close();
 
         return $courseArray;
@@ -399,8 +393,6 @@ class dbHandler
 
         $courseArray = $result->fetch_assoc();
 
-        print_r($courseArray); // Fetch the first row as an associative array 
-
         $myQuery->close();
 
         return $courseArray;
@@ -415,8 +407,6 @@ class dbHandler
         $result = $myQuery->get_result();
 
         $courseArray = $result->fetch_assoc();
-
-        print_r($courseArray);  // Fetch the first row as an associative array 
 
         $myQuery->close();
 
