@@ -12,6 +12,7 @@ include_once "include/dbHandler.php";
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="rec/css/header.css">
     <link rel="stylesheet" href="rec/css/footer.css">
+    <link rel="stylesheet" href="rec/css/baseStyle.css">
     <style>
         body {
             background-color: rgb(252, 252, 250);
