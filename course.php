@@ -4,9 +4,14 @@ include_once "include/Course.php";
 include_once "include/courseTask.php";
 include_once "components/head.php";
 
+//The raw array from db
 $courseArray = $dbHandler->getCourseById($_GET["id"]);
 
+//Course object
 $course = new Course($courseArray["id"], $courseArray["name"], $courseArray["requirements"], $courseArray["description"], $courseArray["creator_id"]);
+
+//Tasks array from db
+$courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
 ?>
 
 <body>
@@ -14,6 +19,8 @@ $course = new Course($courseArray["id"], $courseArray["name"], $courseArray["req
         .task-container {
             display: flex;
             flex-wrap: wrap;
+            margin-left: 70px;
+            margin-bottom: 30px;
         }
 
         .task-card {
@@ -23,6 +30,7 @@ $course = new Course($courseArray["id"], $courseArray["name"], $courseArray["req
             margin: 10px;
             padding: 20px;
             width: 200px;
+            min-height: 150px;
         }
 
         .task-card h3 {
@@ -44,58 +52,46 @@ $course = new Course($courseArray["id"], $courseArray["name"], $courseArray["req
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Course owner:</h4>
-                        <p><?php echo $course->getCreatorName($dbHandler); ?></p>
+                        <p>
+                            <?php echo $course->getCreatorName($dbHandler); ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Requirements:</h4>
-                        <p><?php echo $course->getRequirements(); ?></p>
+                        <p>
+                            <?php echo $course->getRequirements(); ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Description:</h4>
-                        <p><?php echo $course->getDescription(); ?></p>
+                        <p>
+                            <?php echo $course->getDescription(); ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Tasks:</h4>
-                        <div class="task-container d-flex justify-content-center text-center" id="coursesContainer">
-                            <!-- Placeholder data, replace with your actual courses -->
-                            <div class="task-card d-flex align-items-center">
-                                <h3>Palindrome Number</h3>
-                            </div>
-                            <div class="task-card d-flex align-items-center">
-                                <h3>Palindrome Number</h3>
-                            </div>
-                            <div class="task-card d-flex align-items-center">
-                                <h3>Longest Common Prefix</h3>
-                            </div>
-                            <div class="task-card d-flex align-items-center">
-                                <h3>3Sum Closest</h3>
-                            </div>
-                            <div class="task-card d-flex align-items-center">
-                                <h3>Remove Duplicates from Sorted Array</h3>
-                            </div>
-                            <div class="task-card d-flex align-items-center">
-                                <h3>Search Insert Position</h3>
-                            </div>
-                            <div class="task-card d-flex align-items-center">
-                                <h3>Valid Sudoku</h3>
-                            </div>
-                            <!-- Add more courses as needed -->
+                        <div class="task-container d-flex text-center" id="coursesContainer">
+                            <?php foreach ($courseTasks as $task) { ?>
+                                <div class="task-card d-flex align-items-center">
+                                    <h3><?php echo $task["name"];?></h3>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
                 <?php
-                echo 
-                '<div class="row my-3">
+                echo
+                    '<div class="row my-3">
                     <div class="col-12">
                         <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
                     </div>
-                </div>'; 
+                </div>';
                 ?>
 
             </div>
