@@ -20,8 +20,8 @@ include_once "include/courseTask.php";
             <div class="task-info bg-light border border-secondary rounded ps-3 pt-2">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>
-                            <?php echo $_GET["id"];?>.Title
+                    <h2>
+                            <?php $task->getName(); ?>
                         </h2>
                     </div>
                 </div>
