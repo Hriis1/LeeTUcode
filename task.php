@@ -1,17 +1,19 @@
 <?php
-include_once "include/dbHandler.php"; 
+include_once "include/dbHandler.php";
 include_once "include/courseTask.php";
 ?>
-<?php 
-    include_once "components/head.php";
+<?php
+include_once "components/head.php";
 
-    //Construction
-    $taskArray = $dbHandler->getCourseTaskById($_GET["id"]);
-    $testCases = explode("@@@", $taskArray["test_cases"]);
-    $testAnswers = explode("@@@", $taskArray["test_answers"]);
-    $task = new CourseTask($taskArray["id"], $taskArray["name"], $taskArray["description"], $taskArray["function_name"], 
-    $taskArray["function_declaration"], $testCases, $testAnswers, $taskArray["course_id"], $taskArray["difficulty"]);
+//Construction
+$taskArray = $dbHandler->getCourseTaskById($_GET["id"]);
+$testCases = explode("@@@", $taskArray["test_cases"]);
+$testAnswers = explode("@@@", $taskArray["test_answers"]);
+$task = new CourseTask($taskArray["id"], $taskArray["name"], $taskArray["description"],
+$taskArray["function_name"], $taskArray["function_declaration"], $testCases, $testAnswers,
+$taskArray["course_id"], $taskArray["difficulty"]);
 ?>
+
 <body>
     <?php include_once "components/header.php" ?>
     <main>
@@ -20,8 +22,8 @@ include_once "include/courseTask.php";
             <div class="task-info bg-light border border-secondary rounded ps-3 pt-2">
                 <div class="row">
                     <div class="col-lg-12">
-                    <h2>
-                            <?php $task->getName(); ?>
+                        <h2>
+                            <?php echo $task->getName(); ?>
                         </h2>
                     </div>
                 </div>
@@ -35,25 +37,33 @@ include_once "include/courseTask.php";
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Difficulty:</h4>
-                        <p><?php echo $task->getDifficulty()?></p>
+                        <p>
+                            <?php echo $task->getDifficulty() ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Function name:</h4>
-                        <p><?php echo $task->getFunnctionName()?></p>
+                        <p>
+                            <?php echo $task->getFunnctionName() ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Function declaration:</h4>
-                        <p><?php echo $task->getFunctionDeclaration()?></p>
+                        <p>
+                            <?php echo $task->getFunctionDeclaration() ?>
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Task description:</h4>
-                        <p><?php echo $task->getDescription()?></p>
+                        <p>
+                            <?php echo $task->getDescription() ?>
+                        </p>
                     </div>
                 </div>
 
