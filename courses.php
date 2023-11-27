@@ -1,4 +1,8 @@
-<?php include_once "components/head.php" ?>
+<?php
+include_once "include/dbHandler.php"; 
+include_once "include/Course.php";
+include_once "components/head.php";
+?>
 
 <body>
     <style>

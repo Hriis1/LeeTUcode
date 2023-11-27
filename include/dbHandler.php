@@ -347,6 +347,26 @@ class dbHandler
         $myQuery->close(); //Free/close the statement 
     }
 
+    public function getCourses()
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM courses");
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $courseArray = [];
+
+        while ($row = $result->fetch_assoc()) {
+            // Fetch result as an associative array and append to $courseArray
+            $courseArray[] = $row;
+        }
+
+        print_r($courseArray);
+
+        $myQuery->close();
+
+        return $courseArray;
+    }
+
     public function getCoursesByCreatorId($id)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
