@@ -45,7 +45,7 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>
-                            <?php echo $_GET["id"] . '.' . $course->getName(); ?>
+                            <?php echo $course->getName(); ?>
                         </h2>
                     </div>
                 </div>
