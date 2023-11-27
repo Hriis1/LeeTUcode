@@ -78,9 +78,13 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                         <h4>Tasks:</h4>
                         <div class="task-container d-flex text-center" id="coursesContainer">
                             <?php foreach ($courseTasks as $task) { ?>
-                                <div class="task-card d-flex align-items-center">
-                                    <h3><?php echo $task["name"];?></h3>
-                                </div>
+                                <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
+                                    <div class="task-card d-flex align-items-center">
+                                        <h3>
+                                            <?php echo $task["name"]; ?>
+                                        </h3>
+                                    </div>
+                                </a>
                             <?php } ?>
                         </div>
                     </div>
