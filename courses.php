@@ -53,9 +53,9 @@ $coursesArr = $dbHandler->getCourses();
             </div>
             <div class="row">
                 <div class="col-lg-12 bg-light border border-secondary rounded ps-5 pt-5 pb-5 mx-auto">
-                    <div class="courses-container" id="coursesContainer">
+                    <div class="courses-container text-center" id="coursesContainer">
                         <?php foreach ($coursesArr as $course) { ?>
-                            <a href="course.php?id=<?php echo $course["id"]; ?>" style="text-decoration: none; color: inherit;">
+                            <a href="course.php?id=<?php echo $course["id"]; ?>" class="no-link-style">
                                 <div class="course-card">
                                     <h3>
                                         <?php echo $course["name"]; ?>
