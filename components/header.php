@@ -1,3 +1,20 @@
+<!-- <li><a href="course.php?id=1" class="under">CourseTest</a></li>
+<li><a href="task.php?id=1" class="under">TaskTest</a></li>
+<li>
+    <div class="dropdown">
+        <a class="under" href="">Dropdown</a>
+        <div class="dropdown-content">
+            <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item1</a></div>
+            <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item2</a></div>
+            <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item3</a></div>
+            <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item4</a></div>
+            <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item5</a></div>
+            <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item6</a></div>
+        </div>
+    </div>
+</li>
+-->
+
 <header>
     <div class="logo"><a href="index.php"><img src="rec/img/logo-Placeholder.jpg" alt=""></a></div>
     <div class="heading">
@@ -6,21 +23,6 @@
             echo '<ul>
 			<li><a href="#" class="under">' . $_SESSION["user_username"] . '</a></li>
             <li><a href="courses.php" class="under">Courses</a></li>
-            <li><a href="course.php?id=1" class="under">CourseTest</a></li>
-            <li><a href="task.php?id=1" class="under">TaskTest</a></li>
-            <li>
-                <div class="dropdown">
-                    <a class="under" href="">Dropdown</a>
-                    <div class="dropdown-content">
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item1</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item2</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item3</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item4</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item5</a></div>
-                        <div class="dropdown-item-container"><a class="dropdown-a" href="" class="under">item6</a></div>
-                    </div>
-                </div>
-             </li>
             <li><a href="include/logout.php" class="under">Log out</a></li>
 		    </ul>';
         } else {
