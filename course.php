@@ -90,7 +90,7 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                     </div>
                 </div>
                 <div class="row my-3">
-                    <div class="col-12">
+                    <div class="col-2">
                         <a href="courses.php" class="btn btn-primary btn-lg active" role="button"
                             aria-pressed="true">All courses</a>
                     </div>

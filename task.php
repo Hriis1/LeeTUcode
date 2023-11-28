@@ -9,9 +9,17 @@ include_once "components/head.php";
 $taskArray = $dbHandler->getCourseTaskById($_GET["id"]);
 $testCases = explode("@@@", $taskArray["test_cases"]);
 $testAnswers = explode("@@@", $taskArray["test_answers"]);
-$task = new CourseTask($taskArray["id"], $taskArray["name"], $taskArray["description"],
-$taskArray["function_name"], $taskArray["function_declaration"], $testCases, $testAnswers,
-$taskArray["course_id"], $taskArray["difficulty"]);
+$task = new CourseTask(
+    $taskArray["id"],
+    $taskArray["name"],
+    $taskArray["description"],
+    $taskArray["function_name"],
+    $taskArray["function_declaration"],
+    $testCases,
+    $testAnswers,
+    $taskArray["course_id"],
+    $taskArray["difficulty"]
+);
 ?>
 
 <body>
@@ -66,7 +74,12 @@ $taskArray["course_id"], $taskArray["difficulty"]);
                         </p>
                     </div>
                 </div>
-
+                <div class="row my-3">
+                    <div class="col-2">
+                        <a href="course.php?id=<?php echo $task->getCourseId(); ?>" class="btn btn-primary btn-lg active" role="button"
+                            aria-pressed="true">Course</a>
+                    </div>
+                </div>
             </div>
 
 
@@ -90,7 +103,6 @@ $taskArray["course_id"], $taskArray["difficulty"]);
                     ?>
                 </div>
             </div>
-
         </div>
     </main>
     <?php include_once "components/footer.php" ?>
