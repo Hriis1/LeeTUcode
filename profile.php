@@ -2,19 +2,21 @@
 include_once "components/head.php";
 
 $user = $dbHandler->getUserById($_GET["id"]);
+
+$joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
 ?>
 
 <body>
     <?php include_once "components/header.php" ?>
     <style>
-        .task-container {
+        .course-container {
             display: flex;
             flex-wrap: wrap;
             margin-left: 70px;
             margin-bottom: 30px;
         }
 
-        .task-card {
+        .course-card {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,13 +26,13 @@ $user = $dbHandler->getUserById($_GET["id"]);
             min-height: 150px;
         }
 
-        .task-card h3 {
+        .course-card h3 {
             color: #333;
         }
     </style>
     <main>
         <div class="container my-5">
-            <div class="task-info bg-light border border-secondary rounded ps-3 pt-2 pe-3">
+            <div class="course-info bg-light border border-secondary rounded ps-3 pt-2 pe-3">
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h1>
@@ -52,6 +54,22 @@ $user = $dbHandler->getUserById($_GET["id"]);
                         <p class="ps-3 pt-1">
                             goshko@abv.bg
                         </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-12">
+                        <h4>Joined courses:</h4>
+                        <div class="course-container d-flex text-center" id="coursesContainer">
+                            <?php foreach ($joinedCourses as $course) { ?>
+                                <a href="course.php?id=<?php echo $course["id"]; ?>" class="no-link-style">
+                                    <div class="course-card d-flex align-items-center">
+                                        <h3>
+                                            <?php echo $course["name"]; ?>
+                                        </h3>
+                                    </div>
+                                </a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
 
