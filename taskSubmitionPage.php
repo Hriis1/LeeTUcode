@@ -39,9 +39,13 @@
         $.ajax(settings).done(function (response) {
             var submitionStatus = "fail";
             var formattedOutput = "";
+            var compilationResponse = ""; 
             if (response["output"] != "") {
                 // Replace newline characters with <br> tags
                 formattedOutput = response["output"].replace(/\n/g, '<br>');
+
+                 //Response for the db
+                 compilationResponse = response["output"];
 
                 //Set the submition status
                 if (formattedOutput == "All tests cleared!") {
@@ -49,7 +53,11 @@
                 }
             }
             else {
+                //The output that shows to the user
                 formattedOutput = "Program did not compile correctly! <br>" + response["error"];
+
+                //Response for the db
+                compilationResponse = "Program did not compile correctly!\n" + response["error"];
 
                 //Set the submition status
                 submitionStatus = "error";
@@ -61,8 +69,8 @@
             // Update the submission status in the database using AJAX
             $.ajax({
                 type: "POST",
-                url: "include/updateSubmissionStatus.php",
-                data: { submitionStatus: submitionStatus, taskId: <?php echo $_GET["id"]; ?> },
+                url: "include/updateSubmission.php",
+                data: { submitionStatus: submitionStatus, taskId: <?php echo $_GET["id"]; ?>, compilationResponse: compilationResponse },
                 success: function (result) {
                    console.log("update status success!");
                 }
