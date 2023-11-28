@@ -30,7 +30,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
             color: #333;
         }
     </style>
-    <main>
+    <main class="mb-5">
         <div class="container my-5">
             <div class="course-info bg-light border border-secondary rounded ps-3 pt-2 pe-3">
                 <div class="row">
@@ -44,7 +44,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     <div class="col-lg-12 d-flex mb-3">
                         <h4>Name:</h4>
                         <p class="ps-3 pt-1">
-                            <?php echo $user["username"];?>
+                            <?php echo $user["username"]; ?>
                         </p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     <div class="col-lg-12 d-flex mb-3">
                         <h4>Eamil:</h4>
                         <p class="ps-3 pt-1">
-                        <?php echo $user["email"];?>
+                            <?php echo $user["email"]; ?>
                         </p>
                     </div>
                 </div>
@@ -72,6 +72,15 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                         </div>
                     </div>
                 </div>
+
+                <?php if ($user["account_type"] == "teacher") { ?>
+                    <div class="row my-4">
+                        <div class="col-12">
+                            <a href="#" class="btn btn-primary btn-lg active" role="button"
+                                aria-pressed="true">Create a course</a>
+                        </div>
+                    </div>
+                <?php } ?>
 
             </div>
         </div>
