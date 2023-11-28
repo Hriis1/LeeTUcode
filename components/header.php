@@ -21,7 +21,7 @@
         <?php
         if (isset($_SESSION["user_id"])) {
             echo '<ul>
-			<li><a href="#" class="under">' . $_SESSION["user_username"] . '</a></li>
+			<li><a href="profile.php?id=' . $_SESSION["user_id"] . '" class="under">' . $_SESSION["user_username"] . '</a></li>
             <li><a href="courses.php" class="under">Courses</a></li>
             <li><a href="include/logout.php" class="under">Log out</a></li>
 		    </ul>';
