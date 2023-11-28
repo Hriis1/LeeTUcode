@@ -87,7 +87,7 @@ class dbHandler
 
         // Fetch the first row as an associative array
         $userArray = $result->fetch_assoc();
-        
+
         $myQuery->close();
 
         return $userArray;
@@ -210,6 +210,14 @@ class dbHandler
     {
         $myQuery = $this->mysqli->prepare("UPDATE task_submitions SET submition_status = ? WHERE id = ?"); // Prepare the SQL query
         $myQuery->bind_param("si", $submition_status, $id); // Bind the parameters in place of the '?'
+        $myQuery->execute(); // Execute the statement
+        $myQuery->close(); // Free/close the statement
+    }
+
+    public function updateTaskSubmitionResponse($response, $id)
+    {
+        $myQuery = $this->mysqli->prepare("UPDATE task_submitions SET response = ? WHERE id = ?"); // Prepare the SQL query
+        $myQuery->bind_param("si", $response, $id); // Bind the parameters in place of the '?'
         $myQuery->execute(); // Execute the statement
         $myQuery->close(); // Free/close the statement
     }
