@@ -44,7 +44,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     <div class="col-lg-12 d-flex mb-3">
                         <h4>Name:</h4>
                         <p class="ps-3 pt-1">
-                            Goshko
+                            <?php echo $user["username"];?>
                         </p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     <div class="col-lg-12 d-flex mb-3">
                         <h4>Eamil:</h4>
                         <p class="ps-3 pt-1">
-                            goshko@abv.bg
+                        <?php echo $user["email"];?>
                         </p>
                     </div>
                 </div>
