@@ -56,28 +56,36 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                         </p>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3 mb-5">
                     <div class="col-lg-12">
-                        <h4>Joined courses:</h4>
-                        <div class="course-container d-flex text-center" id="coursesContainer">
-                            <?php foreach ($joinedCourses as $course) { ?>
-                                <a href="course.php?id=<?php echo $course["id"]; ?>" class="no-link-style">
-                                    <div class="course-card d-flex align-items-center">
-                                        <h3>
-                                            <?php echo $course["name"]; ?>
-                                        </h3>
-                                    </div>
-                                </a>
-                            <?php } ?>
-                        </div>
+                        <?php if ($joinedCourses) { ?>
+                            <h4>Joined courses:</h4>
+                            <div class="course-container d-flex text-center" id="coursesContainer">
+                                <?php foreach ($joinedCourses as $course) { ?>
+                                    <a href="course.php?id=<?php echo $course["id"]; ?>" class="no-link-style">
+                                        <div class="course-card d-flex align-items-center">
+                                            <h3>
+                                                <?php echo $course["name"]; ?>
+                                            </h3>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="d-flex">
+                                <h4>You haven't joined any courses yet :/</h4>
+                                <p class="text-success pt-1 ps-2">it's never too late to start!</p>
+                            </div>
+
+                        <?php } ?>
                     </div>
                 </div>
 
                 <?php if ($user["account_type"] == "teacher") { ?>
-                    <div class="row my-4">
+                    <div class="row mb-4">
                         <div class="col-12">
-                            <a href="#" class="btn btn-primary btn-lg active" role="button"
-                                aria-pressed="true">Create a course</a>
+                            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create a
+                                course</a>
                         </div>
                     </div>
                 <?php } ?>
