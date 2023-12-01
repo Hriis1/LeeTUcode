@@ -340,6 +340,21 @@ class dbHandler
 
         return $courseMembersArray;
     }
+
+    public function hasUserJoinedCourse($userID, $courseID)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
+                WHERE user_id = ? AND course_id = ?");
+        $myQuery->bind_param("ii", $userID, $courseID);
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $hasJoined = $result->num_rows > 0;
+
+        $myQuery->close();
+
+        return $hasJoined;
+    }
     //==============================================Course==================================================
     public function createCourse($name, $requirements, $description, $creator_id)
     {

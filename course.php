@@ -100,9 +100,19 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                             aria-pressed="true">All courses</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
     <?php include_once "components/footer.php" ?>
+    <script>
+        $joinCourseBtn = $(".joinBtn");
+        //If there is a logged in user
+        <?php if ($user != null) { ?>
+            <?php if ($user != null) { ?>
+            
+            <?php } ?>
+        <?php } else { ?>
+            console.log("No user loged in");
+        <?php } ?>
+    </script>
 </body>
