@@ -280,7 +280,7 @@ class dbHandler
         return $courseTasksArray;
     }
     //=============================================CourseMember=============================================
-    public function createCourseMember($course_id, $user_id)
+    public function joinCourse($course_id, $user_id)
     {
         $myQuery = $this->mysqli->prepare("INSERT INTO course_members (course_id, user_id) VALUES (?,?);");
         //Prepare the sql query
