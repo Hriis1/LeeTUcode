@@ -108,14 +108,18 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
         $joinCourseBtn = $(".joinBtn");
         //If there is a logged in user
         <?php if ($user != null) { ?>
-            //If the user has already joined the course
             <?php if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) { ?>
-                console.log("user already joined the course");
+            //If the user has already joined the course
+            $(".joinBtn").addClass("disabled");
+            $(".joinBtn").addClass("d-none");
             <?php } else { ?>
-                console.log("user has not joined the course");
+                //If the user has not yet joined the course
+                $(".joinBtn").text("Join course");
             <?php } ?>
         <?php } else { ?>
-            console.log("No user loged in");
+            //If there isnt a logged in user
+            $(".joinBtn").addClass("disabled");
+            $(".joinBtn").text("Log in to join");
         <?php } ?>
     </script>
 </body>
