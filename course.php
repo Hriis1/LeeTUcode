@@ -102,6 +102,10 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                         <a href="include/joinCourse.php?course_id=<?php echo $_GET["id"]; ?>"
                             class="btn btn-success btn-lg active joinBtn" role="button" aria-pressed="true">Join
                             course</a>
+
+                            <a href="include/leaveCourse.php?course_id=<?php echo $_GET["id"]; ?>"
+                            class="btn btn-danger btn-lg disabled d-none leaveBtn" role="button" aria-pressed="true">Leave
+                            course</a>
                     </div>
                     <div class="col-8"></div>
                     <div class="col-2 d-flex justify-content-end">
@@ -115,12 +119,19 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
     <?php include_once "components/footer.php" ?>
     <script>
         $joinCourseBtn = $(".joinBtn");
+        $leaveCourseBtn = $(".leaveBtn");
         //If there is a logged in user
         <?php if ($user != null) { ?>
             <?php if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) { ?>
                 //If the user has already joined the course
+
+                //Disable and hide the join btn
                 $(".joinBtn").addClass("disabled");
                 $(".joinBtn").addClass("d-none");
+
+                //Enable the leave btn
+                $(".leaveBtn").removeClass("disabled");
+                $(".leaveBtn").removeClass("d-none");
             <?php } else { ?>
                 //If the user has not yet joined the course
                 $(".joinBtn").text("Join course");
