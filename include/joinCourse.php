@@ -1,5 +1,7 @@
 <?php
 include_once "sessionConfig.php";
+include_once "dbHandler.php";
+
 $courseID = $_GET["course_id"];
 if (isset($_SESSION["user_id"])) {
     if ($dbHandler->hasUserJoinedCourse($_SESSION["user_id"], $courseID)) {
