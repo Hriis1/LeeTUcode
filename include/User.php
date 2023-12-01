@@ -17,6 +17,11 @@ class User
         $this->_account_type = $account_type;
     }
 
+    function hasJoinedCourse(dbHandler $dbHandler, $courseID)
+    {
+        return $dbHandler->hasUserJoinedCourse($this->_id, $courseID);
+    }
+
     //Getters
     function getID()
     {
