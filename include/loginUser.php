@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
         {
             $user = $dbHandler->getUserByUsernaame($username); //Get the users data
 
-            //Set the session variables for the users data
+            //Set the session variables for the users id
             $_SESSION["user_id"] = $user["id"];
 
             regenerateSessionIDLoggedIn(); //Generate a new session id and combin it with the users id

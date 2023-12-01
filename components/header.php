@@ -23,8 +23,11 @@ $user = null;
     <div class="heading">
         <?php
         if (isset($_SESSION["user_id"])) {
+            //Construct the user
             $userArray = $dbHandler->getUserById($_SESSION["user_id"]);
             $user = new User($userArray['id'], $userArray['username'], $userArray['email'], $userArray['pass'], $userArray['account_type']);
+
+            //Show the relevant buttons
             echo '<ul>
 			<li><a href="profile.php?id=' . $user->getID() . '" class="under">' . $user->getUsername() . '</a></li>
             <li><a href="courses.php" class="under">Courses</a></li>
