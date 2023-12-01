@@ -14,14 +14,19 @@
     </div>
 </li>
 -->
-
+<?php
+include_once "include/User.php";
+$user = null;
+?>
 <header>
     <div class="logo"><a href="index.php"><img src="rec/img/logo-Placeholder.jpg" alt=""></a></div>
     <div class="heading">
         <?php
         if (isset($_SESSION["user_id"])) {
+            $userArray = $dbHandler->getUserById($_SESSION["user_id"]);
+            $user = new User($userArray['id'], $userArray['username'], $userArray['email'], $userArray['pass'], $userArray['account_type']);
             echo '<ul>
-			<li><a href="profile.php?id=' . $_SESSION["user_id"] . '" class="under">' . $_SESSION["user_username"] . '</a></li>
+			<li><a href="profile.php?id=' . $user->getID() . '" class="under">' . $user->getUsername() . '</a></li>
             <li><a href="courses.php" class="under">Courses</a></li>
             <li><a href="include/logout.php" class="under">Log out</a></li>
 		    </ul>';
