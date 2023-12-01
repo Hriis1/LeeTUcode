@@ -90,7 +90,7 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                 </div>
                 <div class="row my-3">
                     <div class="col-2">
-                        <a href="joinCourse.php?course_id=<?php echo $_GET["id"]; ?>"
+                        <a href="include/joinCourse.php?course_id=<?php echo $_GET["id"]; ?>"
                             class="btn btn-success btn-lg active joinBtn" role="button" aria-pressed="true">Join
                             course</a>
                     </div>
