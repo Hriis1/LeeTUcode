@@ -289,6 +289,15 @@ class dbHandler
         $myQuery->close(); //Free/close the statement 
     }
 
+    public function leaveCourse($course_id, $user_id)
+    {
+        $myQuery = $this->mysqli->prepare("DELETE FROM course_members WHERE course_id = ? AND user_id = ?");
+        // Prepare the SQL query
+        $myQuery->bind_param("ii", $course_id, $user_id); // Bind the params in place of the '?'
+        $myQuery->execute(); // Execute the statement
+        $myQuery->close(); // Free/close the statement
+    }
+
     public function getMembersOfCourse($course_id)
     {
         $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
