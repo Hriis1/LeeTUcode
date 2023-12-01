@@ -42,9 +42,18 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
         <div class="container my-5">
             <div class="task-info bg-light border border-secondary rounded ps-3 pt-2 pe-3">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 d-flex">
                         <h2>
                             <?php echo $course->getName(); ?>
+                        </h2>
+                        <h2 class="text-success ps-1">
+                            <?php
+                            if ($user != null) {
+                                if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) {
+                                    echo (" (Joined)");
+                                }
+                            }
+                            ?>
                         </h2>
                     </div>
                 </div>
@@ -109,9 +118,9 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
         //If there is a logged in user
         <?php if ($user != null) { ?>
             <?php if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) { ?>
-            //If the user has already joined the course
-            $(".joinBtn").addClass("disabled");
-            $(".joinBtn").addClass("d-none");
+                //If the user has already joined the course
+                $(".joinBtn").addClass("disabled");
+                $(".joinBtn").addClass("d-none");
             <?php } else { ?>
                 //If the user has not yet joined the course
                 $(".joinBtn").text("Join course");
