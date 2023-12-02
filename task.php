@@ -29,15 +29,15 @@ $task = new CourseTask(
         <div class="container my-5">
             <div class="task-info bg-light border border-secondary rounded ps-3 pt-2">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 d-flex">
                         <h2>
                             <?php echo $task->getName(); ?>
                         </h2>
                         <h2 class="text-success ps-1">
                             <?php
                             if ($user != null) {
-                                if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) {
-                                    echo (" (Joined)");
+                                if ($user->hasSolvedTask($dbHandler, $_GET["id"])) {
+                                    echo (" (Solved)");
                                 }
                             }
                             ?>
