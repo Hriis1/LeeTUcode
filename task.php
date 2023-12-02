@@ -76,8 +76,8 @@ $task = new CourseTask(
                 </div>
                 <div class="row my-3">
                     <div class="col-2">
-                        <a href="course.php?id=<?php echo $task->getCourseId(); ?>" class="btn btn-primary btn-lg active" role="button"
-                            aria-pressed="true">Course</a>
+                        <a href="course.php?id=<?php echo $task->getCourseId(); ?>"
+                            class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Course</a>
                     </div>
                 </div>
             </div>
@@ -88,8 +88,9 @@ $task = new CourseTask(
                     upload-form-container d-flex text-center mx-auto">
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        $serializedTask = base64_encode(serialize($task));
-                        echo '<form class="form-upload mx-auto" action="include/buildExecutable.php" method="post" enctype="multipart/form-data">
+                        if ($user->hasJoinedCourse($dbHandler, $task->getCourseId())) {
+                            $serializedTask = base64_encode(serialize($task));
+                            echo '<form class="form-upload mx-auto" action="include/buildExecutable.php" method="post" enctype="multipart/form-data">
                                         <h2 class="form-upload-heading">Upload solution</h2>
                                         <input type="hidden" name="serializedTask" value="' . $serializedTask . '">
                                         <input type="file" class="form-control" name="submition_file" accept=".txt" required>
@@ -97,6 +98,9 @@ $task = new CourseTask(
                                             <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Upload</button>
                                         </div>
                                     </form>';
+                        } else {
+                            echo "<h2>Join the course to upload a solution!</h2>";
+                        }
                     } else {
                         echo '<h2>Log in to upload a solution!</h2>';
                     }
