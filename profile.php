@@ -10,7 +10,6 @@
             display: flex;
             flex-wrap: wrap;
             margin-left: 70px;
-            margin-bottom: 30px;
         }
 
         .course-card {
@@ -31,7 +30,7 @@
         <div class="container my-5">
             <div class="course-info bg-light border border-secondary rounded ps-3 pt-2 pe-3">
                 <div class="row">
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 mt-3 text-center">
                         <h1>
                             Profile
                         </h1>
