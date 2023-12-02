@@ -1,13 +1,10 @@
-<?php
-include_once "components/head.php";
-
-$user = $dbHandler->getUserById($_GET["id"]);
-
-$joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
-?>
+<?php include_once "components/head.php"; ?>
 
 <body>
-    <?php include_once "components/header.php" ?>
+    <?php
+    include_once "components/header.php";
+    $joinedCourses = $dbHandler->getCoursesJoinedByUser($user->getID());
+    ?>
     <style>
         .course-container {
             display: flex;
@@ -44,7 +41,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     <div class="col-lg-12 d-flex mb-3">
                         <h4>Name:</h4>
                         <p class="ps-3 pt-1">
-                            <?php echo $user["username"]; ?>
+                            <?php echo $user->getUsername(); ?>
                         </p>
                     </div>
                 </div>
@@ -52,7 +49,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     <div class="col-lg-12 d-flex mb-3">
                         <h4>Eamil:</h4>
                         <p class="ps-3 pt-1">
-                            <?php echo $user["email"]; ?>
+                            <?php echo $user->getEmail(); ?>
                         </p>
                     </div>
                 </div>
@@ -81,7 +78,7 @@ $joinedCourses = $dbHandler->getCoursesJoinedByUser($user["id"]);
                     </div>
                 </div>
 
-                <?php if ($user["account_type"] == "teacher") { ?>
+                <?php if ($user->getAccountType() == "teacher") { ?>
                     <div class="row mb-4">
                         <div class="col-12">
                             <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create a
