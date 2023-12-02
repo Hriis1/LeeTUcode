@@ -25,6 +25,10 @@ class User
     {
         return $dbHandler->hasUserJoinedCourse($this->_id, $courseID);
     }
+    function hasSolvedTask(dbHandler $dbHandler, $taskID)
+    {
+        return $dbHandler->hasUserSolvedTask($this->_id, $taskID);
+    }
 
     //Getters
     function getID()

@@ -221,6 +221,22 @@ class dbHandler
         $myQuery->execute(); // Execute the statement
         $myQuery->close(); // Free/close the statement
     }
+
+    public function hasUserSolvedTask($userID, $taskID)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM task_submitions 
+        WHERE user_id = ? AND task_id = ? AND submition_status = 'success';");
+        $myQuery->bind_param("ii", $userID, $taskID);
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $hasSolved = $result->num_rows > 0;
+
+        $myQuery->close();
+
+        return $hasSolved;
+    }
+
     //==============================================CourseTask==============================================
     public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id, $difficulty)
     {

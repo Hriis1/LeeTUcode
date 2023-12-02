@@ -33,6 +33,15 @@ $task = new CourseTask(
                         <h2>
                             <?php echo $task->getName(); ?>
                         </h2>
+                        <h2 class="text-success ps-1">
+                            <?php
+                            if ($user != null) {
+                                if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) {
+                                    echo (" (Joined)");
+                                }
+                            }
+                            ?>
+                        </h2>
                     </div>
                 </div>
                 <div class="row mt-3">
