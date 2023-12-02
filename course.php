@@ -88,9 +88,21 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                             <?php foreach ($courseTasks as $task) { ?>
                                 <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
                                     <div class="task-card d-flex align-items-center justify-content-center">
-                                        <h3>
-                                            <?php echo $task["name"]; ?>
-                                        </h3>
+                                        <div>
+                                            <h3>
+                                                <?php echo $task["name"]; ?>
+                                            </h3>
+                                            <h3 class="text-success ps-1">
+                                                <?php
+                                                if ($user != null) {
+                                                    if ($user->hasSolvedTask($dbHandler, $task["id"])) {
+                                                        echo (" (Solved)");
+                                                    }
+                                                }
+                                                ?>
+                                            </h3>
+                                        </div>
+
                                     </div>
                                 </a>
                             <?php } ?>
@@ -103,8 +115,9 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                             class="btn btn-success btn-lg active joinBtn" role="button" aria-pressed="true">Join
                             course</a>
 
-                            <a href="include/leaveCourse.php?course_id=<?php echo $_GET["id"]; ?>"
-                            class="btn btn-danger btn-lg disabled d-none leaveBtn" role="button" aria-pressed="true">Leave
+                        <a href="include/leaveCourse.php?course_id=<?php echo $_GET["id"]; ?>"
+                            class="btn btn-danger btn-lg disabled d-none leaveBtn" role="button"
+                            aria-pressed="true">Leave
                             course</a>
                     </div>
                     <div class="col-8"></div>
