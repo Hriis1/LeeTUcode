@@ -24,7 +24,7 @@ header {
   text-decoration: none;
   font-weight: 500;
   font-size: 18px;
-  white-space: none;
+  white-space: nowrap;
   color: black;
   margin: 2px 30px;
   transition-duration: 1s;
