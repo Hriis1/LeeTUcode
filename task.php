@@ -27,7 +27,7 @@ $task = new CourseTask(
     <main>
 
         <div class="container my-5">
-            <div class="task-info bg-light border border-secondary rounded ps-3 pt-2">
+            <div class="task-info bg-light border border-secondary rounded ps-3 pe-3 pt-2">
                 <div class="row">
                     <div class="col-lg-12 d-flex">
                         <h2>
@@ -87,6 +87,11 @@ $task = new CourseTask(
                     <div class="col-2">
                         <a href="course.php?id=<?php echo $task->getCourseId(); ?>"
                             class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Course</a>
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2 d-flex justify-content-end">
+                        <a href="" class="btn btn-primary btn-lg active" role="button"
+                            aria-pressed="true">Submitions</a>
                     </div>
                 </div>
             </div>
