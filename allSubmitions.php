@@ -6,9 +6,16 @@
         <?php
         if ($user != null) {
             //If there is a logged in user
-            if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course ?>
+            if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course
+                $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
+                ?>
                 <div class="container" style="margin-top: 120px;">
                     <div class="accordion" id="accordionExample">
+                        <?php
+                        foreach ($submitions as $submition) { ?>
+                        
+                        <?php } ?>
+
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"

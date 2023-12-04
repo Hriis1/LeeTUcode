@@ -171,7 +171,6 @@ class dbHandler
             $taskSubArray[] = $row;
         }
 
-        print_r($taskSubArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $taskSubArray;
@@ -295,7 +294,7 @@ class dbHandler
 
         return $courseTasksArray;
     }
-    
+
     //=============================================CourseMember=============================================
     public function joinCourse($course_id, $user_id)
     {
