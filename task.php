@@ -90,7 +90,7 @@ $task = new CourseTask(
                     </div>
                     <div class="col-8"></div>
                     <div class="col-2 d-flex justify-content-end">
-                        <a href="" class="btn btn-primary btn-lg submitionsBtn" role="button"
+                        <a href="allSubmitions.php" class="btn btn-primary btn-lg submitionsBtn" role="button"
                             aria-pressed="true">Submitions</a>
                     </div>
                 </div>
