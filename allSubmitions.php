@@ -25,7 +25,10 @@
                                 <div id="collapse<?php echo $idx ?>" class="accordion-collapse collapse"
                                     aria-labelledby="headingOne" data-bs-parent="#submitionsAccordion">
                                     <div class="accordion-body">
-                                        <?php echo $submition["submited_function"] ?>
+                                        Submited function:<br>
+                                        <?php echo nl2br($submition["submited_function"]) ?><br><br>
+                                        Response:<br>
+                                        <?php echo $submition["submition_status"] ?>
                                     </div>
                                 </div>
                             </div>
