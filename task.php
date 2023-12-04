@@ -90,7 +90,8 @@ $task = new CourseTask(
                     </div>
                     <div class="col-8"></div>
                     <div class="col-2 d-flex justify-content-end">
-                        <a href="allSubmitions.php" class="btn btn-primary btn-lg submitionsBtn" role="button"
+                        <a href="allSubmitions.php?task_id=<?php echo $task->getId(); ?>"
+                            class="btn btn-primary btn-lg submitionsBtn" role="button"
                             aria-pressed="true">Submitions</a>
                     </div>
                 </div>
@@ -128,7 +129,7 @@ $task = new CourseTask(
         $submitionsBtn = $(".submitionsBtn");
         //If there is a logged in user
         <?php if ($user != null) { ?>
-            <?php if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) { ?>
+            <?php if ($user->hasJoinedCourse($dbHandler, $task->getCourseId())) { ?>
                 //If the user has already joined the course
 
                 //Enable the solutions btn

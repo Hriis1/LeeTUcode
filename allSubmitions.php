@@ -3,7 +3,9 @@
 <body>
     <?php include_once "components/header.php" ?>
     <main>
-        ssssszzzzttt
+        <?php
+        
+         ?>
     </main>
     <?php include_once "components/footer.php" ?>
 </body>
