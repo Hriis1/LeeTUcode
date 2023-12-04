@@ -90,7 +90,7 @@ $task = new CourseTask(
                     </div>
                     <div class="col-8"></div>
                     <div class="col-2 d-flex justify-content-end">
-                        <a href="" class="btn btn-primary btn-lg active" role="button"
+                        <a href="" class="btn btn-primary btn-lg submitionsBtn" role="button"
                             aria-pressed="true">Submitions</a>
                     </div>
                 </div>
@@ -124,4 +124,27 @@ $task = new CourseTask(
         </div>
     </main>
     <?php include_once "components/footer.php" ?>
+    <script>
+        $submitionsBtn = $(".submitionsBtn");
+        //If there is a logged in user
+        <?php if ($user != null) { ?>
+            <?php if ($user->hasJoinedCourse($dbHandler, $_GET["id"])) { ?>
+                //If the user has already joined the course
+
+                //Enable the solutions btn
+                $(".submitionsBtn").addClass("active");
+                $(".submitionsBtn").removeClass("disabled");
+            <?php } else { ?>
+                //If the user has not yet joined the course
+
+                //Disable the solutions btn
+                $(".submitionsBtn").removeClass("active");
+                $(".submitionsBtn").addClass("disabled");
+            <?php } ?>
+        <?php } else { ?>
+            //Disable the solutions btn
+            $(".submitionsBtn").removeClass("active");
+            $(".submitionsBtn").addClass("disabled");
+        <?php } ?>
+    </script>
 </body>
