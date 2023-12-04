@@ -31,7 +31,7 @@
                                         Submited function:<br>
                                         <?php echo nl2br($submition["submited_function"]) ?><br><br>
                                         Response:<br>
-                                        <?php echo $submition["submition_status"]; ?>
+                                        <?php echo $submition["response"]; ?>
                                     </div>
                                 </div>
                             </div>
