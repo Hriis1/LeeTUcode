@@ -15,11 +15,14 @@
                         $idx = 0;
                         foreach ($submitions as $submition) { ?>
                             <div class="accordion-item">
-                                <h2><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <h2>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse<?php echo ++$idx ?>" aria-expanded="false"
                                         aria-controls="collapse<?php echo $idx ?>">
                                         <?php echo $submition["updated_at"] ?>
-
+                                        <text class="ps-1 response">
+                                            (<?php echo $submition["submition_status"]; ?>)
+                                        </text>
                                     </button>
                                 </h2>
                                 <div id="collapse<?php echo $idx ?>" class="accordion-collapse collapse"
@@ -28,7 +31,7 @@
                                         Submited function:<br>
                                         <?php echo nl2br($submition["submited_function"]) ?><br><br>
                                         Response:<br>
-                                        <?php echo $submition["submition_status"] ?>
+                                        <?php echo $submition["submition_status"]; ?>
                                     </div>
                                 </div>
                             </div>
@@ -44,4 +47,19 @@
         } ?>
     </main>
     <?php include_once "components/footer.php" ?>
+    <script>
+        var responseTexts = $(".response");
+        responseTexts.each(function()
+        {
+            var currentElement = $(this);
+            if(currentElement.text().trim() == "(success)")
+            {
+                currentElement.addClass("text-success");
+            }
+            else
+            {
+                currentElement.addClass("text-danger");
+            }
+        });
+    </script>
 </body>
