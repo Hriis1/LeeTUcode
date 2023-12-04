@@ -54,4 +54,9 @@ class User
     {
         return $this->_account_type;
     }
+
+    function getSubmitionsForTask(dbHandler $dbHandler, $taskID)
+    {
+        return $dbHandler->getTaskSubmitionsOfUserForTask($this->_id, $taskID);
+    }
 }

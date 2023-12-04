@@ -295,6 +295,7 @@ class dbHandler
 
         return $courseTasksArray;
     }
+    
     //=============================================CourseMember=============================================
     public function joinCourse($course_id, $user_id)
     {
