@@ -21,10 +21,13 @@
                             <label for="recipient-name" class="col-form-label">Requirements:</label>
                             <input type="text" class="form-control" name="requirements" id="requirements_input" required>
                         </div>
-                        <div class="row mx-1 mb-5">
+                        <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Description:</label> <br>
                             <textarea name="description" id="description_input" placeholder="Description"
                                 required></textarea>
+                        </div>
+                        <div class="row mx-1 mb-5">
+                            <label id="courseCreateError" class="col-form-label text-danger"></label>
                         </div>
                         <input type="Submit" name="submit" value="Add course" class="btn btn-primary">
                     </form>
@@ -35,4 +38,19 @@
         } ?>
     </main>
     <?php include_once "components/footer.php" ?>
+    <script>
+        $(document).ready(function () {
+            
+            var errorContainer = $("#courseCreateError");
+            var errorText = "";
+
+            //Get the errors if any
+            <?php if (isset($_SESSION["create_course_error"])) { ?>
+                errorText = "<?php echo $_SESSION["create_course_error"]; ?>";
+            <?php unset($_SESSION["create_course_error"]); } ?>
+
+            //Show the errors
+            errorContainer.text(errorText);
+        });
+    </script>
 </body>
