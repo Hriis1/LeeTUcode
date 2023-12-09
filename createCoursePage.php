@@ -8,7 +8,11 @@
 
             <div class="container" style="margin-top: 50px;">
                 <div class="form-container border border-secondary rounded p-4">
-                    <form id="addCourse" action="" method="POST">
+                    <form id="addCourseForm" action="include/createCourse.php" method="POST">
+                        <div class="d-none">
+                            <input type="text" class="form-control" name="creator_id" id="creator_id_input"
+                                value="<?php echo $user->getID(); ?>" required>
+                        </div>
                         <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Course name:</label>
                             <input type="text" class="form-control" name="name" id="name_input" required>
@@ -19,7 +23,8 @@
                         </div>
                         <div class="row mx-1 mb-5">
                             <label for="recipient-name" class="col-form-label">Description:</label> <br>
-                            <textarea name="description" id="description_input" placeholder="Description" required></textarea>
+                            <textarea name="description" id="description_input" placeholder="Description"
+                                required></textarea>
                         </div>
                         <input type="Submit" name="submit" value="Add course" class="btn btn-primary">
                     </form>
