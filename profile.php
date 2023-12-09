@@ -97,7 +97,7 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col-12">
-                            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create a
+                            <a href="createCoursePage.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create a
                                 course</a>
                         </div>
                     </div>
