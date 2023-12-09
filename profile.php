@@ -4,6 +4,7 @@
     <?php
     include_once "components/header.php";
     $joinedCourses = $dbHandler->getCoursesJoinedByUser($user->getID());
+    $createdCourses = $dbHandler->getCoursesByCreatorId($user->getID());
     ?>
     <style>
         .course-container {
@@ -78,6 +79,22 @@
                 </div>
 
                 <?php if ($user->getAccountType() == "teacher") { ?>
+                    <div class="row mt-3 mb-5">
+                        <div class="col-12">
+                            <h4>My courses:</h4>
+                            <div class="course-container d-flex text-center" id="coursesContainer">
+                                <?php foreach ($createdCourses as $course) { ?>
+                                    <a href="course.php?id=<?php echo $course["id"]; ?>" class="no-link-style">
+                                        <div class="course-card d-flex align-items-center">
+                                            <h3>
+                                                <?php echo $course["name"]; ?>
+                                            </h3>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mb-4">
                         <div class="col-12">
                             <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create a
