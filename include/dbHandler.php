@@ -459,6 +459,26 @@ class dbHandler
         return $courseArray;
     }
 
+    public function getCourseByName($name)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
+                WHERE name = ?");
+        $myQuery->bind_param("s", $name);
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $courseArray = $result->fetch_assoc();
+
+        $myQuery->close();
+
+        return $courseArray;
+    }
+
+    function isCourseNameTaken($course_name)
+    {
+        return (bool) $this->getCourseByName($course_name);
+    }
+
 }
 
 // Report all mysqli errors as exceptions
