@@ -384,11 +384,19 @@ class dbHandler
     public function createCourse($name, $requirements, $description, $creator_id)
     {
         $myQuery = $this->mysqli->prepare("INSERT INTO courses (name, requirements, description, creator_id) VALUES (?,?,?,?);");
-        //Prepare the sql query
+        // Prepare the SQL query
         $myQuery->bind_param("sssi", $name, $requirements, $description, $creator_id);
-        //bind the params in place of the '?'
-        $myQuery->execute(); //Execute the statement
-        $myQuery->close(); //Free/close the statement 
+        // Bind the params in place of the '?'
+        $myQuery->execute(); // Execute the statement
+
+        // Get the ID of the last inserted row
+        $lastInsertedId = $myQuery->insert_id;
+
+        // Close the statement
+        $myQuery->close();
+
+        // Return the ID of the newly created course
+        return $lastInsertedId;
     }
 
     public function getCourses()

@@ -26,7 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
         if (!$error) //if there were no errors
         {
+            //Create the course
             $dbHandler->createCourse($course_name, $course_requirements, $course_description, $creator_id);
+
+            //Join the course since the creator should be a member
+
             header('Location: ../profile.php?createCourse=success'); 
             die(); //Kill the script
 
