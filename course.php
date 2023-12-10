@@ -122,9 +122,9 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                     </div>
                     <div class="col-3"></div>
                     <div class="col-2">
-                        <?php if ($course->getCreatorID() == $user->getID()) { ?>
-                            <a href="addTaskSetupPage.php" class="btn btn-success btn-lg active ms-5" role="button"
-                                aria-pressed="true">Add task</a>
+                        <?php if (isset($user) && $course->getCreatorID() == $user->getID()) { ?>
+                            <a href="addTaskSetupPage.php?course_id=<?php echo $course->getID(); ?>"
+                                class="btn btn-success btn-lg active ms-5" role="button" aria-pressed="true">Add task</a>
                         <?php } ?>
                     </div>
                     <div class="col-3"></div>
