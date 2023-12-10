@@ -120,7 +120,14 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                             aria-pressed="true">Leave
                             course</a>
                     </div>
-                    <div class="col-8"></div>
+                    <div class="col-3"></div>
+                    <div class="col-2">
+                        <?php if ($course->getCreatorID() == $user->getID()) { ?>
+                            <a href="addTaskSetupPage.php" class="btn btn-success btn-lg active ms-5" role="button"
+                                aria-pressed="true">Add task</a>
+                        <?php } ?>
+                    </div>
+                    <div class="col-3"></div>
                     <div class="col-2 d-flex justify-content-end">
                         <a href="courses.php" class="btn btn-primary btn-lg active" role="button"
                             aria-pressed="true">All courses</a>
