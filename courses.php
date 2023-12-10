@@ -4,9 +4,11 @@ include_once "include/Course.php";
 include_once "components/head.php";
 
 $coursesArr = $dbHandler->getCourses();
+//defaults to first page 
 $pageNum = isset($_GET["page"])?$_GET["page"]:1;
 // items per page
 $pageSize = 5;
+$searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
 ?>
 
 <body>
@@ -49,15 +51,28 @@ $pageSize = 5;
         <div class="container my-5">
             <div class="row">
                 <div class="col-lg-12 mx-auto">
-                    <div class="search-container">
+                    <div class="search-container dropdown">
                         <input type="text" class="search-input" id="searchInput" placeholder="Search by course name">
+                        <ul class="dropdown-content list-unstyled">
+
+                            <li class="dropdown-item-container"><a class="dropdown-a no-link-style">Search all...</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 bg-light border border-secondary rounded ps-5 pt-5 pb-5 mx-auto">
                     <div class="courses-container text-center" id="coursesContainer">
-                        <?php for ($i=($pageNum-1)*$pageSize; $i<$pageNum*$pageSize&&$i<count($coursesArr); $i++) { ?>
+                        <!-- filters courses by value passed in url -->
+                        <?php foreach ($coursesArr as $key=>$course) 
+                            {
+                                if (!str_contains($course["name"], $searchFilter)) unset($coursesArr[$key]);
+                            }
+                            $coursesArr=array_values($coursesArr);
+                            //invalid pages
+                            if ($pageNum<1||$pageNum>ceil(count($coursesArr)/$pageSize)) {?>
+                            <h3>Page not found!</h3>
+                        <?php } else for ($i=($pageNum-1)*$pageSize; $i<$pageNum*$pageSize&&$i<count($coursesArr); $i++) { ?>
                             <a href="course.php?id=<?php echo $coursesArr[$i]["id"]; ?>" class="no-link-style">
                                 <div class="course-card">
                                     <h3>
@@ -65,7 +80,6 @@ $pageSize = 5;
                                     </h3>
                                 </div>
                             </a>
-
                         <?php } ?>
                     </div>
                 </div>
@@ -78,6 +92,7 @@ $pageSize = 5;
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script> 
+    <script src="rec/js/filterCourses.js"></script>
     <script>
         const pCount=<?=ceil(count($coursesArr)/$pageSize)?>;
         const pNum=<?=$pageNum?>;
@@ -85,6 +100,8 @@ $pageSize = 5;
         //best to be odd so that the current page is centered
         const pageBarLength=9;
         const pageItem="<li class='page-item'><a class='page-link'></a></li>"
+        //string to append to url later when building page links containing filter param or nothing if there isnt any already
+        const filterParam=<?=$searchFilter==""?'""':'"&filter='.$searchFilter.'"'?>;
         $(document).ready(function() {
             for (let i=0; i<pCount&&i<pageBarLength; i++)
             {
@@ -100,7 +117,7 @@ $pageSize = 5;
                 if (pNum>pageBarLength/2+1)
                 {
                     $("a.page-link").eq(startPageIdx).html("1");
-                    $("a.page-link").eq(startPageIdx++).attr("href", "courses.php?page=1");
+                    $("a.page-link").eq(startPageIdx++).attr("href", `courses.php?page=1${filterParam}`);
                     $("a.page-link").eq(startPageIdx++).html("...");
                     curPage=Math.min(pNum-Math.floor(pageBarLength/2-2), pCount-Math.floor(pageBarLength-4)-1);
                 }
@@ -108,28 +125,31 @@ $pageSize = 5;
                 if (pNum<pCount-pageBarLength/2)
                 {
                     $("a.page-link").eq(endPageIdx).html(pCount);
-                    $("a.page-link").eq(endPageIdx--).attr("href", "courses.php?page="+pCount);
+                    $("a.page-link").eq(endPageIdx--).attr("href", `courses.php?page=${pCount}${filterParam}`);
                     $("a.page-link").eq(endPageIdx--).html("...");
                 }
             }
             for (let i=startPageIdx; i<=endPageIdx; i++, curPage++)
             {
                 $("a.page-link").eq(i).html(curPage);
-                $("a.page-link").eq(i).attr("href", "courses.php?page="+curPage);
+                $("a.page-link").eq(i).attr("href", `courses.php?page=${curPage}${filterParam}`);
             }
             if (pNum>1) 
             {
                 $("ul.pagination").prepend(pageItem);
                 $("a.page-link").first().html("<");
-                $("a.page-link").first().attr("href", "courses.php?page="+(pNum-1));
+                $("a.page-link").first().attr("href", `courses.php?page=${(pNum-1)}${filterParam}`);
             }
             if (pNum<pCount) 
             {
                 $("ul.pagination").append(pageItem);
                 $("a.page-link").last().html(">");
-                $("a.page-link").last().attr("href", "courses.php?page="+(pNum+1));
+                $("a.page-link").last().attr("href", `courses.php?page=${(pNum+1)}${filterParam}`);
             }
-            $(`a[href="courses.php?page=${pNum}"]`).addClass("active");
+            $(`a[href*="page=${pNum}"]`).addClass("active");
+            
+            const courses=jQuery.parseJSON('<?php echo json_encode($coursesArr)?>');
+            $('#searchInput').on('input', ()=>dropdownDisplayResults(courses));
         })
         
     </script>
