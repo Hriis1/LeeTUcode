@@ -4,7 +4,7 @@ include_once "include/Course.php";
 include_once "include/courseTask.php";
 include_once "components/head.php";
 
-//The raw array from db
+//The raw course array from db
 $courseArray = $dbHandler->getCourseById($_GET["id"]);
 
 //Course object
