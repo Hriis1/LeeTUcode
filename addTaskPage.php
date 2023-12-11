@@ -69,7 +69,7 @@
     <script>
         $(document).ready(function () {
 
-            var errorContainer = $("#addTaskrror");
+            var errorContainer = $("#add_task_error");
             var errorText = "";
 
             //Get the errors if any

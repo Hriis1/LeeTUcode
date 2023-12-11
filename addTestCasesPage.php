@@ -34,7 +34,7 @@
             $error = "";
 
             if (utils\isInputEmpty($difficulty, $name, $description, $func_name, $func_declaration, $num_tests)) {
-                $error = "Fill in all fields!";
+                $error = "Fill in all fields, please!";
             }
 
             if ($error) //if there were errors
