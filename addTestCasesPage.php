@@ -39,7 +39,7 @@
 
             if ($error) //if there were errors
             {
-                $_SESSION["add_task_error"] = $error;
+                $_SESSION["test_cases_error"] = $error;
 
                 header('Location: addTaskPage.php?course_id=' . $course_id . '&createCourse=fail'); //Redirect the user
                 die();
@@ -47,27 +47,27 @@
             ?>
             <div class="container" style="margin-top: 50px;">
                 <div class="form-container border border-secondary rounded p-4">
-                    <form id="addTaskForm" action="include/addTestCasesPage.php" method="POST">
+                    <form id="addTaskForm" action="include/addTask.php" method="POST">
                         <div class="d-none">
-                            <input type="number" class="form-control" name="course_id" id="course_id_input"
+                            <input type="text" class="form-control" name="course_id" id="course_id_input"
                                 value="<?php echo $course_id; ?>" required>
 
-                            <input type="number" class="form-control" name="difficulty" id="difficulty_input"
+                            <input type="text" class="form-control" name="difficulty" id="difficulty_input"
                                 value="<?php echo $difficulty; ?>" required>
 
-                            <input type="number" class="form-control" name="name" id="name_input"
+                            <input type="text" class="form-control" name="name" id="name_input"
                                 value="<?php echo $name; ?>" required>
 
-                            <input type="number" class="form-control" name="description" id="description_input"
+                            <input type="text" class="form-control" name="description" id="description_input"
                                 value="<?php echo $description; ?>" required>
 
-                            <input type="number" class="form-control" name="func_name" id="func_name_input"
+                            <input type="text" class="form-control" name="func_name" id="func_name_input"
                                 value="<?php echo $func_name; ?>" required>
 
-                            <input type="number" class="form-control" name="func_declaration" id="func_declaration_input"
+                            <input type="text" class="form-control" name="func_declaration" id="func_declaration_input"
                                 value="<?php echo $func_declaration; ?>" required>
 
-                            <input type="number" class="form-control" name="num_tests" id="num_tests_input"
+                            <input type="text" class="form-control" name="num_tests" id="num_tests_input"
                                 value="<?php echo $num_tests; ?>" required>
                         </div>
                         <?php for ($i = 0; $i < intval($num_tests); $i++) { ?>
@@ -93,7 +93,10 @@
                                 <div class="col-1"></div>
                             </div>
                         <?php } ?>
-                        <input type="Submit" name="submit" value="Finish task" class="btn btn-primary mt-5">
+                        <div class="row mx-1 mb-5">
+                            <label id="test_cases_error" class="col-form-label text-danger"></label>
+                        </div>
+                        <input type="Submit" name="submit" value="Finish task" class="btn btn-primary">
                     </form>
                 </div>
             </div>
@@ -105,13 +108,13 @@
     <script>
         $(document).ready(function () {
 
-            var errorContainer = $("#addTaskrror");
+            var errorContainer = $("#test_cases_error");
             var errorText = "";
 
             //Get the errors if any
-            <?php if (isset($_SESSION["add_task_error"])) { ?>
-                errorText = "<?php echo $_SESSION["add_task_error"]; ?>";
-                <?php unset($_SESSION["add_task_error"]);
+            <?php if (isset($_SESSION["test_cases_error"])) { ?>
+                errorText = "<?php echo $_SESSION["test_cases_error"]; ?>";
+                <?php unset($_SESSION["test_cases_error"]);
             } ?>
 
             //Show the errors
