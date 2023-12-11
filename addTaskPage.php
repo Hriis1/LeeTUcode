@@ -18,7 +18,11 @@
 
             <div class="container" style="margin-top: 50px;">
                 <div class="form-container border border-secondary rounded p-4">
-                    <form id="addCourseForm" action="include/createCourse.php" method="POST">
+                    <form id="addTaskForm" action="include/addTestCasesPage.php" method="POST">
+                        <div class="d-none">
+                            <input type="number" class="form-control" name="course_id" id="course_id_input"
+                                value="<?php echo $_GET["course_id"]; ?>" required>
+                        </div>
                         <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Difficulty:</label>
                             <div class="col-2">
