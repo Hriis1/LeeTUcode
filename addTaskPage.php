@@ -48,7 +48,7 @@
                         </div>
                         <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Function declaration:</label>
-                            <input type="text" class="form-control" name="func_name" id="func_name_input" required>
+                            <input type="text" class="form-control" name="func_declaration" id="func_declaration_input" required>
                         </div>
                         <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Number of tests:</label>
