@@ -53,7 +53,7 @@
                         </div>
                         <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Number of tests:</label>
-                            <input type="number" name="num_tests" id="num_tests_input" step="1" min="0" max="50" required>
+                            <input type="number" class="form-control" name="num_tests" id="num_tests_input" step="1" min="0" max="50" required>
                         </div>
                         <div class="row mx-1 mb-5">
                             <label id="add_task_error" class="col-form-label text-danger"></label>
