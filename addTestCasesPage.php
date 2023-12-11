@@ -48,6 +48,28 @@
             <div class="container" style="margin-top: 50px;">
                 <div class="form-container border border-secondary rounded p-4">
                     <form id="addTaskForm" action="include/addTestCasesPage.php" method="POST">
+                        <div class="d-none">
+                            <input type="number" class="form-control" name="course_id" id="course_id_input"
+                                value="<?php echo $course_id; ?>" required>
+
+                            <input type="number" class="form-control" name="difficulty" id="difficulty_input"
+                                value="<?php echo $difficulty; ?>" required>
+
+                            <input type="number" class="form-control" name="name" id="name_input"
+                                value="<?php echo $name; ?>" required>
+
+                            <input type="number" class="form-control" name="description" id="description_input"
+                                value="<?php echo $description; ?>" required>
+
+                            <input type="number" class="form-control" name="func_name" id="func_name_input"
+                                value="<?php echo $func_name; ?>" required>
+
+                            <input type="number" class="form-control" name="func_declaration" id="func_declaration_input"
+                                value="<?php echo $func_declaration; ?>" required>
+
+                            <input type="number" class="form-control" name="num_tests" id="num_tests_input"
+                                value="<?php echo $num_tests; ?>" required>
+                        </div>
                         <?php for ($i = 0; $i < intval($num_tests); $i++) { ?>
                             <div class="row">
                                 <div class="col-1"></div>
