@@ -7,21 +7,22 @@
     include_once "components/header.php";
 
     //The raw course array from db
-    $courseArray = $dbHandler->getCourseById($_GET["course_id"]);
+    $courseArray = $dbHandler->getCourseById($_POST["course_id"]);
 
     //Course object
     $course = new Course($courseArray["id"], $courseArray["name"], $courseArray["requirements"], $courseArray["description"], $courseArray["creator_id"]);
     ?>
     <main>
         <?php
-        if (isset($user) && $course->getCreatorID() == $user->getID()) { ?>
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($user) && $course->getCreatorID() == $user->getID()) { ?>
 
             <div class="container" style="margin-top: 50px;">
                 <div class="form-container border border-secondary rounded p-4">
-                    <form id="addTaskForm" action="addTestCasesPage.php" method="POST">
+                    <form id="addTaskForm" action="include/addTestCasesPage.php" method="POST">
+                        TEST CASES BRUV
                         <div class="d-none">
                             <input type="number" class="form-control" name="course_id" id="course_id_input"
-                                value="<?php echo $_GET["course_id"]; ?>" required>
+                                value="<?php echo $_POST["course_id"]; ?>" required>
                         </div>
                         <div class="row mx-1">
                             <label for="recipient-name" class="col-form-label">Difficulty:</label>
@@ -62,7 +63,7 @@
                 </div>
             </div>
         <?php } else {
-            echo "You must be the course owner to add a task :)!";
+            echo "Error: Forbiden way of getting to this page!";
         } ?>
     </main>
     <?php include_once "components/footer.php" ?>
