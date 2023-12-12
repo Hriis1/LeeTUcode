@@ -46,6 +46,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
         if (utils\isInputEmpty($difficulty, $name, $description, $func_name, $func_declaration, $num_tests)) {
             $error = "Fill in all fields, please!";
+        } else {
+            $position = strpos($func_declaration, '(');
+            $position2 = strpos($func_declaration, ')');
+
+            if ($position == false || $position2 == false || $position > $position2) {
+                $error = "Incorrect function declaration!";
+
+            } else {
+                // Extract the substring before "("
+                $result = substr($inputString, 0, $position);
+                if($result != $func_name)
+                {
+                    $error = "Function name must match the name in declaration!";
+                }
+            }
         }
         //TO DO but prob wont do it: check if the provided function successfully with the test cases and answers
 
