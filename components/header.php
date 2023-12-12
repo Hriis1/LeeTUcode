@@ -19,7 +19,7 @@ include_once "include/User.php";
 $user = null;
 ?>
 <header>
-    <div class="logo"><a href="index.php"><img src="rec/img/logo-Placeholder.jpg" alt=""></a></div>
+    <div class="logo"><a href="index.php"><img src="rec/img/TUlogo.png" alt=""></a></div>
     <div class="heading">
         <?php
         if (isset($_SESSION["user_id"])) {
