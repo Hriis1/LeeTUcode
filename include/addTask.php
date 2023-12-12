@@ -49,15 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
         } else {
             $position = strpos($func_declaration, '(');
             $position2 = strpos($func_declaration, ')');
+            $position3 = strpos($func_declaration, ' ');
 
-            if ($position == false || $position2 == false || $position > $position2) {
+            if ($position == false || $position2 == false || $position3 == false || $position > $position2) {
                 $error = "Incorrect function declaration!";
 
             } else {
                 // Extract the substring before "("
-                $result = substr($inputString, 0, $position);
-                if($result != $func_name)
-                {
+                $result = substr($func_declaration, $position3 + 1, $position - ($position3 + 1));
+                if ($result != $func_name) {
                     $error = "Function name must match the name in declaration!";
                 }
             }
