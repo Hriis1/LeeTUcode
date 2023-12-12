@@ -94,10 +94,6 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                 <div class="row mt-3">
                     <div class="col-lg-12">
                         <h4>Tasks:</h4>
-                        <?php
-                        if ($user->getID() == $course->getCreatorID()) {
-                            ?> <a href="" class="btn btn-success btn-lg active" role="button">Create task</a>
-                        <?php } ?>
                         <div class="task-container d-flex text-center" id="coursesContainer">
                             <?php foreach ($courseTasks as $task) { ?>
                                 <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
