@@ -3,7 +3,21 @@ ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
-include_once "components/head.php" ?>
+include_once "components/head.php";
+$courses = $dbHandler->getCourses();
+for ($i=0; $i < sizeof($courses); $i++) { 
+   $courseMemberCount = sizeof($dbHandler->getMembersOfCourse($courses[$i]["id"]));
+   $courses[$i]["member_count"] = $courseMemberCount;
+}
+
+//comparison function for descending order
+function compareByMemberCountDescending($a, $b) {
+    return $b['member_count'] - $a['member_count'];
+}
+
+// Sorting the array based on the member_count field in descending order
+usort($courses, 'compareByMemberCountDescending');
+?>
 <body>
     <?php include_once "components/header.php" ?>
     <main>

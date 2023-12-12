@@ -326,8 +326,7 @@ class dbHandler
         while ($row = $result->fetch_assoc()) {
             $courseMembersArray[] = $this->getUserById($row["user_id"]);
         }
-
-        print_r($courseMembersArray); // Fetch the first row as an associative array 
+        
         $myQuery->close();
 
         return $courseMembersArray;
