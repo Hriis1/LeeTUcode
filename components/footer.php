@@ -1,12 +1,16 @@
+<header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="Style.css">
+</header>
 <footer>
     <div class="container">
         <div id="contacts" class="row">
             <div class="col-lg-4">
                 <h4>Contact us:</h4>
                 <ul>
-                    <li>+359876543210</li>
-                    <li>leetucodeteam@yahoo.com</li>
-                    <li>Sofia, Bulgaria</li>
+                <i class="fa-solid fa-phone"></i><li>+359876543210</li>
+                <i class="fa-solid fa-envelope"></i><li>leetucodeteam@yahoo.com</li>
+                <i class="fa-solid fa-map"></i><li>Sofia, Bulgaria</li>
                 </ul>
             </div>
             <div class="col-lg-4">
