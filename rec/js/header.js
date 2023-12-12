@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $(".dropdown").on("click", function (event) {
         $(".dropdown-content").toggle();
-        event.preventDefault(); // Disables the link so that it behaves like a button
+        //event.preventDefault(); // Disables the link so that it behaves like a button
         event.stopPropagation(); // Prevent the event from bubbling up to the document
     });
 
