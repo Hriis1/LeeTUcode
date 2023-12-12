@@ -21,6 +21,9 @@
             padding: 20px;
             width: 200px;
             min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .course-card h3 {
