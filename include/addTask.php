@@ -29,8 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
             $testCasesArr[] = $_POST["test" . $i];
 
             //Check if the test cases were filled
-            if($testCasesArr[$i] != "")
-            {
+            if ($testCasesArr[$i] == "") {
                 $error = "Test cases were not filled correctly!";
                 break;
             }
@@ -39,8 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
             $answersArr[] = $_POST["answer" . $i];
 
             //Check if answers were filled
-            if($answersArr[$i]  != "")
-            {
+            if ($answersArr[$i] == "") {
                 $error = "Answers were not filled correctly!";
                 break;
             }
@@ -53,16 +51,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
         if (!$error) //if there were no errors
         {
+            //Build test cases and answers
+            $testCases = "";
+            $answers = "";
+            for ($i = 0; $i < intval($num_tests) - 1; $i++) {
+                //Add test case
+                $testCases = $testCases . $testCasesArr[$i] . "@@@";
+
+                //Add answer
+                $answers = $answers . $answersArr[$i] . "@@@";
+            }
+
+            //Add final test case ans answer
+            $testCases = $testCases . $testCasesArr[$num_tests - 1];
+            $answers = $answers . $answersArr[$num_tests - 1];
 
 
-            header('Location: ../course.php?id='.$course_id.'$addTask=success');
+            $dbHandler->createCourseTask($name, $description, $func_name, $func_declaration, $testCases, $answers, $course_id, $difficulty);
+            header('Location: ../course.php?id=' . $course_id . '$addTask=success');
             die(); //Kill the script
 
         } else //if there were errors
         {
             $_SESSION["add_task_error"] = $error;
 
-            header('Location: ../addTaskPage.php?course_id='.$course_id.'addTask=fail'); //Redirect the user to the home page
+            header('Location: ../addTaskPage.php?course_id=' . $course_id . '&addTask=fail'); //Redirect the user to the home page
             die();
 
         }
