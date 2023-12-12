@@ -8,3 +8,10 @@
     background-color: rgb(40, 185, 56) !important;
     border-color: rgb(40, 185, 56) !important;;
 }
+
+.custom-link {
+    text-decoration: none; /* Remove default underline */
+    color: inherit; /* Inherit the color from the parent (list item) */
+    padding: 10px; /* Add padding to match the list item styling */
+    /* Add any additional styles as needed */
+}
