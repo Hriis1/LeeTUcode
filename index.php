@@ -18,7 +18,7 @@ include_once "components/head.php" ?>
                 </div>   
                 <div class="row mt-3"> 
                     <div class="col-lg-12">   
-                        <h4>Your new go-to destination for your prgramming courses</h4>
+                        <h4>Your new go-to destination for your programming courses</h4>
                         <p>Here you can join or create programming courses that can contain coding exercises with instant results based on your needs.</p>
                         <p>The platform is specifically streamlined to be used by teachers and students.</p>
                     </div>
