@@ -34,9 +34,11 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
         .course-card h3 {
             color: #333;
         }
-
-        .search-container {
+        .search-container{
             margin-bottom: 20px;
+            /* overrides .dropdown margin */
+            margin: 2px 0 20px!important;
+            z-index: 4;
         }
 
         .search-input {
@@ -45,6 +47,25 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             font-size: 14px;
             box-sizing: border-box;
         }
+        .search-container .dropdown-content{
+            width: 100%!important;
+        }
+        /* button applying the filter */
+        .search-container .dropdown-content .dropdown-item-container:last-child{
+            margin-top: 10px;
+            border-top: 2px solid gray;
+        }
+        #clear-filter-button{
+            position: absolute;
+            display: none;
+            align-items: center;
+            height: 100%;
+            right:5%;
+        }
+        #clear-filter-button a{
+            color: gray;
+            text-decoration: none;
+        }
     </style>
     <?php include_once "components/header.php" ?>
     <main>
@@ -52,11 +73,13 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             <div class="row">
                 <div class="col-lg-12 mx-auto">
                     <div class="search-container dropdown">
-                        <input type="text" class="search-input" id="searchInput" placeholder="Search by course name">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search by course name" value="<?=$searchFilter?>">
                         <ul class="dropdown-content list-unstyled">
 
-                            <li class="dropdown-item-container"><a class="dropdown-a no-link-style">Search all...</a></li>
                         </ul>
+                        <div id="clear-filter-button">
+                            <a href="courses.php">X</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,6 +126,7 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
         //string to append to url later when building page links containing filter param or nothing if there isnt any already
         const filterParam=<?=$searchFilter==""?'""':'"&filter='.$searchFilter.'"'?>;
         $(document).ready(function() {
+            if (filterParam!=="") document.getElementById("clear-filter-button").style.display="inline-flex";
             for (let i=0; i<pCount&&i<pageBarLength; i++)
             {
                 $("ul.pagination").append(pageItem);
