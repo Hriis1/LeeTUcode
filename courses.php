@@ -116,61 +116,19 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
     </main>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script> 
     <script src="rec/js/filterCourses.js"></script>
+    <script src="rec/js/paginationBar.js"></script>
     <script>
         const pCount=<?=ceil(count($coursesArr)/$pageSize)?>;
         const pNum=<?=$pageNum?>;
         //max # of page links
         //best to be odd so that the current page is centered
         const pageBarLength=9;
-        const pageItem="<li class='page-item'><a class='page-link'></a></li>"
         //string to append to url later when building page links containing filter param or nothing if there isnt any already
         const filterParam=<?=$searchFilter==""?'""':'"&filter='.$searchFilter.'"'?>;
         $(document).ready(function() {
             if (filterParam!=="") document.getElementById("clear-filter-button").style.display="inline-flex";
-            for (let i=0; i<pCount&&i<pageBarLength; i++)
-            {
-                $("ul.pagination").append(pageItem);
-            }
-
-            let startPageIdx=0;
-            let endPageIdx=$("ul.pagination").children().length-1;
-            let curPage=1;
-            if (pCount>pageBarLength)
-            {
-                //adds a link to the first page if there isnt space for it
-                if (pNum>pageBarLength/2+1)
-                {
-                    $("a.page-link").eq(startPageIdx).html("1");
-                    $("a.page-link").eq(startPageIdx++).attr("href", `courses.php?page=1${filterParam}`);
-                    $("a.page-link").eq(startPageIdx++).html("...");
-                    curPage=Math.min(pNum-Math.floor(pageBarLength/2-2), pCount-Math.floor(pageBarLength-4)-1);
-                }
-                //adds a link to the last page if there isnt space for it
-                if (pNum<pCount-pageBarLength/2)
-                {
-                    $("a.page-link").eq(endPageIdx).html(pCount);
-                    $("a.page-link").eq(endPageIdx--).attr("href", `courses.php?page=${pCount}${filterParam}`);
-                    $("a.page-link").eq(endPageIdx--).html("...");
-                }
-            }
-            for (let i=startPageIdx; i<=endPageIdx; i++, curPage++)
-            {
-                $("a.page-link").eq(i).html(curPage);
-                $("a.page-link").eq(i).attr("href", `courses.php?page=${curPage}${filterParam}`);
-            }
-            if (pNum>1) 
-            {
-                $("ul.pagination").prepend(pageItem);
-                $("a.page-link").first().html("<");
-                $("a.page-link").first().attr("href", `courses.php?page=${(pNum-1)}${filterParam}`);
-            }
-            if (pNum<pCount) 
-            {
-                $("ul.pagination").append(pageItem);
-                $("a.page-link").last().html(">");
-                $("a.page-link").last().attr("href", `courses.php?page=${(pNum+1)}${filterParam}`);
-            }
-            $(`a[href*="page=${pNum}"]`).addClass("active");
+            //builds navigation bar for inner pages
+            paginationBar(pCount, pNum, pageBarLength, filterParam);
             
             const courses=jQuery.parseJSON('<?php echo json_encode($coursesArr)?>');
             $('#searchInput').on('input', ()=>dropdownDisplayResults(courses));

@@ -30,4 +30,4 @@ function dropdownDisplayResults(source)
 }
 
 // Attach the filterCourses function to the input event
-document.getElementById('searchInput').addEventListener('input', filterCourses);
+//document.getElementById('searchInput').addEventListener('input', filterCourses);
