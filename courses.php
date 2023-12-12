@@ -4,6 +4,11 @@ include_once "include/Course.php";
 include_once "components/head.php";
 
 $coursesArr = $dbHandler->getCourses();
+//defaults to first page 
+$pageNum = isset($_GET["page"])?$_GET["page"]:1;
+// items per page
+$pageSize = 5;
+$searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
 ?>
 
 <body>
@@ -29,9 +34,11 @@ $coursesArr = $dbHandler->getCourses();
         .course-card h3 {
             color: #333;
         }
-
-        .search-container {
+        .search-container{
             margin-bottom: 20px;
+            /* overrides .dropdown margin */
+            margin: 2px 0 20px!important;
+            z-index: 4;
         }
 
         .search-input {
@@ -40,35 +47,94 @@ $coursesArr = $dbHandler->getCourses();
             font-size: 14px;
             box-sizing: border-box;
         }
+        .search-container .dropdown-content{
+            width: 100%!important;
+        }
+        /* button applying the filter */
+        .search-container .dropdown-content .dropdown-item-container:last-child{
+            margin-top: 10px;
+            border-top: 2px solid gray;
+        }
+        #clear-filter-button{
+            position: absolute;
+            display: none;
+            align-items: center;
+            height: 100%;
+            right:5%;
+        }
+        #clear-filter-button a{
+            color: gray;
+            text-decoration: none;
+        }
     </style>
     <?php include_once "components/header.php" ?>
     <main>
         <div class="container my-5">
             <div class="row">
                 <div class="col-lg-12 mx-auto">
-                    <div class="search-container">
-                        <input type="text" class="search-input" id="searchInput" placeholder="Search by course name">
+                    <div class="search-container dropdown">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search by course name" value="<?=$searchFilter?>">
+                        <ul class="dropdown-content list-unstyled">
+
+                        </ul>
+                        <div id="clear-filter-button">
+                            <a href="courses.php">X</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 bg-light border border-secondary rounded ps-5 pt-5 pb-5 mx-auto">
                     <div class="courses-container text-center" id="coursesContainer">
-                        <?php foreach ($coursesArr as $course) { ?>
-                            <a href="course.php?id=<?php echo $course["id"]; ?>" class="no-link-style">
+                        <!-- filters courses by value passed in url -->
+                        <?php foreach ($coursesArr as $key=>$course) 
+                            {
+                                if (!str_contains($course["name"], $searchFilter)) unset($coursesArr[$key]);
+                            }
+                            $coursesArr=array_values($coursesArr);
+                            //invalid pages
+                            if ($pageNum<1||$pageNum>ceil(count($coursesArr)/$pageSize)) {?>
+                            <h3>Page not found!</h3>
+                        <?php } else for ($i=($pageNum-1)*$pageSize; $i<$pageNum*$pageSize&&$i<count($coursesArr); $i++) { ?>
+                            <a href="course.php?id=<?php echo $coursesArr[$i]["id"]; ?>" class="no-link-style">
                                 <div class="course-card">
                                     <h3>
-                                        <?php echo $course["name"]; ?>
+                                        <?php echo $coursesArr[$i]["name"]; ?>
                                     </h3>
                                 </div>
                             </a>
-
                         <?php } ?>
                     </div>
                 </div>
             </div>
+            <div class="row my-3">
+                <ul class="col-lg-6 pagination">
+                    
+                </ul>
+            </div>
         </div>
     </main>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script> 
+    <script src="rec/js/filterCourses.js"></script>
+    <script src="rec/js/paginationBar.js"></script>
+    <script>
+        const pCount=<?=ceil(count($coursesArr)/$pageSize)?>;
+        const pNum=<?=$pageNum?>;
+        //max # of page links
+        //best to be odd so that the current page is centered
+        const pageBarLength=9;
+        //string to append to url later when building page links containing filter param or nothing if there isnt any already
+        const filterParam=<?=$searchFilter==""?'""':'"&filter='.$searchFilter.'"'?>;
+        $(document).ready(function() {
+            if (filterParam!=="") document.getElementById("clear-filter-button").style.display="inline-flex";
+            //builds navigation bar for inner pages
+            paginationBar(pCount, pNum, pageBarLength, filterParam);
+            
+            const courses=jQuery.parseJSON('<?php echo json_encode($coursesArr)?>');
+            $('#searchInput').on('input', ()=>dropdownDisplayResults(courses));
+        })
+        
+    </script>
     <?php include_once "components/footer.php" ?>
     <script src="rec/js/filterCourses.js"></script>
 </body>
