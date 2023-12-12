@@ -23,7 +23,7 @@ function dropdownDisplayResults(source)
     for (let i=0; i<10; i++)
     {
         if (!source[i].name.toLowerCase().includes(document.getElementById("searchInput").value.toLowerCase())) continue;
-        dropdown.prepend(newItem=document.createElement("li"));
+        dropdown.insertBefore(newItem=document.createElement("li"), dropdown.lastChild);
         newItem.classList.add("dropdown-item-container");
         newItem.innerHTML=`<a class="dropdown-a no-link-style" href="course.php?id=${source[i].id}">${source[i].name}</a>`;
     }

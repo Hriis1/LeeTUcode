@@ -9,28 +9,31 @@ function paginationBar(pageCount, pageNum, pageBarLength, filterParam){
         let startPageIdx=0;
         let endPageIdx=$("ul.pagination").children().length-1;
         let curPage=1;
+        let pLink=$("a.page-link");
         if (pageCount>pageBarLength)
         {
+            
             //adds a link to the first page if there isnt space for it
             if (pageNum>pageBarLength/2+1)
             {
-                $("a.page-link").eq(startPageIdx).html("1");
-                $("a.page-link").eq(startPageIdx++).attr("href", `courses.php?page=1${filterParam}`);
-                $("a.page-link").eq(startPageIdx++).html("...");
+                
+                pLink.eq(startPageIdx).html("1");
+                pLink.eq(startPageIdx++).attr("href", `courses.php?page=1${filterParam}`);
+                pLink.eq(startPageIdx++).html("...");
                 curPage=Math.min(pageNum-Math.floor(pageBarLength/2-2), pageCount-Math.floor(pageBarLength-4)-1);
             }
             //adds a link to the last page if there isnt space for it
             if (pageNum<pageCount-pageBarLength/2)
             {
-                $("a.page-link").eq(endPageIdx).html(pageCount);
-                $("a.page-link").eq(endPageIdx--).attr("href", `courses.php?page=${pageCount}${filterParam}`);
-                $("a.page-link").eq(endPageIdx--).html("...");
+                pLink.eq(endPageIdx).html(pageCount);
+                pLink.eq(endPageIdx--).attr("href", `courses.php?page=${pageCount}${filterParam}`);
+                pLink.eq(endPageIdx--).html("...");
             }
         }
         for (let i=startPageIdx; i<=endPageIdx; i++, curPage++)
         {
-            $("a.page-link").eq(i).html(curPage);
-            $("a.page-link").eq(i).attr("href", `courses.php?page=${curPage}${filterParam}`);
+            pLink.eq(i).html(curPage);
+            pLink.eq(i).attr("href", `courses.php?page=${curPage}${filterParam}`);
         }
         if (pageNum>1) 
         {
@@ -44,6 +47,6 @@ function paginationBar(pageCount, pageNum, pageBarLength, filterParam){
             $("a.page-link").last().html(">");
             $("a.page-link").last().attr("href", `courses.php?page=${(pageNum+1)}${filterParam}`);
         }
-        $(`a[href*="page=${pageNum}"]`).addClass("active");
+        $(`a[href$="page=${pageNum}"],a[href*="page=${pageNum}&"]`).addClass("active");
         });
 }
