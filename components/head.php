@@ -1,5 +1,6 @@
 <?php
 include_once "include/sessionConfig.php";
+include_once "include/config.php";
 include_once "include/dbHandler.php";
 ?>
 <html lang="en">

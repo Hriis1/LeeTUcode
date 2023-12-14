@@ -1,5 +1,5 @@
 <?php
-
+require_once "config.php";
 function regenerateSessionID()
 {
     session_regenerate_id(true);
