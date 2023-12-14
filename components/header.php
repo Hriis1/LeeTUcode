@@ -16,6 +16,7 @@
 -->
 <?php
 include_once "include/User.php";
+include_once "include/lastVIsited.php";
 $user = null;
 ?>
 <header>

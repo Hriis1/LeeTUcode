@@ -33,9 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
             regenerateSessionIDLoggedIn(); //Generate a new session id and combin it with the users id
 
-            $redirectUrl = isset($_SESSION['redirect_url']) ? $_SESSION['redirect_url'] : '../index.php';
+            $redirectUrl = isset($_SESSION['last_visited']) ? $_SESSION['last_visited'] : '../index.php';
             header('Location: ' . $redirectUrl . '?login=success');
-            
+
             die(); //Kill the script
 
         } else //if there were errors

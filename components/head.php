@@ -2,7 +2,6 @@
 include_once "include/sessionConfig.php";
 include_once "include/config.php";
 include_once "include/dbHandler.php";
-include_once "include/lastVIsited.php";
 ?>
 <html lang="en">
 
