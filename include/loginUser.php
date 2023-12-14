@@ -18,11 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
             $errors["empty_input"] = "Fill in all fields!";
         }
 
-        if (!$dbHandler->getUserByUsernaame($username)) 
-        {
+        if (!$dbHandler->getUserByUsernaame($username)) {
             $errors["login_incorrect"] = "User doesn't exist!";
-        } else if (!$dbHandler->isPasswordCorrect($username, $pass)) 
-        {
+        } else if (!$dbHandler->isPasswordCorrect($username, $pass)) {
             $errors["incorrect_password"] = "Password is incorrect!";
         }
 
@@ -35,7 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
             regenerateSessionIDLoggedIn(); //Generate a new session id and combin it with the users id
 
-            header('Location: ../index.php?login=success'); 
+            $redirectUrl = isset($_SESSION['redirect_url']) ? $_SESSION['redirect_url'] : '../index.php';
+            header('Location: ' . $redirectUrl . '?login=success');
+            
             die(); //Kill the script
 
         } else //if there were errors
