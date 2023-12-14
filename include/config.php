@@ -1,4 +1,4 @@
 <?php
 
-// Define the base URL of your project
+// Define the base URL
 define('BASE_URL', '/LeeTUcode');
