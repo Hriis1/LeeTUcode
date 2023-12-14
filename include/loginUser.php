@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //if the user got to this page via POS
 
             regenerateSessionIDLoggedIn(); //Generate a new session id and combin it with the users id
 
-            header('Location: ../index.php?login=success'); //Redirect the user to the home page
+            header('Location: ../index.php?login=success'); 
             die(); //Kill the script
 
         } else //if there were errors
