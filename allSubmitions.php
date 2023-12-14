@@ -7,11 +7,33 @@
         if ($user != null) {
             //If there is a logged in user
             if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course
-                $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
+                if ($dbHandler->getCourseById($_GET["course_id"])["creator_id"]==$user->getID()) {
+                    $members=$dbHandler->getMembersOfCourse($_GET["course_id"]);
+                    $submitions=[];
+                    foreach ($members as $member) {
+                        $current = new User(
+                            $member["id"],
+                            $member["username"],
+                            $member["email"],
+                            $member["pass"],
+                            $member["account_type"]
+                        );
+                        $submitions=array_merge($submitions, $current->getSubmitionsForTask($dbHandler, $_GET["task_id"]));
+                    }
+                }
+                else $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
                 ?>
                 <div class="container" style="margin-top: 120px;">
                     <div class="accordion" id="submitionsAccordion">
                         <?php
+                        if (count($submitions) == 0) { ?>
+                            <div class="mb-3">
+                                You haven't submitted any solutions yet!
+                            </div>
+                            <a class="btn btn-primary" href="task.php?id=<?php echo $_GET["task_id"]?>">
+                                Back to task
+                            </a>
+                        <?php }
                         $idx = 0;
                         foreach ($submitions as $submition) { ?>
                             <div class="accordion-item">
@@ -32,6 +54,8 @@
                                         <?php echo nl2br($submition["submited_function"]) ?><br><br>
                                         Response:<br>
                                         <?php echo nl2br($submition["response"]); ?>
+                                        Submitted by:<br>
+                                        <?php echo nl2br($members[$submition["user_id"]-1]["username"]); ?>
                                     </div>
                                 </div>
                             </div>
