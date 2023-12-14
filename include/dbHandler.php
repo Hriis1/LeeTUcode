@@ -171,7 +171,6 @@ class dbHandler
             $taskSubArray[] = $row;
         }
 
-        print_r($taskSubArray); // Fetch the first row as an associative array 
         $myQuery->close();
 
         return $taskSubArray;
@@ -221,6 +220,22 @@ class dbHandler
         $myQuery->execute(); // Execute the statement
         $myQuery->close(); // Free/close the statement
     }
+
+    public function hasUserSolvedTask($userID, $taskID)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM task_submitions 
+        WHERE user_id = ? AND task_id = ? AND submition_status = 'success';");
+        $myQuery->bind_param("ii", $userID, $taskID);
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $hasSolved = $result->num_rows > 0;
+
+        $myQuery->close();
+
+        return $hasSolved;
+    }
+
     //==============================================CourseTask==============================================
     public function createCourseTask($name, $description, $function_name, $function_declaration, $test_cases, $test_answers, $course_id, $difficulty)
     {
@@ -279,14 +294,24 @@ class dbHandler
 
         return $courseTasksArray;
     }
+
     //=============================================CourseMember=============================================
-    public function createCourseMember($course_id, $user_id)
+    public function joinCourse($course_id, $user_id)
     {
         $myQuery = $this->mysqli->prepare("INSERT INTO course_members (course_id, user_id) VALUES (?,?);");
         //Prepare the sql query
         $myQuery->bind_param("ii", $course_id, $user_id); //bind the params in place of the '?'
         $myQuery->execute(); //Execute the statement
         $myQuery->close(); //Free/close the statement 
+    }
+
+    public function leaveCourse($course_id, $user_id)
+    {
+        $myQuery = $this->mysqli->prepare("DELETE FROM course_members WHERE course_id = ? AND user_id = ?");
+        // Prepare the SQL query
+        $myQuery->bind_param("ii", $course_id, $user_id); // Bind the params in place of the '?'
+        $myQuery->execute(); // Execute the statement
+        $myQuery->close(); // Free/close the statement
     }
 
     public function getMembersOfCourse($course_id)
@@ -301,8 +326,7 @@ class dbHandler
         while ($row = $result->fetch_assoc()) {
             $courseMembersArray[] = $this->getUserById($row["user_id"]);
         }
-
-        print_r($courseMembersArray); // Fetch the first row as an associative array 
+        
         $myQuery->close();
 
         return $courseMembersArray;
@@ -340,15 +364,38 @@ class dbHandler
 
         return $courseMembersArray;
     }
+
+    public function hasUserJoinedCourse($userID, $courseID)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM course_members 
+                WHERE user_id = ? AND course_id = ?");
+        $myQuery->bind_param("ii", $userID, $courseID);
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $hasJoined = $result->num_rows > 0;
+
+        $myQuery->close();
+
+        return $hasJoined;
+    }
     //==============================================Course==================================================
     public function createCourse($name, $requirements, $description, $creator_id)
     {
         $myQuery = $this->mysqli->prepare("INSERT INTO courses (name, requirements, description, creator_id) VALUES (?,?,?,?);");
-        //Prepare the sql query
+        // Prepare the SQL query
         $myQuery->bind_param("sssi", $name, $requirements, $description, $creator_id);
-        //bind the params in place of the '?'
-        $myQuery->execute(); //Execute the statement
-        $myQuery->close(); //Free/close the statement 
+        // Bind the params in place of the '?'
+        $myQuery->execute(); // Execute the statement
+
+        // Get the ID of the last inserted row
+        $lastInsertedId = $myQuery->insert_id;
+
+        // Close the statement
+        $myQuery->close();
+
+        // Return the ID of the newly created course
+        return $lastInsertedId;
     }
 
     public function getCourses()
@@ -417,6 +464,26 @@ class dbHandler
         $myQuery->close();
 
         return $courseArray;
+    }
+
+    public function getCourseByName($name)
+    {
+        $myQuery = $this->mysqli->prepare("SELECT * FROM courses 
+                WHERE name = ?");
+        $myQuery->bind_param("s", $name);
+        $myQuery->execute();
+        $result = $myQuery->get_result();
+
+        $courseArray = $result->fetch_assoc();
+
+        $myQuery->close();
+
+        return $courseArray;
+    }
+
+    function isCourseNameTaken($course_name)
+    {
+        return (bool) $this->getCourseByName($course_name);
     }
 
 }

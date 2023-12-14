@@ -27,11 +27,20 @@ $task = new CourseTask(
     <main>
 
         <div class="container my-5">
-            <div class="task-info bg-light border border-secondary rounded ps-3 pt-2">
+            <div class="task-info bg-light border border-secondary rounded ps-3 pe-3 pt-2">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 d-flex">
                         <h2>
                             <?php echo $task->getName(); ?>
+                        </h2>
+                        <h2 class="text-success ps-1">
+                            <?php
+                            if ($user != null) {
+                                if ($user->hasSolvedTask($dbHandler, $_GET["id"])) {
+                                    echo (" (Solved)");
+                                }
+                            }
+                            ?>
                         </h2>
                     </div>
                 </div>
@@ -76,8 +85,14 @@ $task = new CourseTask(
                 </div>
                 <div class="row my-3">
                     <div class="col-2">
-                        <a href="course.php?id=<?php echo $task->getCourseId(); ?>" class="btn btn-primary btn-lg active" role="button"
-                            aria-pressed="true">Course</a>
+                        <a href="course.php?id=<?php echo $task->getCourseId(); ?>"
+                            class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Course</a>
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2 d-flex justify-content-end">
+                        <a href="allSubmitions.php?task_id=<?php echo $task->getId(); ?>&course_id=<?php echo $task->getCourseId(); ?>"
+                            class="btn btn-primary btn-lg submitionsBtn" role="button"
+                            aria-pressed="true">Submitions</a>
                     </div>
                 </div>
             </div>
@@ -88,8 +103,9 @@ $task = new CourseTask(
                     upload-form-container d-flex text-center mx-auto">
                     <?php
                     if (isset($_SESSION["user_id"])) {
-                        $serializedTask = base64_encode(serialize($task));
-                        echo '<form class="form-upload mx-auto" action="include/buildExecutable.php" method="post" enctype="multipart/form-data">
+                        if ($user->hasJoinedCourse($dbHandler, $task->getCourseId())) {
+                            $serializedTask = base64_encode(serialize($task));
+                            echo '<form class="form-upload mx-auto" action="include/buildExecutable.php" method="post" enctype="multipart/form-data">
                                         <h2 class="form-upload-heading">Upload solution</h2>
                                         <input type="hidden" name="serializedTask" value="' . $serializedTask . '">
                                         <input type="file" class="form-control" name="submition_file" accept=".txt" required>
@@ -97,6 +113,9 @@ $task = new CourseTask(
                                             <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Upload</button>
                                         </div>
                                     </form>';
+                        } else {
+                            echo "<h2>Join the course to upload a solution!</h2>";
+                        }
                     } else {
                         echo '<h2>Log in to upload a solution!</h2>';
                     }
@@ -106,4 +125,27 @@ $task = new CourseTask(
         </div>
     </main>
     <?php include_once "components/footer.php" ?>
+    <script>
+        $submitionsBtn = $(".submitionsBtn");
+        //If there is a logged in user
+        <?php if ($user != null) { ?>
+            <?php if ($user->hasJoinedCourse($dbHandler, $task->getCourseId())) { ?>
+                //If the user has already joined the course
+
+                //Enable the solutions btn
+                $(".submitionsBtn").addClass("active");
+                $(".submitionsBtn").removeClass("disabled");
+            <?php } else { ?>
+                //If the user has not yet joined the course
+
+                //Disable the solutions btn
+                $(".submitionsBtn").removeClass("active");
+                $(".submitionsBtn").addClass("disabled");
+            <?php } ?>
+        <?php } else { ?>
+            //Disable the solutions btn
+            $(".submitionsBtn").removeClass("active");
+            $(".submitionsBtn").addClass("disabled");
+        <?php } ?>
+    </script>
 </body>
