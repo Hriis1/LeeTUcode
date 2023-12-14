@@ -54,7 +54,7 @@ if (isset($_SESSION["user_id"])) //If there is a loged in user
 {
     if (!isset($_SESSION["last_regeneration"]) || $sessionExpired) {
         // Redirect to the front page when the session has expired
-        header("Location: /front-page.php");
+        header("Location: " . BASE_URL . "/index.php");
         exit();
     } else {
         $interval = 60 * 30;

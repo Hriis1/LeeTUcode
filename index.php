@@ -21,8 +21,6 @@ usort($courses, 'compareByMemberCountDescending');
 
 // Selecting the top 5 courses or all courses if there are fewer than 5
 $topCourses = array_slice($courses, 0, 5);
-
-/* header("Location: /front-page.php"); */
 ?>
 
 <body>
