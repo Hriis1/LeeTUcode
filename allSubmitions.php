@@ -10,6 +10,8 @@
                 if ($dbHandler->getCourseById($_GET["course_id"])["creator_id"]==$user->getID()) {
                     $members=$dbHandler->getMembersOfCourse($_GET["course_id"]);
                     $submitions=[];
+                    $noSubmitionsUsers=[];
+                    //constructs user object from table data
                     foreach ($members as $member) {
                         $current = new User(
                             $member["id"],
@@ -18,7 +20,10 @@
                             $member["pass"],
                             $member["account_type"]
                         );
-                        $submitions=array_merge($submitions, $current->getSubmitionsForTask($dbHandler, $_GET["task_id"]));
+                        //all submissions of current user
+                        $curUserSubmitions=$current->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
+                        $submitions=array_merge($submitions, $curUserSubmitions);
+                        if (count($curUserSubmitions)==0) array_push($noSubmitionsUsers, $member);
                     }
                 }
                 else $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
@@ -53,14 +58,29 @@
                                         Submited function:<br>
                                         <?php echo nl2br($submition["submited_function"]) ?><br><br>
                                         Response:<br>
-                                        <?php echo nl2br($submition["response"]); ?>
+                                        <?php if (isset($members)) { echo nl2br($submition["response"]); ?>
                                         Submitted by:<br>
-                                        <?php echo nl2br($members[$submition["user_id"]-1]["username"]); ?>
+                                        <?php echo nl2br($members[$submition["user_id"]-1]["username"]); }?>
                                     </div>
                                 </div>
                             </div>
-
-                        <?php } ?>
+                        <?php } if (isset($noSubmitionsUsers)&&count($noSubmitionsUsers)>0) {?>
+                            <!-- displays the list of course members who havent uploaded a solution yet -->
+                            <div class="row my-3">
+                                <div class="col-lg-12">
+                                    <h4>Course members who haven't provided a solution: </h4>
+                                    <ul class="list-group">
+                                        <?php foreach ($noSubmitionsUsers as $member) {?>
+                                            <li class="list-group-item">
+                                                <a><!-- could link to user's profile --> 
+                                                    <?php echo $member["username"] ?>
+                                                </a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        <?php }?>
                     </div>
                 </div>
             <?php } else {
