@@ -50,7 +50,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12 d-flex mb-3">
-                        <h4>Eamil:</h4>
+                        <h4>Email:</h4>
                         <p class="ps-3 pt-1">
                             <?php echo $user->getEmail(); ?>
                         </p>
