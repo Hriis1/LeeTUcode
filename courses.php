@@ -33,10 +33,14 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .course-card h3 {
             color: #333;
+        }
+        .course-card .text-success {
+            width: 100%;
         }
         .search-container{
             margin-bottom: 20px;
@@ -105,6 +109,18 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
                                     <h3>
                                         <?php echo $coursesArr[$i]["name"]; ?>
                                     </h3>
+                                    <!-- displays whether user has created or joined this course -->
+                                    <h4 class="text-success ps-1 d-block">
+                                        <?php
+                                        if ($user != null) {
+                                            if ($user->getID()==$coursesArr[$i]["creator_id"])
+                                                echo ("(Owned)");
+                                            else if ($user->hasJoinedCourse($dbHandler, $coursesArr[$i]["id"])) {
+                                                echo ("(Joined)");
+                                            }
+                                        }
+                                        ?>
+                                    </h4>
                                 </div>
                             </a>
                         <?php } ?>

@@ -33,7 +33,7 @@
                         <?php
                         if (count($submitions) == 0) { ?>
                             <div class="mb-3">
-                                You haven't submitted any solutions yet!
+                                No solutions have been submitted yet!
                             </div>
                             <a class="btn btn-primary" href="task.php?id=<?php echo $_GET["task_id"]?>">
                                 Back to task

@@ -5,6 +5,17 @@
     include_once "components/header.php";
     $joinedCourses = $dbHandler->getCoursesJoinedByUser($user->getID());
     $createdCourses = $dbHandler->getCoursesByCreatorId($user->getID());
+    //tasks the user has yet to solve
+    $dueTasks=[];
+    foreach ($joinedCourses as $course)
+    {
+        $tasks=$dbHandler->getCourseTasksByCourseId($course["id"]);
+        foreach ($tasks as $task)
+        {
+            //checks if the user has solved the task he hasn't created
+            if (!in_array($task["course_id"], array_column($createdCourses, "id"))&&!$user->hasSolvedTask($dbHandler, $task["id"])) array_push($dueTasks, $task);
+        }
+    }
     ?>
     <style>
         .course-container {
@@ -80,7 +91,30 @@
                         <?php } ?>
                     </div>
                 </div>
+                <!-- displays unsolved tasks -->
+                <div class="row mt-3 mb-5">
+                    <div class="col-lg-12">
+                        <?php if ($dueTasks) { ?>
+                            <h4>Tasks Due:</h4>
+                            <div class="course-container d-flex text-center" id="coursesContainer">
+                                <?php foreach ($dueTasks as $task) { ?>
+                                    <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
+                                        <div class="course-card d-flex align-items-center">
+                                            <h3>
+                                                <?php echo $task["name"]; ?>
+                                            </h3>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="d-flex">
+                                <h4>You have no tasks due.</h4>
+                            </div>
 
+                        <?php } ?>
+                    </div>
+                </div>
                 <?php if ($user->getAccountType() == "teacher") { ?>
                     <div class="row mt-3 mb-5">
                         <div class="col-12">
