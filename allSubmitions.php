@@ -58,9 +58,9 @@
                                         Submited function:<br>
                                         <?php echo nl2br($submition["submited_function"]) ?><br><br>
                                         Response:<br>
-                                        <?php if (isset($members)) { echo nl2br($submition["response"]); ?>
+                                        <?php  echo nl2br($submition["response"]); if (isset($members)) {?><br><br>
                                         Submitted by:<br>
-                                        <?php echo nl2br($members[$submition["user_id"]-1]["username"]); }?>
+                                        <?php echo nl2br($members[array_search($submition["user_id"], array_column($members, "id"))]["username"]);}?>
                                     </div>
                                 </div>
                             </div>
