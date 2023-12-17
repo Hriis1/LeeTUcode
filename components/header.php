@@ -26,10 +26,20 @@ $user = null;
             //Construct the user
             $userArray = $dbHandler->getUserById($_SESSION["user_id"]);
             $user = new User($userArray['id'], $userArray['username'], $userArray['email'], $userArray['pass'], $userArray['account_type']);
-
+            //tasks the user has yet to solve
+            $dueTasks=[];
+            foreach ($dbHandler->getCoursesJoinedByUser($user->getID()) as $curCourse)
+            {
+                $tasks=$dbHandler->getCourseTasksByCourseId($curCourse["id"]);
+                foreach ($tasks as $curTask)
+                {
+                    //checks if the user has solved the task he hasn't created
+                    if (!in_array($curTask["course_id"], array_column($dbHandler->getCoursesByCreatorId($user->getID()), "id"))&&!$user->hasSolvedTask($dbHandler, $curTask["id"])) array_push($dueTasks, $curTask);
+                }
+            }
             //Show the relevant buttons
             echo '<ul>
-			<li><a href="profile.php?id=' . $user->getID() . '" class="under">' . $user->getUsername() . '</a></li>
+			<li><a href="profile.php?id=' . $user->getID() . '" class="under">' . $user->getUsername() . '</a>'.(count($dueTasks)>0?'<a href="profile.php?id=' . $user->getID() . '#due-tasks" class="" id="due-tasks-count">'.count($dueTasks).'</a>':"").'</li>
             <li><a href="courses.php" class="under">Courses</a></li>
             <li><a href="include/logout.php" class="under">Log out</a></li>
 		    </ul>';
