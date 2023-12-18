@@ -88,7 +88,7 @@
                             <div class="course-container d-flex text-center" id="coursesContainer">
                                 <?php foreach ($dueTasks as $task) { ?>
                                     <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
-                                        <div class="course-card d-flex align-items-center">
+                                        <div class="course-card d-flex align-items-center" title="On <?php echo $dbHandler->getCourseById($task["course_id"])["name"]; ?>">
                                             <h3>
                                                 <?php echo $task["name"]; ?>
                                             </h3>

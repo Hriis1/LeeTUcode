@@ -127,6 +127,23 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
                         </div>
                     </div>
                 </div>
+                <?php if ($members=$dbHandler->getMembersOfCourse($course->getID())) {?>
+                    <!-- displays list of course members -->
+                    <div class="row my-3">
+                        <div class="col-lg-12">
+                            <h4>Course members: </h4>
+                            <ul class="list-group">
+                                <?php foreach ($members as $member) {?>
+                                    <li class="list-group-item">
+                                        <a><!-- could link to user's profile --> 
+                                            <?php echo $member["username"] ?>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                <?php }?>
                 <div class="row my-3">
                     <div class="col-2">
                         <a href="include/joinCourse.php?course_id=<?php echo $_GET["id"]; ?>"
