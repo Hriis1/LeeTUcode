@@ -23,7 +23,8 @@
                         //all submissions of current user
                         $curUserSubmitions=$current->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
                         $submitions=array_merge($submitions, $curUserSubmitions);
-                        if (count($curUserSubmitions)==0) array_push($noSubmitionsUsers, $member);
+                        //adds user to array if he isn't the creator of the course and hasn't submitted anything yet
+                        if (count($curUserSubmitions)==0&&$dbHandler->getCourseById($_GET["course_id"])["creator_id"]!=$current->getID()) array_push($noSubmitionsUsers, $member);
                     }
                 }
                 else $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
@@ -46,6 +47,8 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse<?php echo ++$idx ?>" aria-expanded="false"
                                         aria-controls="collapse<?php echo $idx ?>">
+                                        <?php if (isset($members)) 
+                                            echo '<strong class="pe-3">'.$members[array_search($submition["user_id"], array_column($members, "id"))]["username"].'</strong>';?>
                                         <?php echo $submition["updated_at"] ?>
                                         <text class="ps-1 response">
                                             (<?php echo $submition["submition_status"]; ?>)
@@ -58,9 +61,7 @@
                                         Submited function:<br>
                                         <?php echo nl2br($submition["submited_function"]) ?><br><br>
                                         Response:<br>
-                                        <?php  echo nl2br($submition["response"]); if (isset($members)) {?><br><br>
-                                        Submitted by:<br>
-                                        <?php echo nl2br($members[array_search($submition["user_id"], array_column($members, "id"))]["username"]);}?>
+                                        <?php  echo nl2br($submition["response"]);?>
                                     </div>
                                 </div>
                             </div>

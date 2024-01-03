@@ -88,9 +88,16 @@
                             <div class="course-container d-flex text-center" id="coursesContainer">
                                 <?php foreach ($dueTasks as $task) { ?>
                                     <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
-                                        <div class="course-card d-flex align-items-center" title="On <?php echo $dbHandler->getCourseById($task["course_id"])["name"]; ?>">
+                                        <div class="course-card d-flex align-items-center flex-column" title="On <?php echo $dbHandler->getCourseById($task["course_id"])["name"]; ?>">
                                             <h3>
                                                 <?php echo $task["name"]; ?>
+                                            </h3>
+                                            <h3 class="text-danger">
+                                                <?php
+                                                if ($dbHandler->getTaskSubmitionsOfUserForTask($user->getID(), $task["id"])) {
+                                                    echo ("(Attempted)");
+                                                }
+                                                ?>
                                             </h3>
                                         </div>
                                     </a>

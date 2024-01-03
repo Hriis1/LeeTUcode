@@ -150,6 +150,7 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             
             const courses=jQuery.parseJSON('<?php echo json_encode($coursesArr)?>');
             $('#searchInput').on('input', ()=>dropdownDisplayResults(courses));
+            $('#searchInput').one('click', ()=>dropdownDisplayResults(courses));
         })
         
     </script>
