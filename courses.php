@@ -97,7 +97,7 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
                         <!-- filters courses by value passed in url -->
                         <?php foreach ($coursesArr as $key=>$course) 
                             {
-                                if (!str_contains($course["name"], $searchFilter)) unset($coursesArr[$key]);
+                                if (!str_contains(strtolower($course["name"]), strtolower($searchFilter))) unset($coursesArr[$key]);
                             }
                             $coursesArr=array_values($coursesArr);
                             //invalid pages

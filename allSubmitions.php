@@ -7,7 +7,7 @@
         if ($user != null) {
             //If there is a logged in user
             if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course
-                if ($dbHandler->getCourseById($_GET["course_id"])["creator_id"]==$user->getID()) {
+                if (($creatorID=$dbHandler->getCourseById($_GET["course_id"])["creator_id"])==$user->getID()) {
                     $members=$dbHandler->getMembersOfCourse($_GET["course_id"]);
                     $submitions=[];
                     $noSubmitionsUsers=[];
@@ -24,7 +24,7 @@
                         $curUserSubmitions=$current->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
                         $submitions=array_merge($submitions, $curUserSubmitions);
                         //adds user to array if he isn't the creator of the course and hasn't submitted anything yet
-                        if (count($curUserSubmitions)==0&&$dbHandler->getCourseById($_GET["course_id"])["creator_id"]!=$current->getID()) array_push($noSubmitionsUsers, $member);
+                        if (count($curUserSubmitions)==0&&$creatorID!=$current->getID()) array_push($noSubmitionsUsers, $member);
                     }
                 }
                 else $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
@@ -41,6 +41,30 @@
                             </a>
                         <?php }
                         $idx = 0;
+                        //displays intended solution if creator has submitted it
+                        if ($dbHandler->hasUserSolvedTask($creatorID, $_GET["task_id"]))
+                        {
+                            $creatorSubmissions=$dbHandler->getTaskSubmitionsOfUserForTask($creatorID, $_GET["task_id"]);
+                            $solution=$creatorSubmissions[array_search("success", array_column($creatorSubmissions, "submition_status"))];?>
+                            <div class="accordion-item">
+                                <h2>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse<?php echo ++$idx ?>" aria-expanded="false"
+                                        aria-controls="collapse<?php echo $idx ?>">
+                                        <strong class="text-success">
+                                            Solution
+                                        </strong>
+                                    </button>
+                                </h2>
+                                <div id="collapse<?php echo $idx ?>" class="accordion-collapse collapse"
+                                    aria-labelledby="headingOne" data-bs-parent="#submitionsAccordion">
+                                    <div class="accordion-body">
+                                        Function:<br>
+                                        <?php echo nl2br($solution["submited_function"]) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }
                         foreach ($submitions as $submition) { ?>
                             <div class="accordion-item">
                                 <h2>
