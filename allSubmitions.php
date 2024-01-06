@@ -7,6 +7,8 @@
         if ($user != null) {
             //If there is a logged in user
             if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course
+                //saves an array of all task submissions grouped by the users who submitted them andd an array of the students who haven't attempted it
+                //only if the logged in user is the creator of the course
                 if (($creatorID=$dbHandler->getCourseById($_GET["course_id"])["creator_id"])==$user->getID()) {
                     $members=$dbHandler->getMembersOfCourse($_GET["course_id"]);
                     $submitions=[];
@@ -30,41 +32,48 @@
                 else $submitions = $user->getSubmitionsForTask($dbHandler, $_GET["task_id"]);
                 ?>
                 <div class="container" style="margin-top: 120px;">
+                    <?php
+                    if (count($submitions) == 0) { ?>
+                        <div class="mb-3">
+                            No solutions have been submitted yet!
+                        </div>
+                        <a class="mb-3 btn btn-primary" href="task.php?id=<?php echo $_GET["task_id"]?>">
+                            Back to task
+                        </a>
+                    <?php } ?>
                     <div class="accordion" id="submitionsAccordion">
-                        <?php
-                        if (count($submitions) == 0) { ?>
-                            <div class="mb-3">
-                                No solutions have been submitted yet!
-                            </div>
-                            <a class="btn btn-primary" href="task.php?id=<?php echo $_GET["task_id"]?>">
-                                Back to task
-                            </a>
-                        <?php }
+                        <?php 
                         $idx = 0;
-                        //displays intended solution if creator has submitted it
+                        //displays intended solutions if submitted by creator
                         if ($dbHandler->hasUserSolvedTask($creatorID, $_GET["task_id"]))
                         {
                             $creatorSubmissions=$dbHandler->getTaskSubmitionsOfUserForTask($creatorID, $_GET["task_id"]);
-                            $solution=$creatorSubmissions[array_search("success", array_column($creatorSubmissions, "submition_status"))];?>
+                            $solutions=[];
+                            //filters the successful attempts by the creator
+                            foreach (array_keys(array_column($creatorSubmissions, "submition_status"), "success") as $key)
+                            {
+                                array_push($solutions, $creatorSubmissions[$key]);
+                            }
+                            foreach ($solutions as $solution) {?>
                             <div class="accordion-item">
                                 <h2>
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse<?php echo ++$idx ?>" aria-expanded="false"
                                         aria-controls="collapse<?php echo $idx ?>">
                                         <strong class="text-success">
-                                            Solution
+                                            Solution #<?php echo $idx ?>
                                         </strong>
                                     </button>
                                 </h2>
                                 <div id="collapse<?php echo $idx ?>" class="accordion-collapse collapse"
                                     aria-labelledby="headingOne" data-bs-parent="#submitionsAccordion">
                                     <div class="accordion-body">
-                                        Function:<br>
                                         <?php echo nl2br($solution["submited_function"]) ?>
                                     </div>
                                 </div>
                             </div>
                         <?php }
+                        }
                         foreach ($submitions as $submition) { ?>
                             <div class="accordion-item">
                                 <h2>
