@@ -33,10 +33,14 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .course-card h3 {
             color: #333;
+        }
+        .course-card>h4 {
+            width: 100%;
         }
         .search-container{
             margin-bottom: 20px;
@@ -93,7 +97,7 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
                         <!-- filters courses by value passed in url -->
                         <?php foreach ($coursesArr as $key=>$course) 
                             {
-                                if (!str_contains($course["name"], $searchFilter)) unset($coursesArr[$key]);
+                                if (!str_contains(strtolower($course["name"]), strtolower($searchFilter))) unset($coursesArr[$key]);
                             }
                             $coursesArr=array_values($coursesArr);
                             //invalid pages
@@ -105,6 +109,16 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
                                     <h3>
                                         <?php echo $coursesArr[$i]["name"]; ?>
                                     </h3>
+                                    <!-- displays whether user has created or joined this course -->
+                                    <?php
+                                    if ($user != null) {
+                                        if ($user->getID()==$coursesArr[$i]["creator_id"])
+                                            echo '<h4 class="text-primary">(Owned)</h4>';
+                                        else if ($user->hasJoinedCourse($dbHandler, $coursesArr[$i]["id"])) {
+                                            echo '<h4 class="text-success">(Joined)</h4>';
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </a>
                         <?php } ?>
@@ -136,6 +150,7 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             
             const courses=jQuery.parseJSON('<?php echo json_encode($coursesArr)?>');
             $('#searchInput').on('input', ()=>dropdownDisplayResults(courses));
+            $('#searchInput').one('click', ()=>dropdownDisplayResults(courses));
         })
         
     </script>

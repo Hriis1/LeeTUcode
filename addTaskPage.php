@@ -16,7 +16,7 @@
         <?php
         if (isset($user) && $course->getCreatorID() == $user->getID()) { ?>
 
-            <div class="container" style="margin-top: 50px;">
+            <div class="container" style="margin: 50px auto;">
                 <div class="form-container border border-secondary rounded p-4">
                     <form id="addTaskForm" action="addTestCasesPage.php" method="POST">
                         <div class="d-none">
