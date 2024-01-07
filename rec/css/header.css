@@ -52,7 +52,22 @@ header {
   margin: 2px 30px;
 
 }
-
+#due-tasks-count{
+  margin: 0 0 0 -25px;
+  border-radius: 10px;
+  height: 20px;
+  min-width: 20px;
+  padding: 0 5px;
+  font-size: 12px;
+  background-color: var(--bs-danger);
+  color: white;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  text-wrap: wrap;
+  font-weight: bold;
+  user-select: none;
+}
 .dropdown {
   position: relative;
   display: inline-block;

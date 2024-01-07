@@ -50,7 +50,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12 d-flex mb-3">
-                        <h4>Eamil:</h4>
+                        <h4>Email:</h4>
                         <p class="ps-3 pt-1">
                             <?php echo $user->getEmail(); ?>
                         </p>
@@ -80,7 +80,37 @@
                         <?php } ?>
                     </div>
                 </div>
+                <!-- displays unsolved tasks -->
+                <div class="row mt-3 mb-5" id="due-tasks">
+                    <div class="col-lg-12">
+                        <?php if ($dueTasks) { ?>
+                            <h4>Tasks Due:</h4>
+                            <div class="course-container d-flex text-center" id="coursesContainer">
+                                <?php foreach ($dueTasks as $task) { ?>
+                                    <a href="task.php?id=<?php echo $task["id"]; ?>" class="no-link-style">
+                                        <div class="course-card d-flex align-items-center flex-column" title="On <?php echo $dbHandler->getCourseById($task["course_id"])["name"]; ?>">
+                                            <h3>
+                                                <?php echo $task["name"]; ?>
+                                            </h3>
+                                            <h3 class="text-danger">
+                                                <?php
+                                                if ($dbHandler->getTaskSubmitionsOfUserForTask($user->getID(), $task["id"])) {
+                                                    echo ("(Attempted)");
+                                                }
+                                                ?>
+                                            </h3>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="d-flex">
+                                <h4>You have no tasks due.</h4>
+                            </div>
 
+                        <?php } ?>
+                    </div>
+                </div>
                 <?php if ($user->getAccountType() == "teacher") { ?>
                     <div class="row mt-3 mb-5">
                         <div class="col-12">

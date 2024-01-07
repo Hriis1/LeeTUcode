@@ -78,6 +78,13 @@ $topCourses = array_slice($courses, 0, 5);
                         </ol>
                     </div>
                 </div>
+                <div class="row my-3">
+                    <div class="col-3">
+                        <a href="courses.php" class="btn btn-primary active" role="button" aria-pressed="true">
+                            View all
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

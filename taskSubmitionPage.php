@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="submition-result col-12 bg-light border border-secondary rounded ps-3 pt-2">
                     <h3>Submition result:</h3>
-                    <p id="codeoutput" style="height: 100px;"></p>
+                    <p id="codeoutput" style="min-height: 100px;"></p>
                 </div>
             </div>
             <div class="row mt-3">
