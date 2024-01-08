@@ -19,15 +19,25 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin: 10px;
             padding: 20px;
-            width: 200px;
+            width: 300px;
             min-height: 150px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
         .course-card h3 {
             color: #333;
+        }
+
+        .course-details {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .course-details p {
+            margin: 5px 0;
+            color: #555;
         }
     </style>
     <main class="mb-5">
@@ -67,6 +77,11 @@
                                             <h3>
                                                 <?php echo $course["name"]; ?>
                                             </h3>
+                                            <div class="course-details">
+                                                <p><strong>Instructor:</strong> <?php echo $dbHandler->getUserById($course["creator_id"])["username"]; ?></p>
+                                                <!-- could maybe calculate the average difficulty for the currently active tasks -->
+                                                <!-- <p><strong>Level:</strong> Intermediate</p> -->
+                                            </div>
                                         </div>
                                     </a>
                                 <?php } ?>
