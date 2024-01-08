@@ -74,6 +74,48 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             color: gray;
             text-decoration: none;
         }
+        
+        #invite-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(60, 60, 60, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            z-index: 5;
+        }
+
+        #invite-content {
+            width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .space-between {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #popup-close-button {
+            position: static;
+            cursor: pointer;
+        }
+
+        #course-dropdown {
+            width: 100%;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
     <?php include_once "components/header.php" ?>
     <main>
@@ -88,6 +130,36 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
                         <div id="clear-filter-button">
                             <a href="courses.php">X</a>
                         </div>
+                    </div>
+                    <button class="btn btn-success btn-md active" id="popup-button">Add users to course</button>
+                </div>
+            </div>
+            <div id="invite-container">
+                <div id="invite-content">
+                    <div class="space-between">
+                        <h2>Add to course</h2>
+                        <div id="popup-close-button">X</div>
+                    </div>
+                    <div class="space-between">
+                        <input type="text" id="username" style="width: 100%;" placeholder="name" required>
+                    </div>
+
+                    <div>
+                        <select id="course-dropdown">
+                            <option value="">Your Courses</option>
+                            <?php
+                            $coursesCreatorArr = $dbHandler->getCoursesByCreatorId($user->getID());
+                            foreach ($coursesCreatorArr as $course) { ?>
+                                <option value="<?php echo $course["id"]; ?>">
+                                    <?php echo $course["name"]; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="space-between">
+                        <p id="responseContainer"></p>
+                        <button id="add-user-button" class="btn btn-success btn-md active">Add</button>
                     </div>
                 </div>
             </div>
@@ -152,7 +224,36 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
             $('#searchInput').on('input', ()=>dropdownDisplayResults(courses));
             $('#searchInput').one('click', ()=>dropdownDisplayResults(courses));
         })
-        
+
+        document.getElementById('popup-close-button').addEventListener('click', function () {
+            document.getElementById('invite-container').style.display = "none";
+        });
+        document.getElementById('popup-button').addEventListener('click', function () {
+            document.getElementById('invite-container').style.display = "flex";
+        });
+
+        const addUserButton = document.getElementById('add-user-button');
+        addUserButton.addEventListener('click', function () {
+            const username = document.getElementById('username').value;
+            const courseID = document.getElementById('course-dropdown').value;
+
+            // Send an AJAX request to addUserToCourse.php
+            $.ajax({
+                url: 'include/addUserToCourse.php',
+                method: 'POST',
+                data: {
+                    username: username,
+                    courseID: courseID
+                },
+                success: function (response) {
+                    if (response) {
+                        document.getElementById('responseContainer').innerHTML = "user not found";
+                    } else {
+                        document.getElementById('responseContainer').innerHTML = "user added to course";
+                    }
+                }
+            })
+        });
     </script>
     <?php include_once "components/footer.php" ?>
     <script src="rec/js/filterCourses.js"></script>
