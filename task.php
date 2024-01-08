@@ -6,20 +6,23 @@ include_once "include/courseTask.php";
 include_once "components/head.php";
 
 //Construction
-$taskArray = $dbHandler->getCourseTaskById($_GET["id"]);
-$testCases = explode("@@@", $taskArray["test_cases"]);
-$testAnswers = explode("@@@", $taskArray["test_answers"]);
-$task = new CourseTask(
-    $taskArray["id"],
-    $taskArray["name"],
-    $taskArray["description"],
-    $taskArray["function_name"],
-    $taskArray["function_declaration"],
-    $testCases,
-    $testAnswers,
-    $taskArray["course_id"],
-    $taskArray["difficulty"]
-);
+if (isset($_GET["id"])&&
+    $taskArray = $dbHandler->getCourseTaskById($_GET["id"])) 
+{
+    $testCases = explode("@@@", $taskArray["test_cases"]);
+    $testAnswers = explode("@@@", $taskArray["test_answers"]);
+    $task = new CourseTask(
+        $taskArray["id"],
+        $taskArray["name"],
+        $taskArray["description"],
+        $taskArray["function_name"],
+        $taskArray["function_declaration"],
+        $testCases,
+        $testAnswers,
+        $taskArray["course_id"],
+        $taskArray["difficulty"]
+    );
+}
 ?>
 
 <body>
@@ -28,73 +31,75 @@ $task = new CourseTask(
 
         <div class="container my-5">
             <div class="task-info bg-light border border-secondary rounded ps-3 pe-3 pt-2">
-                <div class="row">
-                    <div class="col-lg-12 d-flex">
-                        <h2>
-                            <?php echo $task->getName(); ?>
-                        </h2>
-                        <h2 class="text-success ps-1">
-                            <?php
-                            if ($user != null) {
-                                if ($user->hasSolvedTask($dbHandler, $_GET["id"])) {
-                                    echo (" (Solved)");
+                <?php if (!isset($task)) echo '<h4>Task not found!</h4>';
+                else {?>
+                    <div class="row">
+                        <div class="col-lg-12 d-flex">
+                            <h2>
+                                <?php echo $task->getName(); ?>
+                            </h2>
+                            <h2 class="text-success ps-1">
+                                <?php
+                                if ($user != null) {
+                                    if ($user->hasSolvedTask($dbHandler, $_GET["id"])) {
+                                        echo (" (Solved)");
+                                    }
                                 }
-                            }
-                            ?>
-                        </h2>
+                                ?>
+                            </h2>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-12">
-                        <h4>How to use:</h4>
-                        <p>Please, provide file with a function deffinition that completes the given task with name and
-                            parameters as specified below!</p>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <h4>How to use:</h4>
+                            <p>Please, provide file with a function deffinition that completes the given task with name and
+                                parameters as specified below!</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-12">
-                        <h4>Difficulty:</h4>
-                        <p>
-                            <?php echo $task->getDifficulty() ?>
-                        </p>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <h4>Difficulty:</h4>
+                            <p>
+                                <?php echo $task->getDifficulty() ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-12">
-                        <h4>Function name:</h4>
-                        <p>
-                            <?php echo $task->getFunnctionName() ?>
-                        </p>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <h4>Function name:</h4>
+                            <p>
+                                <?php echo $task->getFunnctionName() ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-12">
-                        <h4>Function declaration:</h4>
-                        <p>
-                            <?php echo $task->getFunctionDeclaration() ?>
-                        </p>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <h4>Function declaration:</h4>
+                            <p>
+                                <?php echo $task->getFunctionDeclaration() ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-lg-12">
-                        <h4>Task description:</h4>
-                        <p>
-                            <?php echo $task->getDescription() ?>
-                        </p>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <h4>Task description:</h4>
+                            <p>
+                                <?php echo $task->getDescription() ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row my-3">
-                    <div class="col-2">
-                        <a href="course.php?id=<?php echo $task->getCourseId(); ?>"
-                            class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Course</a>
-                    </div>
-                    <div class="col-8"></div>
-                    <div class="col-2 d-flex justify-content-end">
-                        <a href="allSubmitions.php?task_id=<?php echo $task->getId(); ?>&course_id=<?php echo $task->getCourseId(); ?>"
-                            class="btn btn-primary btn-lg submitionsBtn" role="button"
-                            aria-pressed="true">Submitions</a>
-                    </div>
-                </div>
+                    <div class="row my-3">
+                        <div class="col-2">
+                            <a href="course.php?id=<?php echo $task->getCourseId(); ?>"
+                                class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Course</a>
+                        </div>
+                        <div class="col-8"></div>
+                        <div class="col-2 d-flex justify-content-end">
+                            <a href="allSubmitions.php?task_id=<?php echo $task->getId(); ?>&course_id=<?php echo $task->getCourseId(); ?>"
+                                class="btn btn-primary btn-lg submitionsBtn" role="button"
+                                aria-pressed="true">Submitions</a>
+                        </div>
+                    </div>  
             </div>
 
 
@@ -123,6 +128,7 @@ $task = new CourseTask(
                 </div>
             </div>
         </div>
+        <?php }?>
     </main>
     <?php include_once "components/footer.php" ?>
     <script>
