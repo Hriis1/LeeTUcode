@@ -1,12 +1,16 @@
-header {
+header{
+  background-color: rgb(120, 163, 202);
+  padding: 10px;
+}
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
   width: 100%;
   background: rgb(179, 205, 229);
-  padding-left: 250px;
-  padding-right: 50px;
+  /* padding-left: 250px;
+  padding-right: 50px; */
 }
 
 .heading {
@@ -38,10 +42,22 @@ header {
   min-width: fit-content;
   min-height: fit-content;
 }
+.logo>a{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5%;
+  height: 100%;
+  text-decoration: none;
+  color: white;
+}
 
 .logo img {
   width: 100%;
   height: 100%;
+}
+.logo h1 {
+  font-weight: bold;
 }
 
 .user-info {

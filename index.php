@@ -51,8 +51,8 @@ $topCourses = array_slice($courses, 0, 5);
                 </div>
                 <div class="row mt-3">
                     <div class="col-lg-12 border-bottom border-secondary">
-                        <h4>Something else</h4>
-                        <p>Additional info</p>
+                        <h4>Designed with education in mind</h4>
+                        <p>This page's goal is to make it easier for students and teachers alike to practice and teach programming.</p>
                     </div>
                 </div>
                 <div class="row mt-3 ">
