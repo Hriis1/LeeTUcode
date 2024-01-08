@@ -30,6 +30,7 @@ $courseTasks = $dbHandler->getCourseTasksByCourseId($course->getID());
             margin: 10px;
             width: 200px;
             min-height: 150px;
+            flex-direction: column;
         }
 
         .task-card h3 {
