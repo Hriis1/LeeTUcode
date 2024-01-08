@@ -12,17 +12,14 @@
             <div class="col-lg-4">
                 <h4>About us:</h4>
                 <ul>
-                    <a href=""><li>Legal info</li></a>
-                    <a href=""><li>Team</li></a>
+                    <li><a href="">Legal info</a></li>
+                    <li><a href="">Team</a></li>
                 </ul>
             </div>
             <div class="col-lg-4">
-                <h4>something</h4>
+                <h4>Our partners</h4>
                 <ul>
-                    <li>placeholder</li>
-                    <li>ph</li>
-                    <li>ph</li>
-                    <li>ph</li>
+                    <li><a href="https://tu-sofia.bg/">TU</a></li>
                 </ul>
             </div>
         </div>
