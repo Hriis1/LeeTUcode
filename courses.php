@@ -140,27 +140,30 @@ $searchFilter=isset($_GET["filter"])?$_GET["filter"]:"";
                         <h2>Add to course</h2>
                         <div id="popup-close-button">X</div>
                     </div>
-                    <div class="space-between">
-                        <input type="text" id="username" style="width: 100%;" placeholder="name" required>
-                    </div>
+                    <?php if ($user==null) echo "Log in first"; 
+                    else {?>
+                        <div class="space-between">
+                            <input type="text" id="username" style="width: 100%;" placeholder="name" required>
+                        </div>
 
-                    <div>
-                        <select id="course-dropdown">
-                            <option value="">Your Courses</option>
-                            <?php
-                            $coursesCreatorArr = $dbHandler->getCoursesByCreatorId($user->getID());
-                            foreach ($coursesCreatorArr as $course) { ?>
-                                <option value="<?php echo $course["id"]; ?>">
-                                    <?php echo $course["name"]; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
-
-                    <div class="space-between">
-                        <p id="responseContainer"></p>
-                        <button id="add-user-button" class="btn btn-success btn-md active">Add</button>
-                    </div>
+                        <div>
+                            <select id="course-dropdown">
+                                <option value="">Your Courses</option>
+                                <?php
+                                $coursesCreatorArr = $dbHandler->getCoursesByCreatorId($user->getID());
+                                foreach ($coursesCreatorArr as $course) { ?>
+                                    <option value="<?php echo $course["id"]; ?>">
+                                        <?php echo $course["name"]; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    
+                        <div class="space-between">
+                            <p id="responseContainer"></p>
+                            <button id="add-user-button" class="btn btn-success btn-md active">Add</button>
+                        </div>
+                    <?php }?>
                 </div>
             </div>
             <div class="row">
