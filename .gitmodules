@@ -1,0 +1,3 @@
+[submodule "frontend-prototype"]
+	path = frontend-prototype
+	url = https://github.com/tudjarov000/LeetCode

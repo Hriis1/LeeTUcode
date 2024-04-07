@@ -5,8 +5,9 @@
     <main>
         <?php
         if ($user != null) {
+            if (!isset($_GET["course_id"])||!isset($_GET["task_id"])) echo "Page not found :(";
             //If there is a logged in user
-            if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course
+            else if ($user->hasJoinedCourse($dbHandler, $_GET["course_id"])) {  //If the user is member of the course
                 //saves an array of all task submissions grouped by the users who submitted them andd an array of the students who haven't attempted it
                 //only if the logged in user is the creator of the course
                 if (($creatorID=$dbHandler->getCourseById($_GET["course_id"])["creator_id"])==$user->getID()) {
